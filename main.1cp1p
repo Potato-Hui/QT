@@ -1,0 +1,82 @@
+#include "mainwindow.h"
+#include "gstvideoreceiver.h"
+
+#include <QApplication>
+#include <QDebug>
+#include <QFile>
+#include <QTextStream>
+#include <QTimer>
+
+#include <gst/gst.h>
+
+int main(int argc, char *argv[])
+{
+    gst_init(&argc, &argv);
+
+    QApplication app(argc, argv);
+
+    app.setApplicationName(
+        QStringLiteral("绝缘子智能检测系统"));
+
+    app.setOrganizationName(
+        QStringLiteral("Insulator Monitor"));
+
+    QFile styleFile(
+        QStringLiteral(
+            ":/styles/white_theme.qss"));
+
+    if (styleFile.open(
+            QIODevice::ReadOnly |
+            QIODevice::Text)) {
+
+        QTextStream stream(&styleFile);
+        app.setStyleSheet(stream.readAll());
+    }
+
+    MainWindow window;
+    GstVideoReceiver videoReceiver;
+
+    QObject::connect(
+        &videoReceiver,
+        &GstVideoReceiver::frameReady,
+        &window,
+        &MainWindow::setPreviewFrame,
+        Qt::QueuedConnection);
+
+    QObject::connect(
+        &videoReceiver,
+        &GstVideoReceiver::firstFrameReceived,
+        []() {
+            qInfo() << "已经收到第一帧 TCP 视频";
+        });
+
+    QObject::connect(
+        &videoReceiver,
+        &GstVideoReceiver::streamError,
+        [](const QString &message) {
+            qCritical()
+                << "GStreamer 视频错误："
+                << message;
+        });
+
+    window.showFullScreen();
+
+    /*
+     * 等 Qt 事件循环启动后再启动 GStreamer。
+     * 测试服务器必须提前监听 127.0.0.1:5000。
+     */
+    QTimer::singleShot(
+        0,
+        &videoReceiver,
+        [&videoReceiver]() {
+            if (videoReceiver.start()) {
+                qInfo()
+                    << "GStreamer TCP 接收管线已启动";
+            } else {
+                qCritical()
+                    << "GStreamer TCP 接收管线启动失败";
+            }
+        });
+
+    return app.exec();
+}

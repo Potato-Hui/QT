@@ -1,0 +1,98 @@
+{
+	"BUILD_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen",
+	"CMAKE_BINARY_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_SOURCE_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor",
+	"HEADERS" : 
+	[
+		[
+			"/home/root123/QtProject/gptproject/InsulatorMonitor/gstvideoreceiver.h",
+			"MU",
+			"EWIEGA46WW/moc_gstvideoreceiver.cpp"
+		],
+		[
+			"/home/root123/QtProject/gptproject/InsulatorMonitor/inferencecontroller.h",
+			"MU",
+			"EWIEGA46WW/moc_inferencecontroller.cpp"
+		],
+		[
+			"/home/root123/QtProject/gptproject/InsulatorMonitor/mainwindow.h",
+			"MU",
+			"EWIEGA46WW/moc_mainwindow.cpp"
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_NO_DEBUG", "QT_WIDGETS_LIB" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5/QtCore",
+		"/opt/atk-dlrk3588-toolchain/mkspecs/devices/linux-buildroot-g++",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5/QtGui",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5/QtWidgets",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/gstreamer-1.0",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/glib-2.0",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/glib-2.0/include",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/rga",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward",
+		"/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include",
+		"/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed",
+		"/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : true,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/opt/atk-dlrk3588-toolchain/bin/moc",
+	"QT_UIC_EXECUTABLE" : "/opt/atk-dlrk3588-toolchain/bin/uic",
+	"QT_VERSION_MAJOR" : 5,
+	"SETTINGS_FILE" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/root123/QtProject/gptproject/InsulatorMonitor/gstvideoreceiver.cpp",
+			"MU"
+		],
+		[
+			"/home/root123/QtProject/gptproject/InsulatorMonitor/inferencecontroller.cpp",
+			"MU"
+		],
+		[ "/home/root123/QtProject/gptproject/InsulatorMonitor/main.cpp", "MU" ],
+		[
+			"/home/root123/QtProject/gptproject/InsulatorMonitor/mainwindow.cpp",
+			"MU"
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}

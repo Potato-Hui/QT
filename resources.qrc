@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/styles">
+        <file>styles/white_theme.qss</file>
+    </qresource>
+</RCC>
+

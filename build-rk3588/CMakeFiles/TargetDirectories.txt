@@ -1,0 +1,4 @@
+/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/rebuild_cache.dir
+/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/edit_cache.dir
+/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir
+/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir
