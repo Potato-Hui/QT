@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/root123/QtProject/gptproject/InsulatorMonitor
+CMAKE_SOURCE_DIR = /home/cbt123/project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588
+CMAKE_BINARY_DIR = /home/cbt123/project/build-rk3588
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cbt123/project/build-rk3588/CMakeFiles /home/cbt123/project/build-rk3588/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cbt123/project/build-rk3588/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named InsulatorMonitorSingle
+
+# Build rule for target.
+InsulatorMonitorSingle: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 InsulatorMonitorSingle
+.PHONY : InsulatorMonitorSingle
+
+# fast build rule for target.
+InsulatorMonitorSingle/fast:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/build
+.PHONY : InsulatorMonitorSingle/fast
+
+#=============================================================================
 # Target rules for targets named InsulatorMonitor
 
 # Build rule for target.
@@ -124,6 +137,19 @@ InsulatorMonitor/fast:
 .PHONY : InsulatorMonitor/fast
 
 #=============================================================================
+# Target rules for targets named InsulatorMonitorSingle_autogen
+
+# Build rule for target.
+InsulatorMonitorSingle_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 InsulatorMonitorSingle_autogen
+.PHONY : InsulatorMonitorSingle_autogen
+
+# fast build rule for target.
+InsulatorMonitorSingle_autogen/fast:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle_autogen.dir/build.make CMakeFiles/InsulatorMonitorSingle_autogen.dir/build
+.PHONY : InsulatorMonitorSingle_autogen/fast
+
+#=============================================================================
 # Target rules for targets named InsulatorMonitor_autogen
 
 # Build rule for target.
@@ -135,6 +161,60 @@ InsulatorMonitor_autogen: cmake_check_build_system
 InsulatorMonitor_autogen/fast:
 	$(MAKE) -f CMakeFiles/InsulatorMonitor_autogen.dir/build.make CMakeFiles/InsulatorMonitor_autogen.dir/build
 .PHONY : InsulatorMonitor_autogen/fast
+
+InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.o: InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.o
+
+.PHONY : InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.o
+
+# target to build an object file
+InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.o
+.PHONY : InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.o
+
+InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.i: InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.i
+
+.PHONY : InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.i
+
+# target to preprocess a source file
+InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.i
+.PHONY : InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.i
+
+InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.s: InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.s
+
+.PHONY : InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.s
+
+# target to generate assembly for a file
+InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.s
+.PHONY : InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.cpp.s
+
+InsulatorMonitorSingle_autogen/mocs_compilation.o: InsulatorMonitorSingle_autogen/mocs_compilation.cpp.o
+
+.PHONY : InsulatorMonitorSingle_autogen/mocs_compilation.o
+
+# target to build an object file
+InsulatorMonitorSingle_autogen/mocs_compilation.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/InsulatorMonitorSingle_autogen/mocs_compilation.cpp.o
+.PHONY : InsulatorMonitorSingle_autogen/mocs_compilation.cpp.o
+
+InsulatorMonitorSingle_autogen/mocs_compilation.i: InsulatorMonitorSingle_autogen/mocs_compilation.cpp.i
+
+.PHONY : InsulatorMonitorSingle_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+InsulatorMonitorSingle_autogen/mocs_compilation.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/InsulatorMonitorSingle_autogen/mocs_compilation.cpp.i
+.PHONY : InsulatorMonitorSingle_autogen/mocs_compilation.cpp.i
+
+InsulatorMonitorSingle_autogen/mocs_compilation.s: InsulatorMonitorSingle_autogen/mocs_compilation.cpp.s
+
+.PHONY : InsulatorMonitorSingle_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+InsulatorMonitorSingle_autogen/mocs_compilation.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/InsulatorMonitorSingle_autogen/mocs_compilation.cpp.s
+.PHONY : InsulatorMonitorSingle_autogen/mocs_compilation.cpp.s
 
 InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.o: InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o
 
@@ -196,6 +276,7 @@ gstvideoreceiver.o: gstvideoreceiver.cpp.o
 
 # target to build an object file
 gstvideoreceiver.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/gstvideoreceiver.cpp.o
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o
 .PHONY : gstvideoreceiver.cpp.o
 
@@ -205,6 +286,7 @@ gstvideoreceiver.i: gstvideoreceiver.cpp.i
 
 # target to preprocess a source file
 gstvideoreceiver.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/gstvideoreceiver.cpp.i
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.i
 .PHONY : gstvideoreceiver.cpp.i
 
@@ -214,6 +296,7 @@ gstvideoreceiver.s: gstvideoreceiver.cpp.s
 
 # target to generate assembly for a file
 gstvideoreceiver.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/gstvideoreceiver.cpp.s
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.s
 .PHONY : gstvideoreceiver.cpp.s
 
@@ -223,6 +306,7 @@ inferencecontroller.o: inferencecontroller.cpp.o
 
 # target to build an object file
 inferencecontroller.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/inferencecontroller.cpp.o
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o
 .PHONY : inferencecontroller.cpp.o
 
@@ -232,6 +316,7 @@ inferencecontroller.i: inferencecontroller.cpp.i
 
 # target to preprocess a source file
 inferencecontroller.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/inferencecontroller.cpp.i
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.i
 .PHONY : inferencecontroller.cpp.i
 
@@ -241,8 +326,39 @@ inferencecontroller.s: inferencecontroller.cpp.s
 
 # target to generate assembly for a file
 inferencecontroller.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/inferencecontroller.cpp.s
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.s
 .PHONY : inferencecontroller.cpp.s
+
+inferencelaunchspec.o: inferencelaunchspec.cpp.o
+
+.PHONY : inferencelaunchspec.o
+
+# target to build an object file
+inferencelaunchspec.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/inferencelaunchspec.cpp.o
+	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o
+.PHONY : inferencelaunchspec.cpp.o
+
+inferencelaunchspec.i: inferencelaunchspec.cpp.i
+
+.PHONY : inferencelaunchspec.i
+
+# target to preprocess a source file
+inferencelaunchspec.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/inferencelaunchspec.cpp.i
+	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.i
+.PHONY : inferencelaunchspec.cpp.i
+
+inferencelaunchspec.s: inferencelaunchspec.cpp.s
+
+.PHONY : inferencelaunchspec.s
+
+# target to generate assembly for a file
+inferencelaunchspec.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/inferencelaunchspec.cpp.s
+	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.s
+.PHONY : inferencelaunchspec.cpp.s
 
 main.o: main.cpp.o
 
@@ -271,12 +387,40 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+main_single.o: main_single.cpp.o
+
+.PHONY : main_single.o
+
+# target to build an object file
+main_single.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/main_single.cpp.o
+.PHONY : main_single.cpp.o
+
+main_single.i: main_single.cpp.i
+
+.PHONY : main_single.i
+
+# target to preprocess a source file
+main_single.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/main_single.cpp.i
+.PHONY : main_single.cpp.i
+
+main_single.s: main_single.cpp.s
+
+.PHONY : main_single.s
+
+# target to generate assembly for a file
+main_single.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/main_single.cpp.s
+.PHONY : main_single.cpp.s
+
 mainwindow.o: mainwindow.cpp.o
 
 .PHONY : mainwindow.o
 
 # target to build an object file
 mainwindow.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/mainwindow.cpp.o
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o
 .PHONY : mainwindow.cpp.o
 
@@ -286,6 +430,7 @@ mainwindow.i: mainwindow.cpp.i
 
 # target to preprocess a source file
 mainwindow.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/mainwindow.cpp.i
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.i
 .PHONY : mainwindow.cpp.i
 
@@ -295,8 +440,39 @@ mainwindow.s: mainwindow.cpp.s
 
 # target to generate assembly for a file
 mainwindow.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/mainwindow.cpp.s
 	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
+
+monitorapplication.o: monitorapplication.cpp.o
+
+.PHONY : monitorapplication.o
+
+# target to build an object file
+monitorapplication.cpp.o:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/monitorapplication.cpp.o
+	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o
+.PHONY : monitorapplication.cpp.o
+
+monitorapplication.i: monitorapplication.cpp.i
+
+.PHONY : monitorapplication.i
+
+# target to preprocess a source file
+monitorapplication.cpp.i:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/monitorapplication.cpp.i
+	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.i
+.PHONY : monitorapplication.cpp.i
+
+monitorapplication.s: monitorapplication.cpp.s
+
+.PHONY : monitorapplication.s
+
+# target to generate assembly for a file
+monitorapplication.cpp.s:
+	$(MAKE) -f CMakeFiles/InsulatorMonitorSingle.dir/build.make CMakeFiles/InsulatorMonitorSingle.dir/monitorapplication.cpp.s
+	$(MAKE) -f CMakeFiles/InsulatorMonitor.dir/build.make CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.s
+.PHONY : monitorapplication.cpp.s
 
 # Help Target
 help:
@@ -306,8 +482,16 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... InsulatorMonitorSingle"
 	@echo "... InsulatorMonitor"
+	@echo "... InsulatorMonitorSingle_autogen"
 	@echo "... InsulatorMonitor_autogen"
+	@echo "... InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.o"
+	@echo "... InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.i"
+	@echo "... InsulatorMonitorSingle_autogen/EWIEGA46WW/qrc_resources.s"
+	@echo "... InsulatorMonitorSingle_autogen/mocs_compilation.o"
+	@echo "... InsulatorMonitorSingle_autogen/mocs_compilation.i"
+	@echo "... InsulatorMonitorSingle_autogen/mocs_compilation.s"
 	@echo "... InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.o"
 	@echo "... InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.i"
 	@echo "... InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.s"
@@ -320,12 +504,21 @@ help:
 	@echo "... inferencecontroller.o"
 	@echo "... inferencecontroller.i"
 	@echo "... inferencecontroller.s"
+	@echo "... inferencelaunchspec.o"
+	@echo "... inferencelaunchspec.i"
+	@echo "... inferencelaunchspec.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... main_single.o"
+	@echo "... main_single.i"
+	@echo "... main_single.s"
 	@echo "... mainwindow.o"
 	@echo "... mainwindow.i"
 	@echo "... mainwindow.s"
+	@echo "... monitorapplication.o"
+	@echo "... monitorapplication.i"
+	@echo "... monitorapplication.s"
 .PHONY : help
 
 

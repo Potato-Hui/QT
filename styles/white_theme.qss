@@ -2,7 +2,7 @@
 
 * {
     font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-    font-size: 15px;
+    font-size: 17px;
     color: #172033;
 }
 
@@ -21,7 +21,7 @@ QFrame#headerFrame {
 
 QLabel#appTitleLabel {
     color: #14213D;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
 }
 
@@ -29,12 +29,12 @@ QLabel#appSubTitleLabel,
 QLabel#dateLabel,
 QLabel[role="muted"] {
     color: #78849A;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 QLabel#timeLabel {
     color: #14213D;
-    font-size: 23px;
+    font-size: 27px;
     font-weight: 700;
 }
 
@@ -46,18 +46,18 @@ QFrame[card="true"] {
 
 QLabel[role="sectionTitle"] {
     color: #26334D;
-    font-size: 16px;
+    font-size: 19px;
     font-weight: 700;
 }
 
 QLabel[role="metricName"] {
     color: #6F7C91;
-    font-size: 14px;
+    font-size: 17px;
 }
 
 QLabel[role="metricValue"] {
     color: #1D2940;
-    font-size: 16px;
+    font-size: 19px;
     font-weight: 700;
 }
 
@@ -129,13 +129,13 @@ QLabel#deviceStatusDot[state="error"] {
 }
 
 QPushButton {
-    min-height: 46px;
-    padding: 0 18px;
+    min-height: 56px;
+    padding: 0 22px;
     background: #FFFFFF;
     border: 1px solid #CAD3E0;
     border-radius: 9px;
     color: #29364D;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -149,11 +149,11 @@ QPushButton:pressed {
 }
 
 QPushButton#detectButton {
-    min-height: 58px;
+    min-height: 76px;
     background: #178A60;
     border: 1px solid #178A60;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
 }
 
@@ -171,12 +171,18 @@ QPushButton#detectButton[running="true"]:hover {
 }
 
 QPushButton#snapshotButton {
-    min-height: 58px;
+    min-height: 76px;
     background: #2563EB;
     border-color: #2563EB;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
+}
+
+QPushButton#recordsButton,
+QPushButton#settingsButton {
+    min-height: 60px;
+    font-size: 18px;
 }
 
 QPushButton#snapshotButton:hover {
@@ -227,6 +233,7 @@ QTableWidget {
     gridline-color: #E5EAF1;
     selection-background-color: #E8F0FF;
     selection-color: #172033;
+    font-size: 17px;
 }
 
 QHeaderView::section {

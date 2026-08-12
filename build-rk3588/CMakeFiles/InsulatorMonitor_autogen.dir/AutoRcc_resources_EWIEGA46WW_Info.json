@@ -1,22 +1,19 @@
 {
-	"BUILD_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen",
-	"CMAKE_BINARY_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588",
-	"CMAKE_CURRENT_BINARY_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor",
-	"CMAKE_SOURCE_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor",
-	"INCLUDE_DIR" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/include",
-	"INPUTS" : 
-	[
-		"/home/root123/QtProject/gptproject/InsulatorMonitor/styles/white_theme.qss"
-	],
-	"LOCK_FILE" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"BUILD_DIR" : "/home/cbt123/project/build-rk3588/InsulatorMonitor_autogen",
+	"CMAKE_BINARY_DIR" : "/home/cbt123/project/build-rk3588",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/cbt123/project/build-rk3588",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/cbt123/project",
+	"CMAKE_SOURCE_DIR" : "/home/cbt123/project",
+	"INCLUDE_DIR" : "/home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/include",
+	"INPUTS" : [ "/home/cbt123/project/styles/white_theme.qss" ],
+	"LOCK_FILE" : "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
 	"MULTI_CONFIG" : false,
 	"OPTIONS" : [ "-name", "resources" ],
 	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
 	"OUTPUT_NAME" : "qrc_resources.cpp",
-	"RCC_EXECUTABLE" : "/opt/atk-dlrk3588-toolchain/bin/rcc",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
 	"RCC_LIST_OPTIONS" : [ "--list" ],
-	"SETTINGS_FILE" : "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
-	"SOURCE" : "/home/root123/QtProject/gptproject/InsulatorMonitor/resources.qrc",
+	"SETTINGS_FILE" : "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/home/cbt123/project/resources.qrc",
 	"VERBOSITY" : 0
 }

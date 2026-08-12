@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/root123/QtProject/gptproject/InsulatorMonitor
+CMAKE_SOURCE_DIR = /home/cbt123/project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588
+CMAKE_BINARY_DIR = /home/cbt123/project/build-rk3588
 
 # Include any dependencies generated for this target.
 include CMakeFiles/InsulatorMonitor.dir/depend.make
@@ -60,94 +60,122 @@ include CMakeFiles/InsulatorMonitor.dir/flags.make
 InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp: ../resources.qrc
 InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp: CMakeFiles/InsulatorMonitor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json
 InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp: ../styles/white_theme.qss
-InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp: /opt/atk-dlrk3588-toolchain/bin/rcc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic RCC for resources.qrc"
-	/usr/bin/cmake -E cmake_autorcc /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json Release
+InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp: /usr/lib/qt5/bin/rcc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic RCC for resources.qrc"
+	/usr/bin/cmake -E cmake_autorcc /home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json 
 
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o: InsulatorMonitor_autogen/mocs_compilation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o -c /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o -c /home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp
 
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.i"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp > CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp > CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.i
 
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.s"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.s
 
 CMakeFiles/InsulatorMonitor.dir/main.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
 CMakeFiles/InsulatorMonitor.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/InsulatorMonitor.dir/main.cpp.o"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/main.cpp.o -c /home/root123/QtProject/gptproject/InsulatorMonitor/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/InsulatorMonitor.dir/main.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/main.cpp.o -c /home/cbt123/project/main.cpp
 
 CMakeFiles/InsulatorMonitor.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/main.cpp.i"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/root123/QtProject/gptproject/InsulatorMonitor/main.cpp > CMakeFiles/InsulatorMonitor.dir/main.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/main.cpp > CMakeFiles/InsulatorMonitor.dir/main.cpp.i
 
 CMakeFiles/InsulatorMonitor.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/main.cpp.s"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/root123/QtProject/gptproject/InsulatorMonitor/main.cpp -o CMakeFiles/InsulatorMonitor.dir/main.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/main.cpp -o CMakeFiles/InsulatorMonitor.dir/main.cpp.s
+
+CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
+CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o: ../monitorapplication.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o -c /home/cbt123/project/monitorapplication.cpp
+
+CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.i"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/monitorapplication.cpp > CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.i
+
+CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.s"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/monitorapplication.cpp -o CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.s
 
 CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
 CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o: ../mainwindow.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o -c /home/root123/QtProject/gptproject/InsulatorMonitor/mainwindow.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o -c /home/cbt123/project/mainwindow.cpp
 
 CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.i"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/root123/QtProject/gptproject/InsulatorMonitor/mainwindow.cpp > CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/mainwindow.cpp > CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.i
 
 CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.s"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/root123/QtProject/gptproject/InsulatorMonitor/mainwindow.cpp -o CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/mainwindow.cpp -o CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.s
 
 CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
 CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o: ../inferencecontroller.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o -c /home/root123/QtProject/gptproject/InsulatorMonitor/inferencecontroller.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o -c /home/cbt123/project/inferencecontroller.cpp
 
 CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.i"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/root123/QtProject/gptproject/InsulatorMonitor/inferencecontroller.cpp > CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/inferencecontroller.cpp > CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.i
 
 CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.s"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/root123/QtProject/gptproject/InsulatorMonitor/inferencecontroller.cpp -o CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/inferencecontroller.cpp -o CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.s
+
+CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
+CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o: ../inferencelaunchspec.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o -c /home/cbt123/project/inferencelaunchspec.cpp
+
+CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.i"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/inferencelaunchspec.cpp > CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.i
+
+CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.s"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/inferencelaunchspec.cpp -o CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.s
 
 CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
 CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o: ../gstvideoreceiver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o -c /home/root123/QtProject/gptproject/InsulatorMonitor/gstvideoreceiver.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o -c /home/cbt123/project/gstvideoreceiver.cpp
 
 CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.i"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/root123/QtProject/gptproject/InsulatorMonitor/gstvideoreceiver.cpp > CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/gstvideoreceiver.cpp > CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.i
 
 CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.s"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/root123/QtProject/gptproject/InsulatorMonitor/gstvideoreceiver.cpp -o CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/gstvideoreceiver.cpp -o CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.s
 
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o: CMakeFiles/InsulatorMonitor.dir/flags.make
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o: InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o -c /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o"
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o -c /home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp
 
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.i"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp > CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp > CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.i
 
 CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.s"
-	/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp -o CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.s
 
 # Object files for target InsulatorMonitor
 InsulatorMonitor_OBJECTS = \
 "CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/InsulatorMonitor.dir/main.cpp.o" \
+"CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o" \
 "CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o" \
 "CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o" \
+"CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o" \
 "CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o" \
 "CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o"
 
@@ -156,22 +184,24 @@ InsulatorMonitor_EXTERNAL_OBJECTS =
 
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/main.cpp.o
+bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o
+bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/build.make
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libQt5Widgets.so.5.15.8
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libQt5Gui.so.5.15.8
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libQt5Core.so.5.15.8
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libgstapp-1.0.so
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libgstvideo-1.0.so
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libgstbase-1.0.so
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libgstreamer-1.0.so
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libgobject-2.0.so
-bin/InsulatorMonitor: /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libglib-2.0.so
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.12.8
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libQt5Gui.so.5.12.8
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libQt5Core.so.5.12.8
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libgstapp-1.0.so
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libgstvideo-1.0.so
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libgstbase-1.0.so
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libgstreamer-1.0.so
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libgobject-2.0.so
+bin/InsulatorMonitor: /usr/lib/aarch64-linux-gnu/libglib-2.0.so
 bin/InsulatorMonitor: CMakeFiles/InsulatorMonitor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable bin/InsulatorMonitor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable bin/InsulatorMonitor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/InsulatorMonitor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -184,6 +214,6 @@ CMakeFiles/InsulatorMonitor.dir/clean:
 .PHONY : CMakeFiles/InsulatorMonitor.dir/clean
 
 CMakeFiles/InsulatorMonitor.dir/depend: InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp
-	cd /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/root123/QtProject/gptproject/InsulatorMonitor /home/root123/QtProject/gptproject/InsulatorMonitor /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588 /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588 /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cbt123/project/build-rk3588 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cbt123/project /home/cbt123/project /home/cbt123/project/build-rk3588 /home/cbt123/project/build-rk3588 /home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/InsulatorMonitor.dir/depend
 

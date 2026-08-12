@@ -1,8 +1,8 @@
-The target system is: Buildroot - 1 - aarch64
+The target system is: Linux -  - aarch64
 The host system is: Linux - 5.15.0-139-generic - x86_64
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-Compiler: /opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ 
-Build flags: -D_LARGEFILE_SOURCE;-D_LARGEFILE64_SOURCE;-D_FILE_OFFSET_BITS=64;-Os;-g0;-D_FORTIFY_SOURCE=1
+Compiler: /usr/bin/aarch64-linux-gnu-g++ 
+Build flags: 
 Id flags:  
 
 The output was:
@@ -11,207 +11,198 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/3.16.3/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/cbt123/project/build-rk3588/CMakeFiles/3.16.3/CompilerIdCXX/a.out"
 
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp
+Change Dir: /home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_27a81/fast && /usr/bin/make -f CMakeFiles/cmTC_27a81.dir/build.make CMakeFiles/cmTC_27a81.dir/build
-make[1]: 进入目录“/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp”
-Building CXX object CMakeFiles/cmTC_27a81.dir/testCXXCompiler.cxx.o
-/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot    -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os -g0 -D_FORTIFY_SOURCE=1   -DNDEBUG   -o CMakeFiles/cmTC_27a81.dir/testCXXCompiler.cxx.o -c /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_27a81
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_27a81.dir/link.txt --verbose=1
-/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os -g0 -D_FORTIFY_SOURCE=1   -DNDEBUG    CMakeFiles/cmTC_27a81.dir/testCXXCompiler.cxx.o  -o cmTC_27a81 
-make[1]: 离开目录“/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp”
+Run Build Command(s):/usr/bin/make cmTC_92f65/fast && /usr/bin/make -f CMakeFiles/cmTC_92f65.dir/build.make CMakeFiles/cmTC_92f65.dir/build
+make[1]: 进入目录“/home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_92f65.dir/testCXXCompiler.cxx.o
+/usr/bin/aarch64-linux-gnu-g++     -o CMakeFiles/cmTC_92f65.dir/testCXXCompiler.cxx.o -c /home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_92f65
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92f65.dir/link.txt --verbose=1
+/usr/bin/aarch64-linux-gnu-g++       CMakeFiles/cmTC_92f65.dir/testCXXCompiler.cxx.o  -o cmTC_92f65 
+make[1]: 离开目录“/home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp”
 
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp
+Change Dir: /home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_d648d/fast && /usr/bin/make -f CMakeFiles/cmTC_d648d.dir/build.make CMakeFiles/cmTC_d648d.dir/build
-make[1]: Entering directory '/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o
-/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot    -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os -g0 -D_FORTIFY_SOURCE=1   -DNDEBUG   -v -o CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp
+Run Build Command(s):/usr/bin/make cmTC_25726/fast && /usr/bin/make -f CMakeFiles/cmTC_25726.dir/build.make CMakeFiles/cmTC_25726.dir/build
+make[1]: Entering directory '/home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/aarch64-linux-gnu-g++    -v -o CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
-COLLECT_GCC=/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++.br_real
-Target: aarch64-buildroot-linux-gnu
-Configured with: ./configure --prefix=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --sysconfdir=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/etc --enable-static --target=aarch64-buildroot-linux-gnu --with-sysroot=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/sysroot --enable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --disable-decimal-float --enable-plugins --enable-lto --with-gmp=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpc=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpfr=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-pkgversion='Buildroot -g8cdc4e5f-dirty' --with-bugurl=http://bugs.buildroot.net/ --without-zstd --disable-libquadmath --disable-libquadmath-support --enable-tls --enable-threads --without-isl --without-cloog --with-abi=lp64 --with-cpu=cortex-a76.cortex-a55 --enable-languages=c,c++ --with-build-time-tools=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/bin --enable-shared --disable-libgomp
+COLLECT_GCC=/usr/bin/aarch64-linux-gnu-g++
+Target: aarch64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --without-target-system-zlib --enable-libpth-m2 --enable-multiarch --enable-fix-cortex-a53-843419 --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=aarch64-linux-gnu --program-prefix=aarch64-linux-gnu- --includedir=/usr/aarch64-linux-gnu/include
 Thread model: posix
-Supported LTO compression algorithms: zlib
-gcc version 10.4.0 (Buildroot -g8cdc4e5f-dirty) 
-COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64'
- /opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/cc1plus -quiet -v -iprefix /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/ -isysroot /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot -D_GNU_SOURCE -D _LARGEFILE_SOURCE -D _LARGEFILE64_SOURCE -D _FILE_OFFSET_BITS=64 -D _FORTIFY_SOURCE=1 -D NDEBUG /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-a76.cortex-a55 -mlittle-endian -mabi=lp64 -auxbase-strip CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o -g0 -Os -version -fstack-protector-strong -fPIE -o /tmp/ccRKSMwc.s
-GNU C++14 (Buildroot -g8cdc4e5f-dirty) version 10.4.0 (aarch64-buildroot-linux-gnu)
-	compiled by GNU C version 9.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64'
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/cc1plus -quiet -v -imultiarch aarch64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlittle-endian -mabi=lp64 -auxbase-strip CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -o /tmp/cc82VhEl.s
+GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.2) version 9.4.0 (aarch64-linux-gnu)
+	compiled by GNU C version 9.4.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0"
-ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu"
-ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward"
-ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include"
-ignoring nonexistent directory "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/local/include"
-ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed"
-ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include"
+ignoring nonexistent directory "/usr/local/include/aarch64-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc-cross/aarch64-linux-gnu/9/include-fixed"
 #include "..." search starts here:
 #include <...> search starts here:
- /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0
- /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu
- /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward
- /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include
- /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed
- /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include
- /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/aarch64-linux-gnu
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/backward
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/include
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include
+ /usr/include/aarch64-linux-gnu
+ /usr/include
 End of search list.
-GNU C++14 (Buildroot -g8cdc4e5f-dirty) version 10.4.0 (aarch64-buildroot-linux-gnu)
-	compiled by GNU C version 9.4.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version none
+GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.2) version 9.4.0 (aarch64-linux-gnu)
+	compiled by GNU C version 9.4.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-Compiler executable checksum: f61d3064d6bef01aa7f3bf022867e15e
-COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64'
- /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/bin/as -v -EL -march=armv8.2-a+fp16+rcpc+dotprod -mabi=lp64 -o CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccRKSMwc.s
-GNU assembler version 2.40 (aarch64-buildroot-linux-gnu) using BFD version (GNU Binutils) 2.40
-COMPILER_PATH=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/bin/
-LIBRARY_PATH=/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/
-COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64'
-Linking CXX executable cmTC_d648d
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d648d.dir/link.txt --verbose=1
-/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os -g0 -D_FORTIFY_SOURCE=1   -DNDEBUG   -v CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_d648d 
+Compiler executable checksum: 3fd62e19f7cce4e05f266e2c8c4bf6f8
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64'
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc82VhEl.s
+GNU assembler version 2.34 (aarch64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.34
+COMPILER_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/bin/
+LIBRARY_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64'
+Linking CXX executable cmTC_25726
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_25726.dir/link.txt --verbose=1
+/usr/bin/aarch64-linux-gnu-g++      -v CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_25726 
 Using built-in specs.
-COLLECT_GCC=/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++.br_real
-COLLECT_LTO_WRAPPER=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/lto-wrapper
-Target: aarch64-buildroot-linux-gnu
-Configured with: ./configure --prefix=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --sysconfdir=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/etc --enable-static --target=aarch64-buildroot-linux-gnu --with-sysroot=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/sysroot --enable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --disable-decimal-float --enable-plugins --enable-lto --with-gmp=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpc=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpfr=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-pkgversion='Buildroot -g8cdc4e5f-dirty' --with-bugurl=http://bugs.buildroot.net/ --without-zstd --disable-libquadmath --disable-libquadmath-support --enable-tls --enable-threads --without-isl --without-cloog --with-abi=lp64 --with-cpu=cortex-a76.cortex-a55 --enable-languages=c,c++ --with-build-time-tools=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/bin --enable-shared --disable-libgomp
+COLLECT_GCC=/usr/bin/aarch64-linux-gnu-g++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/aarch64-linux-gnu/9/lto-wrapper
+Target: aarch64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --without-target-system-zlib --enable-libpth-m2 --enable-multiarch --enable-fix-cortex-a53-843419 --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=aarch64-linux-gnu --program-prefix=aarch64-linux-gnu- --includedir=/usr/aarch64-linux-gnu/include
 Thread model: posix
-Supported LTO compression algorithms: zlib
-gcc version 10.4.0 (Buildroot -g8cdc4e5f-dirty) 
-COMPILER_PATH=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/bin/
-LIBRARY_PATH=/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/
-COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'cmTC_d648d' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64'
- /opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/collect2 -plugin /opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/liblto_plugin.so -plugin-opt=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccrO5pzG.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot --eh-frame-hdr -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux -pie -o cmTC_d648d /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/Scrt1.o /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/crti.o /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/crtbeginS.o -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0 -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64 -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64 -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64 -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib -z max-page-size=4096 -z common-page-size=4096 -z now -z relro CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/crtendS.o /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/crtn.o
-COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'cmTC_d648d' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64'
-make[1]: Leaving directory '/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp'
+gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2) 
+COMPILER_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/bin/
+LIBRARY_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_25726' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64'
+ /usr/lib/gcc-cross/aarch64-linux-gnu/9/collect2 -plugin /usr/lib/gcc-cross/aarch64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc-cross/aarch64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccgszf2O.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -pie -z now -z relro -o cmTC_25726 /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/Scrt1.o /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/crti.o /usr/lib/gcc-cross/aarch64-linux-gnu/9/crtbeginS.o -L/usr/lib/gcc-cross/aarch64-linux-gnu/9 -L/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc-cross/aarch64-linux-gnu/9/crtendS.o /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_25726' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64'
+make[1]: Leaving directory '/home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp'
 
 
 
 Parsed CXX implicit include dir info from above output: rv=done
   found start of include info
   found start of implicit include info
-    add: [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0]
-    add: [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu]
-    add: [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward]
-    add: [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include]
-    add: [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed]
-    add: [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include]
-    add: [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include]
+    add: [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9]
+    add: [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/aarch64-linux-gnu]
+    add: [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/backward]
+    add: [/usr/lib/gcc-cross/aarch64-linux-gnu/9/include]
+    add: [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include]
+    add: [/usr/include/aarch64-linux-gnu]
+    add: [/usr/include]
   end of search list found
-  collapse include dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0]
-  collapse include dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu]
-  collapse include dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward]
-  collapse include dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include] ==> [/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include]
-  collapse include dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed] ==> [/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed]
-  collapse include dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include]
-  collapse include dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include]
-  implicit include dirs: [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward;/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include;/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include]
+  collapse include dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9] ==> [/usr/aarch64-linux-gnu/include/c++/9]
+  collapse include dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/aarch64-linux-gnu] ==> [/usr/aarch64-linux-gnu/include/c++/9/aarch64-linux-gnu]
+  collapse include dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/backward] ==> [/usr/aarch64-linux-gnu/include/c++/9/backward]
+  collapse include dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/include] ==> [/usr/lib/gcc-cross/aarch64-linux-gnu/9/include]
+  collapse include dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include] ==> [/usr/aarch64-linux-gnu/include]
+  collapse include dir [/usr/include/aarch64-linux-gnu] ==> [/usr/include/aarch64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/aarch64-linux-gnu/include/c++/9;/usr/aarch64-linux-gnu/include/c++/9/aarch64-linux-gnu;/usr/aarch64-linux-gnu/include/c++/9/backward;/usr/lib/gcc-cross/aarch64-linux-gnu/9/include;/usr/aarch64-linux-gnu/include;/usr/include/aarch64-linux-gnu;/usr/include]
 
 
 Parsed CXX implicit link information from above output:
-  link line regex: [^( *|.*[/\])(aarch64-buildroot-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp]
+  link line regex: [^( *|.*[/\])(aarch64-linux-gnu-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make cmTC_d648d/fast && /usr/bin/make -f CMakeFiles/cmTC_d648d.dir/build.make CMakeFiles/cmTC_d648d.dir/build]
-  ignore line: [make[1]: Entering directory '/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot    -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os -g0 -D_FORTIFY_SOURCE=1   -DNDEBUG   -v -o CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_25726/fast && /usr/bin/make -f CMakeFiles/cmTC_25726.dir/build.make CMakeFiles/cmTC_25726.dir/build]
+  ignore line: [make[1]: Entering directory '/home/cbt123/project/build-rk3588/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/aarch64-linux-gnu-g++    -v -o CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++.br_real]
-  ignore line: [Target: aarch64-buildroot-linux-gnu]
-  ignore line: [Configured with: ./configure --prefix=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --sysconfdir=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/etc --enable-static --target=aarch64-buildroot-linux-gnu --with-sysroot=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/sysroot --enable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --disable-decimal-float --enable-plugins --enable-lto --with-gmp=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpc=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpfr=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-pkgversion='Buildroot -g8cdc4e5f-dirty' --with-bugurl=http://bugs.buildroot.net/ --without-zstd --disable-libquadmath --disable-libquadmath-support --enable-tls --enable-threads --without-isl --without-cloog --with-abi=lp64 --with-cpu=cortex-a76.cortex-a55 --enable-languages=c,c++ --with-build-time-tools=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/bin --enable-shared --disable-libgomp]
+  ignore line: [COLLECT_GCC=/usr/bin/aarch64-linux-gnu-g++]
+  ignore line: [Target: aarch64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --without-target-system-zlib --enable-libpth-m2 --enable-multiarch --enable-fix-cortex-a53-843419 --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=aarch64-linux-gnu --program-prefix=aarch64-linux-gnu- --includedir=/usr/aarch64-linux-gnu/include]
   ignore line: [Thread model: posix]
-  ignore line: [Supported LTO compression algorithms: zlib]
-  ignore line: [gcc version 10.4.0 (Buildroot -g8cdc4e5f-dirty) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64']
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/cc1plus -quiet -v -iprefix /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/ -isysroot /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot -D_GNU_SOURCE -D _LARGEFILE_SOURCE -D _LARGEFILE64_SOURCE -D _FILE_OFFSET_BITS=64 -D _FORTIFY_SOURCE=1 -D NDEBUG /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-a76.cortex-a55 -mlittle-endian -mabi=lp64 -auxbase-strip CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o -g0 -Os -version -fstack-protector-strong -fPIE -o /tmp/ccRKSMwc.s]
-  ignore line: [GNU C++14 (Buildroot -g8cdc4e5f-dirty) version 10.4.0 (aarch64-buildroot-linux-gnu)]
-  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version none]
+  ignore line: [gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64']
+  ignore line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/cc1plus -quiet -v -imultiarch aarch64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mlittle-endian -mabi=lp64 -auxbase-strip CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -o /tmp/cc82VhEl.s]
+  ignore line: [GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.2) version 9.4.0 (aarch64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0"]
-  ignore line: [ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu"]
-  ignore line: [ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward"]
-  ignore line: [ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include"]
-  ignore line: [ignoring nonexistent directory "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/local/include"]
-  ignore line: [ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed"]
-  ignore line: [ignoring duplicate directory "/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/../../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include"]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/aarch64-linux-gnu"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc-cross/aarch64-linux-gnu/9/include-fixed"]
   ignore line: [#include "..." search starts here:]
   ignore line: [#include <...> search starts here:]
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0]
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu]
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward]
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include]
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed]
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/include]
-  ignore line: [ /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include]
+  ignore line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9]
+  ignore line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/aarch64-linux-gnu]
+  ignore line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include/c++/9/backward]
+  ignore line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/include]
+  ignore line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/include]
+  ignore line: [ /usr/include/aarch64-linux-gnu]
+  ignore line: [ /usr/include]
   ignore line: [End of search list.]
-  ignore line: [GNU C++14 (Buildroot -g8cdc4e5f-dirty) version 10.4.0 (aarch64-buildroot-linux-gnu)]
-  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version none]
+  ignore line: [GNU C++14 (Ubuntu 9.4.0-1ubuntu1~20.04.2) version 9.4.0 (aarch64-linux-gnu)]
+  ignore line: [	compiled by GNU C version 9.4.0  GMP version 6.2.0  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.22.1-GMP]
+  ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [Compiler executable checksum: f61d3064d6bef01aa7f3bf022867e15e]
-  ignore line: [COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64']
-  ignore line: [ /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/bin/as -v -EL -march=armv8.2-a+fp16+rcpc+dotprod -mabi=lp64 -o CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccRKSMwc.s]
-  ignore line: [GNU assembler version 2.40 (aarch64-buildroot-linux-gnu) using BFD version (GNU Binutils) 2.40]
-  ignore line: [COMPILER_PATH=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/bin/]
-  ignore line: [LIBRARY_PATH=/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64']
-  ignore line: [Linking CXX executable cmTC_d648d]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d648d.dir/link.txt --verbose=1]
-  ignore line: [/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++ --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot  -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os -g0 -D_FORTIFY_SOURCE=1   -DNDEBUG   -v CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_d648d ]
+  ignore line: [Compiler executable checksum: 3fd62e19f7cce4e05f266e2c8c4bf6f8]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64']
+  ignore line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/bin/as -v -EL -mabi=lp64 -o CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc82VhEl.s]
+  ignore line: [GNU assembler version 2.34 (aarch64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.34]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64']
+  ignore line: [Linking CXX executable cmTC_25726]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_25726.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/aarch64-linux-gnu-g++      -v CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_25726 ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++.br_real]
-  ignore line: [COLLECT_LTO_WRAPPER=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/lto-wrapper]
-  ignore line: [Target: aarch64-buildroot-linux-gnu]
-  ignore line: [Configured with: ./configure --prefix=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --sysconfdir=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/etc --enable-static --target=aarch64-buildroot-linux-gnu --with-sysroot=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/sysroot --enable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --disable-decimal-float --enable-plugins --enable-lto --with-gmp=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpc=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-mpfr=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host --with-pkgversion='Buildroot -g8cdc4e5f-dirty' --with-bugurl=http://bugs.buildroot.net/ --without-zstd --disable-libquadmath --disable-libquadmath-support --enable-tls --enable-threads --without-isl --without-cloog --with-abi=lp64 --with-cpu=cortex-a76.cortex-a55 --enable-languages=c,c++ --with-build-time-tools=/home/dengtao/Temp_Dir/RK3588_Linux5.10_R8/buildroot/output/rockchip_atk_dlrk3588/host/aarch64-buildroot-linux-gnu/bin --enable-shared --disable-libgomp]
+  ignore line: [COLLECT_GCC=/usr/bin/aarch64-linux-gnu-g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc-cross/aarch64-linux-gnu/9/lto-wrapper]
+  ignore line: [Target: aarch64-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 9.4.0-1ubuntu1~20.04.2' --with-bugurl=file:///usr/share/doc/gcc-9/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ gm2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-9 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libquadmath --disable-libquadmath-support --enable-plugin --enable-default-pie --with-system-zlib --without-target-system-zlib --enable-libpth-m2 --enable-multiarch --enable-fix-cortex-a53-843419 --disable-werror --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=aarch64-linux-gnu --program-prefix=aarch64-linux-gnu- --includedir=/usr/aarch64-linux-gnu/include]
   ignore line: [Thread model: posix]
-  ignore line: [Supported LTO compression algorithms: zlib]
-  ignore line: [gcc version 10.4.0 (Buildroot -g8cdc4e5f-dirty) ]
-  ignore line: [COMPILER_PATH=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/bin/]
-  ignore line: [LIBRARY_PATH=/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64/:/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/:/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-fstack-protector-strong' '-fPIE' '-pie' '-D' '_LARGEFILE_SOURCE' '-D' '_LARGEFILE64_SOURCE' '-D' '_FILE_OFFSET_BITS=64' '-Os' '-g0' '-D' '_FORTIFY_SOURCE=1' '-D' 'NDEBUG' '-v' '-o' 'cmTC_d648d' '-shared-libgcc' '-mcpu=cortex-a76.cortex-a55' '-mlittle-endian' '-mabi=lp64']
-  link line: [ /opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/collect2 -plugin /opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/liblto_plugin.so -plugin-opt=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccrO5pzG.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot --eh-frame-hdr -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux -pie -o cmTC_d648d /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/Scrt1.o /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/crti.o /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/crtbeginS.o -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0 -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64 -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64 -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64 -L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib -L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib -z max-page-size=4096 -z common-page-size=4096 -z now -z relro CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/crtendS.o /opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/crtn.o]
-    arg [/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/collect2] ==> ignore
+  ignore line: [gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.2) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc-cross/aarch64-linux-gnu/9/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/:/lib/aarch64-linux-gnu/:/lib/../lib/:/usr/lib/aarch64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_25726' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64']
+  link line: [ /usr/lib/gcc-cross/aarch64-linux-gnu/9/collect2 -plugin /usr/lib/gcc-cross/aarch64-linux-gnu/9/liblto_plugin.so -plugin-opt=/usr/lib/gcc-cross/aarch64-linux-gnu/9/lto-wrapper -plugin-opt=-fresolution=/tmp/ccgszf2O.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr --hash-style=gnu --as-needed -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux --fix-cortex-a53-843419 -pie -z now -z relro -o cmTC_25726 /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/Scrt1.o /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/crti.o /usr/lib/gcc-cross/aarch64-linux-gnu/9/crtbeginS.o -L/usr/lib/gcc-cross/aarch64-linux-gnu/9 -L/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib -L/lib/aarch64-linux-gnu -L/lib/../lib -L/usr/lib/aarch64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc-cross/aarch64-linux-gnu/9/crtendS.o /usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/crtn.o]
+    arg [/usr/lib/gcc-cross/aarch64-linux-gnu/9/collect2] ==> ignore
     arg [-plugin] ==> ignore
-    arg [/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/liblto_plugin.so] ==> ignore
-    arg [-plugin-opt=/opt/atk-dlrk3588-toolchain/bin/../libexec/gcc/aarch64-buildroot-linux-gnu/10.4.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccrO5pzG.res] ==> ignore
+    arg [/usr/lib/gcc-cross/aarch64-linux-gnu/9/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc-cross/aarch64-linux-gnu/9/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccgszf2O.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-    arg [--sysroot=/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
     arg [--eh-frame-hdr] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
     arg [-dynamic-linker] ==> ignore
     arg [/lib/ld-linux-aarch64.so.1] ==> ignore
     arg [-X] ==> ignore
     arg [-EL] ==> ignore
     arg [-maarch64linux] ==> ignore
+    arg [--fix-cortex-a53-843419] ==> ignore
     arg [-pie] ==> ignore
-    arg [-o] ==> ignore
-    arg [cmTC_d648d] ==> ignore
-    arg [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/Scrt1.o] ==> ignore
-    arg [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/crti.o] ==> ignore
-    arg [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/crtbeginS.o] ==> ignore
-    arg [-L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0] ==> dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0]
-    arg [-L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc] ==> dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc]
-    arg [-L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64] ==> dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64]
-    arg [-L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64] ==> dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64]
-    arg [-L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64] ==> dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64]
-    arg [-L/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib] ==> dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib]
-    arg [-L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib] ==> dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib]
-    arg [-L/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib] ==> dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib]
-    arg [-zmax-page-size=4096] ==> ignore
-    arg [-zcommon-page-size=4096] ==> ignore
     arg [-znow] ==> ignore
     arg [-zrelro] ==> ignore
-    arg [CMakeFiles/cmTC_d648d.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_25726] ==> ignore
+    arg [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/Scrt1.o] ==> ignore
+    arg [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/crti.o] ==> ignore
+    arg [/usr/lib/gcc-cross/aarch64-linux-gnu/9/crtbeginS.o] ==> ignore
+    arg [-L/usr/lib/gcc-cross/aarch64-linux-gnu/9] ==> dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9]
+    arg [-L/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib] ==> dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib]
+    arg [-L/lib/aarch64-linux-gnu] ==> dir [/lib/aarch64-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/aarch64-linux-gnu] ==> dir [/usr/lib/aarch64-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib] ==> dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib]
+    arg [CMakeFiles/cmTC_25726.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -219,18 +210,17 @@ Parsed CXX implicit link information from above output:
     arg [-lc] ==> lib [c]
     arg [-lgcc_s] ==> lib [gcc_s]
     arg [-lgcc] ==> lib [gcc]
-    arg [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/crtendS.o] ==> ignore
-    arg [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64/crtn.o] ==> ignore
-  collapse library dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0] ==> [/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0]
-  collapse library dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc] ==> [/opt/atk-dlrk3588-toolchain/lib/gcc]
-  collapse library dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib/../lib64] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/lib64]
-  collapse library dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib/../lib64] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib64]
-  collapse library dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/../lib64] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib64]
-  collapse library dir [/opt/atk-dlrk3588-toolchain/bin/../lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/../../../../aarch64-buildroot-linux-gnu/lib] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/lib]
-  collapse library dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib]
-  collapse library dir [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib] ==> [/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib]
+    arg [/usr/lib/gcc-cross/aarch64-linux-gnu/9/crtendS.o] ==> ignore
+    arg [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib/crtn.o] ==> ignore
+  collapse library dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9] ==> [/usr/lib/gcc-cross/aarch64-linux-gnu/9]
+  collapse library dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib/../lib] ==> [/usr/aarch64-linux-gnu/lib]
+  collapse library dir [/lib/aarch64-linux-gnu] ==> [/lib/aarch64-linux-gnu]
+  collapse library dir [/lib/../lib] ==> [/lib]
+  collapse library dir [/usr/lib/aarch64-linux-gnu] ==> [/usr/lib/aarch64-linux-gnu]
+  collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse library dir [/usr/lib/gcc-cross/aarch64-linux-gnu/9/../../../../aarch64-linux-gnu/lib] ==> [/usr/aarch64-linux-gnu/lib]
   implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
-  implicit dirs: [/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0;/opt/atk-dlrk3588-toolchain/lib/gcc;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/lib64;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib64;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib64;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/lib;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib]
+  implicit dirs: [/usr/lib/gcc-cross/aarch64-linux-gnu/9;/usr/aarch64-linux-gnu/lib;/lib/aarch64-linux-gnu;/lib;/usr/lib/aarch64-linux-gnu;/usr/lib]
   implicit fwks: []
 
 

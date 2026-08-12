@@ -1,7 +1,7 @@
-set(CMAKE_CXX_COMPILER "/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-g++")
+set(CMAKE_CXX_COMPILER "/usr/bin/aarch64-linux-gnu-g++")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "GNU")
-set(CMAKE_CXX_COMPILER_VERSION "10.4.0")
+set(CMAKE_CXX_COMPILER_VERSION "9.4.0")
 set(CMAKE_CXX_COMPILER_VERSION_INTERNAL "")
 set(CMAKE_CXX_COMPILER_WRAPPER "")
 set(CMAKE_CXX_STANDARD_COMPUTED_DEFAULT "14")
@@ -19,11 +19,11 @@ set(CMAKE_CXX_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-ar")
-set(CMAKE_CXX_COMPILER_AR "/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-gcc-ar")
-set(CMAKE_RANLIB "/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-ranlib")
-set(CMAKE_CXX_COMPILER_RANLIB "/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-gcc-ranlib")
-set(CMAKE_LINKER "/opt/atk-dlrk3588-toolchain/bin/aarch64-buildroot-linux-gnu-ld")
+set(CMAKE_AR "/usr/bin/aarch64-linux-gnu-ar")
+set(CMAKE_CXX_COMPILER_AR "/usr/bin/aarch64-linux-gnu-gcc-ar-9")
+set(CMAKE_RANLIB "/usr/bin/aarch64-linux-gnu-ranlib")
+set(CMAKE_CXX_COMPILER_RANLIB "/usr/bin/aarch64-linux-gnu-gcc-ranlib-9")
+set(CMAKE_LINKER "/usr/bin/aarch64-linux-gnu-ld")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCXX 1)
 set(CMAKE_CXX_COMPILER_LOADED 1)
@@ -59,7 +59,7 @@ set(CMAKE_CXX_LINKER_PREFERENCE_PROPAGATES 1)
 # Save compiler ABI information.
 set(CMAKE_CXX_SIZEOF_DATA_PTR "8")
 set(CMAKE_CXX_COMPILER_ABI "ELF")
-set(CMAKE_CXX_LIBRARY_ARCHITECTURE "")
+set(CMAKE_CXX_LIBRARY_ARCHITECTURE "aarch64-linux-gnu")
 
 if(CMAKE_CXX_SIZEOF_DATA_PTR)
   set(CMAKE_SIZEOF_VOID_P "${CMAKE_CXX_SIZEOF_DATA_PTR}")
@@ -70,7 +70,7 @@ if(CMAKE_CXX_COMPILER_ABI)
 endif()
 
 if(CMAKE_CXX_LIBRARY_ARCHITECTURE)
-  set(CMAKE_LIBRARY_ARCHITECTURE "")
+  set(CMAKE_LIBRARY_ARCHITECTURE "aarch64-linux-gnu")
 endif()
 
 set(CMAKE_CXX_CL_SHOWINCLUDES_PREFIX "")
@@ -82,7 +82,7 @@ endif()
 
 
 
-set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/aarch64-buildroot-linux-gnu;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include/c++/10.4.0/backward;/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include;/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0/include-fixed;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/include;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include")
+set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/usr/aarch64-linux-gnu/include/c++/9;/usr/aarch64-linux-gnu/include/c++/9/aarch64-linux-gnu;/usr/aarch64-linux-gnu/include/c++/9/backward;/usr/lib/gcc-cross/aarch64-linux-gnu/9/include;/usr/aarch64-linux-gnu/include;/usr/include/aarch64-linux-gnu;/usr/include")
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "stdc++;m;gcc_s;gcc;c;gcc_s;gcc")
-set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "/opt/atk-dlrk3588-toolchain/lib/gcc/aarch64-buildroot-linux-gnu/10.4.0;/opt/atk-dlrk3588-toolchain/lib/gcc;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/lib64;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib64;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib64;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/lib;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/lib;/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib")
+set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "/usr/lib/gcc-cross/aarch64-linux-gnu/9;/usr/aarch64-linux-gnu/lib;/lib/aarch64-linux-gnu;/lib;/usr/lib/aarch64-linux-gnu;/usr/lib")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")

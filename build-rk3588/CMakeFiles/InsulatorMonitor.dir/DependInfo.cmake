@@ -4,12 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp" "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o"
-  "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp" "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o"
-  "/home/root123/QtProject/gptproject/InsulatorMonitor/gstvideoreceiver.cpp" "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o"
-  "/home/root123/QtProject/gptproject/InsulatorMonitor/inferencecontroller.cpp" "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o"
-  "/home/root123/QtProject/gptproject/InsulatorMonitor/main.cpp" "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir/main.cpp.o"
-  "/home/root123/QtProject/gptproject/InsulatorMonitor/mainwindow.cpp" "/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o"
+  "/home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/EWIEGA46WW/qrc_resources.cpp.o"
+  "/home/cbt123/project/build-rk3588/InsulatorMonitor_autogen/mocs_compilation.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/InsulatorMonitor_autogen/mocs_compilation.cpp.o"
+  "/home/cbt123/project/gstvideoreceiver.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/gstvideoreceiver.cpp.o"
+  "/home/cbt123/project/inferencecontroller.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/inferencecontroller.cpp.o"
+  "/home/cbt123/project/inferencelaunchspec.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/inferencelaunchspec.cpp.o"
+  "/home/cbt123/project/main.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/main.cpp.o"
+  "/home/cbt123/project/mainwindow.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/mainwindow.cpp.o"
+  "/home/cbt123/project/monitorapplication.cpp" "/home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor.dir/monitorapplication.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -24,15 +26,15 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "InsulatorMonitor_autogen/include"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5/QtCore"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/../../../mkspecs/devices/linux-buildroot-g++"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5/QtGui"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/qt5/QtWidgets"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/gstreamer-1.0"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/glib-2.0"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/lib/glib-2.0/include"
-  "/opt/atk-dlrk3588-toolchain/aarch64-buildroot-linux-gnu/sysroot/usr/include/rga"
+  "/usr/include/aarch64-linux-gnu/qt5"
+  "/usr/include/aarch64-linux-gnu/qt5/QtCore"
+  "/usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++"
+  "/usr/include/aarch64-linux-gnu/qt5/QtGui"
+  "/usr/include/aarch64-linux-gnu/qt5/QtWidgets"
+  "/usr/include/gstreamer-1.0"
+  "/usr/include/orc-0.4"
+  "/usr/include/glib-2.0"
+  "/usr/lib/aarch64-linux-gnu/glib-2.0/include"
   )
 
 # Targets to which this target links.

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/root123/QtProject/gptproject/InsulatorMonitor
+CMAKE_SOURCE_DIR = /home/cbt123/project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588
+CMAKE_BINARY_DIR = /home/cbt123/project/build-rk3588
 
 # Utility rule file for InsulatorMonitor_autogen.
 
@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3
 include CMakeFiles/InsulatorMonitor_autogen.dir/progress.make
 
 CMakeFiles/InsulatorMonitor_autogen:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target InsulatorMonitor"
-	/usr/bin/cmake -E cmake_autogen /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutogenInfo.json Release
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/cbt123/project/build-rk3588/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target InsulatorMonitor"
+	/usr/bin/cmake -E cmake_autogen /home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/AutogenInfo.json ""
 
 InsulatorMonitor_autogen: CMakeFiles/InsulatorMonitor_autogen
 InsulatorMonitor_autogen: CMakeFiles/InsulatorMonitor_autogen.dir/build.make
@@ -72,6 +72,6 @@ CMakeFiles/InsulatorMonitor_autogen.dir/clean:
 .PHONY : CMakeFiles/InsulatorMonitor_autogen.dir/clean
 
 CMakeFiles/InsulatorMonitor_autogen.dir/depend:
-	cd /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/root123/QtProject/gptproject/InsulatorMonitor /home/root123/QtProject/gptproject/InsulatorMonitor /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588 /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588 /home/root123/QtProject/gptproject/InsulatorMonitor/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cbt123/project/build-rk3588 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cbt123/project /home/cbt123/project /home/cbt123/project/build-rk3588 /home/cbt123/project/build-rk3588 /home/cbt123/project/build-rk3588/CMakeFiles/InsulatorMonitor_autogen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/InsulatorMonitor_autogen.dir/depend
 
