@@ -236,6 +236,21 @@ QTableWidget {
     font-size: 17px;
 }
 
+/* Larger, easier-to-read history photo records. */
+QTableWidget#recordsTable {
+    font-size: 20px;
+}
+
+QTableWidget#recordsTable::item {
+    padding: 8px 12px;
+}
+
+QTableWidget#recordsTable QHeaderView::section {
+    min-height: 52px;
+    padding: 0 14px;
+    font-size: 18px;
+}
+
 QHeaderView::section {
     min-height: 42px;
     padding: 0 10px;

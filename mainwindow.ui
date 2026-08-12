@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>800</height>
+    <width>1403</width>
+    <height>914</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -217,6 +217,11 @@
             <layout class="QHBoxLayout" name="previewTitleLayout">
              <item>
               <widget class="QLabel" name="previewTitleLabel">
+               <property name="font">
+                <font>
+                 <pointsize>20</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>实时检测画面</string>
                </property>
@@ -240,16 +245,21 @@
              </item>
              <item>
               <widget class="QLabel" name="runStatusDot">
-               <property name="state" stdset="0">
-                <string>idle</string>
-               </property>
                <property name="text">
                 <string/>
+               </property>
+               <property name="state" stdset="0">
+                <string>idle</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QLabel" name="runStatusLabel">
+               <property name="font">
+                <font>
+                 <pointsize>20</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>等待开始</string>
                </property>
@@ -391,6 +401,19 @@
              </item>
              <item>
               <widget class="QLabel" name="resultValueLabel">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>30</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>等待检测</string>
                </property>
@@ -534,6 +557,17 @@
              </property>
              <item>
               <widget class="QPushButton" name="detectButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>100</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>20</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>开始检测</string>
                </property>
@@ -544,6 +578,17 @@
              </item>
              <item>
               <widget class="QPushButton" name="snapshotButton">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>100</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>20</pointsize>
+                </font>
+               </property>
                <property name="text">
                 <string>拍照保存</string>
                </property>
@@ -556,6 +601,17 @@
                </property>
                <item>
                 <widget class="QPushButton" name="recordsButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>20</pointsize>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>历史拍照</string>
                  </property>
@@ -566,6 +622,17 @@
                </item>
                <item>
                 <widget class="QPushButton" name="settingsButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>20</pointsize>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>设置</string>
                  </property>
@@ -628,7 +695,7 @@
           <item>
            <widget class="QLabel" name="recordsTitleLabel">
             <property name="text">
-            <string>历史拍照</string>
+             <string>历史拍照</string>
             </property>
             <property name="role" stdset="0">
              <string>sectionTitle</string>
@@ -651,7 +718,7 @@
           <item>
            <widget class="QLabel" name="recordsHintLabel">
             <property name="text">
-                    <string>按时间查看已保存的历史照片，点击照片可查看大图</string>
+             <string>按时间查看已保存的历史照片，点击照片可查看大图</string>
             </property>
             <property name="role" stdset="0">
              <string>muted</string>
@@ -662,62 +729,62 @@
         </item>
         <item>
          <widget class="QTableWidget" name="recordsTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
           <property name="showGrid">
            <bool>true</bool>
-          </property>
-          <property name="columnCount">
-           <number>8</number>
           </property>
           <property name="rowCount">
            <number>0</number>
           </property>
+          <property name="columnCount">
+           <number>8</number>
+          </property>
           <column>
            <property name="text">
-          <string>缩略图</string>
+            <string>缩略图</string>
            </property>
           </column>
           <column>
            <property name="text">
-          <string>文件名</string>
+            <string>文件名</string>
            </property>
           </column>
           <column>
            <property name="text">
-          <string>拍摄时间</string>
+            <string>拍摄时间</string>
            </property>
           </column>
           <column>
            <property name="text">
-          <string>文件大小</string>
+            <string>文件大小</string>
            </property>
           </column>
           <column>
            <property name="text">
-          <string></string>
+            <string/>
            </property>
           </column>
           <column>
            <property name="text">
-          <string></string>
+            <string/>
            </property>
           </column>
           <column>
            <property name="text">
-          <string></string>
+            <string/>
            </property>
           </column>
           <column>
            <property name="text">
-          <string></string>
+            <string/>
            </property>
           </column>
          </widget>
@@ -752,11 +819,11 @@
        </property>
        <item>
         <widget class="QLabel" name="deviceStatusDot">
-         <property name="state" stdset="0">
-          <string>online</string>
-         </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="state" stdset="0">
+          <string>online</string>
          </property>
         </widget>
        </item>
@@ -868,8 +935,6 @@
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

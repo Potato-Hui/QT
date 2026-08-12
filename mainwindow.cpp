@@ -55,7 +55,16 @@ MainWindow::MainWindow(QWidget *parent)
     setBatteryLevel(86, false);
     setDeviceStatus(true, true);
     ui->pageStack->setCurrentWidget(ui->monitorPage);
-    ui->recordsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    auto *recordsHeader = ui->recordsTable->horizontalHeader();
+    // Keep the history table columns large enough for an actual thumbnail and
+    // readable metadata.  This is scoped to the history page and does not
+    // change the realtime preview layout.
+    recordsHeader->setSectionResizeMode(0, QHeaderView::Fixed);
+    recordsHeader->setSectionResizeMode(1, QHeaderView::Fixed);
+    recordsHeader->setSectionResizeMode(2, QHeaderView::Fixed);
+    recordsHeader->setSectionResizeMode(3, QHeaderView::Fixed);
+    recordsHeader->setStretchLastSection(true);
+    ui->recordsTable->setIconSize(QSize(180, 112));
     ui->recordsTable->verticalHeader()->setVisible(false);
     ui->recordsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->recordsTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -270,10 +279,10 @@ void MainWindow::refreshHistoryPhotos()
         QStringLiteral("拍摄时间"),
         QStringLiteral("文件大小")});
     ui->recordsTable->setRowCount(photos.size());
-    ui->recordsTable->setColumnWidth(0, 150);
-    ui->recordsTable->setColumnWidth(1, 360);
-    ui->recordsTable->setColumnWidth(2, 220);
-    ui->recordsTable->setColumnWidth(3, 130);
+    ui->recordsTable->setColumnWidth(0, 210);
+    ui->recordsTable->setColumnWidth(1, 390);
+    ui->recordsTable->setColumnWidth(2, 260);
+    ui->recordsTable->setColumnWidth(3, 160);
 
     for (int row = 0; row < photos.size(); ++row) {
         const QFileInfo &photo = photos.at(row);
@@ -281,7 +290,7 @@ void MainWindow::refreshHistoryPhotos()
         const QPixmap pixmap(photo.absoluteFilePath());
         if (!pixmap.isNull()) {
             thumbnail->setIcon(QIcon(pixmap.scaled(
-                128, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+                180, 112, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
         }
         thumbnail->setData(Qt::UserRole, photo.absoluteFilePath());
         thumbnail->setTextAlignment(Qt::AlignCenter);
@@ -289,18 +298,21 @@ void MainWindow::refreshHistoryPhotos()
 
         auto *name = new QTableWidgetItem(photo.fileName());
         name->setData(Qt::UserRole, photo.absoluteFilePath());
+        name->setTextAlignment(Qt::AlignVCenter | Qt::AlignLeft);
         ui->recordsTable->setItem(row, 1, name);
 
         auto *time = new QTableWidgetItem(
             photo.lastModified().toString(QStringLiteral("yyyy-MM-dd HH:mm:ss")));
         time->setData(Qt::UserRole, photo.absoluteFilePath());
+        time->setTextAlignment(Qt::AlignVCenter | Qt::AlignLeft);
         ui->recordsTable->setItem(row, 2, time);
 
         auto *size = new QTableWidgetItem(
             QStringLiteral("%1 KB").arg(photo.size() / 1024.0, 0, 'f', 1));
         size->setData(Qt::UserRole, photo.absoluteFilePath());
+        size->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
         ui->recordsTable->setItem(row, 3, size);
-        ui->recordsTable->setRowHeight(row, 96);
+        ui->recordsTable->setRowHeight(row, 136);
     }
 
     if (photos.isEmpty()) {
