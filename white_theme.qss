@@ -1,0 +1,248 @@
+/* Qt 5.15.8 / RK3588 轻量白色主题：无阴影、无透明模糊、无动态渐变 */
+
+* {
+    font-family: "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+    font-size: 17px;
+    color: #172033;
+}
+
+QMainWindow,
+QWidget#centralWidget,
+QWidget#monitorPage,
+QWidget#recordsPage {
+    background: #FFFFFF;
+}
+
+QFrame#headerFrame {
+    background: #FFFFFF;
+    border: none;
+    border-bottom: 1px solid #E3E8EF;
+}
+
+QLabel#appTitleLabel {
+    color: #14213D;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+QLabel#appSubTitleLabel,
+QLabel#dateLabel,
+QLabel[role="muted"] {
+    color: #78849A;
+    font-size: 15px;
+}
+
+QLabel#timeLabel {
+    color: #14213D;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+QFrame[card="true"] {
+    background: #FFFFFF;
+    border: 1px solid #E1E7EF;
+    border-radius: 12px;
+}
+
+QLabel[role="sectionTitle"] {
+    color: #26334D;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+QLabel[role="metricName"] {
+    color: #6F7C91;
+    font-size: 17px;
+}
+
+QLabel[role="metricValue"] {
+    color: #1D2940;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+QLabel#resultValueLabel {
+    color: #64748B;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+QLabel#resultValueLabel[resultState="normal"] {
+    color: #16855B;
+}
+
+QLabel#resultValueLabel[resultState="alarm"] {
+    color: #D94747;
+}
+
+QFrame#previewCard {
+    background: #FFFFFF;
+    border: 1px solid #DCE3EC;
+    border-radius: 12px;
+}
+
+QWidget#previewContainer {
+    background: #18212F;
+    border-radius: 9px;
+}
+
+QLabel#previewLabel {
+    background: transparent;
+    color: #FFFFFF;
+}
+
+QLabel#previewHintLabel {
+    color: #B8C2D2;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+QLabel#previewSubHintLabel {
+    color: #7F8BA0;
+    font-size: 13px;
+}
+
+QLabel#runStatusDot,
+QLabel#deviceStatusDot {
+    min-width: 10px;
+    max-width: 10px;
+    min-height: 10px;
+    max-height: 10px;
+    border-radius: 5px;
+}
+
+QLabel#runStatusDot[state="idle"] {
+    background: #AAB3C2;
+}
+
+QLabel#runStatusDot[state="running"],
+QLabel#deviceStatusDot[state="online"] {
+    background: #22A06B;
+}
+
+QLabel#runStatusDot[state="error"] {
+    background: #E24A4A;
+}
+
+QLabel#deviceStatusDot[state="error"] {
+    background: #E24A4A;
+}
+
+QPushButton {
+    min-height: 56px;
+    padding: 0 22px;
+    background: #FFFFFF;
+    border: 1px solid #CAD3E0;
+    border-radius: 9px;
+    color: #29364D;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+QPushButton:hover {
+    background: #F4F7FB;
+    border-color: #9DABBD;
+}
+
+QPushButton:pressed {
+    background: #E9EEF5;
+}
+
+QPushButton#detectButton {
+    min-height: 76px;
+    background: #178A60;
+    border: 1px solid #178A60;
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+QPushButton#detectButton:hover {
+    background: #117651;
+}
+
+QPushButton#detectButton[running="true"] {
+    background: #D94747;
+    border-color: #D94747;
+}
+
+QPushButton#detectButton[running="true"]:hover {
+    background: #C53B3B;
+}
+
+QPushButton#snapshotButton {
+    min-height: 76px;
+    background: #2563EB;
+    border-color: #2563EB;
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+QPushButton#recordsButton,
+QPushButton#settingsButton {
+    min-height: 60px;
+    font-size: 18px;
+}
+
+QPushButton#snapshotButton:hover {
+    background: #1D4ED8;
+}
+
+QPushButton[compact="true"] {
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 14px;
+}
+
+QProgressBar#batteryProgress {
+    min-width: 76px;
+    max-width: 76px;
+    min-height: 12px;
+    max-height: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #DFE5ED;
+    text-align: center;
+}
+
+QProgressBar#batteryProgress::chunk {
+    border-radius: 6px;
+    background: #22A06B;
+}
+
+QProgressBar#batteryProgress[level="warning"]::chunk {
+    background: #E8A317;
+}
+
+QProgressBar#batteryProgress[level="critical"]::chunk {
+    background: #D94747;
+}
+
+QFrame#footerFrame {
+    background: #FFFFFF;
+    border: none;
+    border-top: 1px solid #E3E8EF;
+}
+
+QTableWidget {
+    background: #FFFFFF;
+    alternate-background-color: #F8FAFC;
+    border: 1px solid #DEE5EE;
+    border-radius: 9px;
+    gridline-color: #E5EAF1;
+    selection-background-color: #E8F0FF;
+    selection-color: #172033;
+    font-size: 17px;
+}
+
+QHeaderView::section {
+    min-height: 42px;
+    padding: 0 10px;
+    background: #F1F4F8;
+    color: #4B5870;
+    border: none;
+    border-right: 1px solid #DEE5EE;
+    border-bottom: 1px solid #DEE5EE;
+    font-weight: 700;
+}

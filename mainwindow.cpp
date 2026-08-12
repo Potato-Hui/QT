@@ -2,16 +2,27 @@
 #include "ui_mainwindow.h"
 
 #include <QDateTime>
+#include <QDir>
+#include <QDialog>
+#include <QFileInfo>
+#include <QFileInfoList>
 #include <QHeaderView>
+#include <QIcon>
+#include <QMessageBox>
 #include <QPixmap>
 #include <QResizeEvent>
+#include <QStorageInfo>
 #include <QStyle>
 #include <QTimer>
+#include <QLabel>
+#include <QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_clockTimer(new QTimer(this))
+    , m_storageTimer(new QTimer(this))
+    , m_storagePath(QDir::homePath() + QStringLiteral("/InsulatorMonitor/data"))
     , m_detecting(false)
 {
     ui->setupUi(this);
@@ -30,15 +41,25 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::openMonitorPage);
     connect(ui->settingsButton, &QPushButton::clicked,
             this, &MainWindow::settingsRequested);
+    connect(ui->recordsTable, &QTableWidget::cellClicked,
+            this, &MainWindow::openHistoryPhoto);
 
     m_clockTimer->start(1000);
     updateClock();
+    QDir().mkpath(m_storagePath);
+    connect(m_storageTimer, &QTimer::timeout,
+            this, &MainWindow::updateStorageSpace);
+    m_storageTimer->start(5000);
+    updateStorageSpace();
     updateDetectionButton();
     setBatteryLevel(86, false);
     setDeviceStatus(true, true);
     ui->pageStack->setCurrentWidget(ui->monitorPage);
     ui->recordsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->recordsTable->verticalHeader()->setVisible(false);
+    ui->recordsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->recordsTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    refreshHistoryPhotos();
 }
 
 MainWindow::~MainWindow()
@@ -176,6 +197,7 @@ void MainWindow::setPerformanceMetrics(double pipelineFps,
 
 void MainWindow::openRecordsPage()
 {
+    refreshHistoryPhotos();
     ui->pageStack->setCurrentWidget(ui->recordsPage);
 }
 
@@ -186,9 +208,141 @@ void MainWindow::openMonitorPage()
 
 void MainWindow::requestSnapshot()
 {
+    if (m_lastFrame.isNull()) {
+        QMessageBox::warning(
+            this,
+            QStringLiteral("拍照失败"),
+            QStringLiteral("当前没有可保存的摄像头画面"));
+        return;
+    }
+
+    QDir().mkpath(m_storagePath);
+
+    const QString fileName =
+        QStringLiteral("snapshot_%1.jpg")
+        .arg(QDateTime::currentDateTime()
+             .toString(QStringLiteral("yyyyMMdd_HHmmss")));
+    const QString filePath = QDir(m_storagePath).filePath(fileName);
+
+    if (!m_lastFrame.save(filePath, "JPG", 90)) {
+        QMessageBox::critical(
+            this,
+            QStringLiteral("拍照失败"),
+            QStringLiteral("无法保存图片：%1").arg(filePath));
+        return;
+    }
+
     emit snapshotRequested();
     const int count = ui->snapshotCountValueLabel->text().toInt() + 1;
     ui->snapshotCountValueLabel->setText(QString::number(count));
+    updateStorageSpace();
+}
+
+void MainWindow::updateStorageSpace()
+{
+    const QStorageInfo storage(m_storagePath);
+    if (!storage.isValid() || !storage.isReady()) {
+        ui->storageValueLabel->setText(QStringLiteral("--"));
+        return;
+    }
+
+    const double gigabytes = static_cast<double>(storage.bytesAvailable())
+        / (1024.0 * 1024.0 * 1024.0);
+    ui->storageValueLabel->setText(
+        QStringLiteral("%1 GB").arg(gigabytes, 0, 'f', 1));
+}
+
+void MainWindow::refreshHistoryPhotos()
+{
+    QDir directory(m_storagePath);
+    const QStringList filters{
+        QStringLiteral("*.jpg"),
+        QStringLiteral("*.jpeg"),
+        QStringLiteral("*.png")};
+    const QFileInfoList photos = directory.entryInfoList(
+        filters, QDir::Files | QDir::Readable, QDir::Time);
+
+    ui->recordsTable->clearContents();
+    ui->recordsTable->setColumnCount(4);
+    ui->recordsTable->setHorizontalHeaderLabels({
+        QStringLiteral("缩略图"),
+        QStringLiteral("文件名"),
+        QStringLiteral("拍摄时间"),
+        QStringLiteral("文件大小")});
+    ui->recordsTable->setRowCount(photos.size());
+    ui->recordsTable->setColumnWidth(0, 150);
+    ui->recordsTable->setColumnWidth(1, 360);
+    ui->recordsTable->setColumnWidth(2, 220);
+    ui->recordsTable->setColumnWidth(3, 130);
+
+    for (int row = 0; row < photos.size(); ++row) {
+        const QFileInfo &photo = photos.at(row);
+        auto *thumbnail = new QTableWidgetItem;
+        const QPixmap pixmap(photo.absoluteFilePath());
+        if (!pixmap.isNull()) {
+            thumbnail->setIcon(QIcon(pixmap.scaled(
+                128, 80, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+        }
+        thumbnail->setData(Qt::UserRole, photo.absoluteFilePath());
+        thumbnail->setTextAlignment(Qt::AlignCenter);
+        ui->recordsTable->setItem(row, 0, thumbnail);
+
+        auto *name = new QTableWidgetItem(photo.fileName());
+        name->setData(Qt::UserRole, photo.absoluteFilePath());
+        ui->recordsTable->setItem(row, 1, name);
+
+        auto *time = new QTableWidgetItem(
+            photo.lastModified().toString(QStringLiteral("yyyy-MM-dd HH:mm:ss")));
+        time->setData(Qt::UserRole, photo.absoluteFilePath());
+        ui->recordsTable->setItem(row, 2, time);
+
+        auto *size = new QTableWidgetItem(
+            QStringLiteral("%1 KB").arg(photo.size() / 1024.0, 0, 'f', 1));
+        size->setData(Qt::UserRole, photo.absoluteFilePath());
+        ui->recordsTable->setItem(row, 3, size);
+        ui->recordsTable->setRowHeight(row, 96);
+    }
+
+    if (photos.isEmpty()) {
+        ui->recordsTable->setRowCount(1);
+        auto *empty = new QTableWidgetItem(
+            QStringLiteral("暂无历史照片，请先拍照保存"));
+        empty->setTextAlignment(Qt::AlignCenter);
+        ui->recordsTable->setItem(0, 0, empty);
+        ui->recordsTable->setSpan(0, 0, 1, 4);
+    }
+}
+
+void MainWindow::openHistoryPhoto(int row, int column)
+{
+    QTableWidgetItem *item = ui->recordsTable->item(row, column);
+    if (item == nullptr) {
+        return;
+    }
+
+    const QString path = item->data(Qt::UserRole).toString();
+    if (path.isEmpty()) {
+        return;
+    }
+
+    const QPixmap pixmap(path);
+    if (pixmap.isNull()) {
+        QMessageBox::warning(this,
+                             QStringLiteral("无法查看照片"),
+                             QStringLiteral("照片文件无法读取：%1").arg(path));
+        return;
+    }
+
+    QDialog dialog(this);
+    dialog.setWindowTitle(QFileInfo(path).fileName());
+    dialog.resize(960, 680);
+    auto *layout = new QVBoxLayout(&dialog);
+    auto *imageLabel = new QLabel(&dialog);
+    imageLabel->setAlignment(Qt::AlignCenter);
+    imageLabel->setPixmap(pixmap.scaled(
+        900, 600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    layout->addWidget(imageLabel);
+    dialog.exec();
 }
 
 void MainWindow::updateDetectionButton()

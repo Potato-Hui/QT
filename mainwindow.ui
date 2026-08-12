@@ -557,7 +557,7 @@
                <item>
                 <widget class="QPushButton" name="recordsButton">
                  <property name="text">
-                  <string>检测记录</string>
+                  <string>历史拍照</string>
                  </property>
                  <property name="compact" stdset="0">
                   <bool>true</bool>
@@ -628,7 +628,7 @@
           <item>
            <widget class="QLabel" name="recordsTitleLabel">
             <property name="text">
-             <string>检测记录</string>
+            <string>历史拍照</string>
             </property>
             <property name="role" stdset="0">
              <string>sectionTitle</string>
@@ -651,7 +651,7 @@
           <item>
            <widget class="QLabel" name="recordsHintLabel">
             <property name="text">
-             <string>原图、结果图及像素参数由 SQLite 数据层载入</string>
+                    <string>按时间查看已保存的历史照片，点击照片可查看大图</string>
             </property>
             <property name="role" stdset="0">
              <string>muted</string>
@@ -682,42 +682,42 @@
           </property>
           <column>
            <property name="text">
-            <string>记录编号</string>
+          <string>缩略图</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>拍摄时间</string>
+          <string>文件名</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>识别结果</string>
+          <string>拍摄时间</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>置信度</string>
+          <string>文件大小</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>总像素</string>
+          <string></string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>缺陷像素</string>
+          <string></string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>缺陷占比</string>
+          <string></string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>备注</string>
+          <string></string>
            </property>
           </column>
          </widget>
@@ -855,7 +855,7 @@
        <item>
         <widget class="QPushButton" name="recordsNavButton">
          <property name="text">
-          <string>查看检测记录</string>
+          <string>查看历史拍照</string>
          </property>
          <property name="compact" stdset="0">
           <bool>true</bool>
@@ -873,4 +873,3 @@
  </resources>
  <connections/>
 </ui>
-

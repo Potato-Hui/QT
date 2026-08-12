@@ -3,6 +3,7 @@
 
 #include <QImage>
 #include <QMainWindow>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,13 +50,18 @@ private slots:
     void openRecordsPage();
     void openMonitorPage();
     void requestSnapshot();
+    void updateStorageSpace();
+    void openHistoryPhoto(int row, int column);
 
 private:
     void updateDetectionButton();
     void updatePreviewPixmap();
+    void refreshHistoryPhotos();
 
     Ui::MainWindow *ui;
     QTimer *m_clockTimer;
+    QTimer *m_storageTimer;
+    QString m_storagePath;
     bool m_detecting;
     QImage m_lastFrame;
 };
