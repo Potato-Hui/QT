@@ -14,7 +14,7 @@
  *   -> BGR
  *   -> appsink
  */
-
+//111
 GstVideoReceiver::GstVideoReceiver(QObject *parent)
     : QObject(parent)
     , m_busTimer(new QTimer(this))
@@ -388,14 +388,15 @@ GstFlowReturn GstVideoReceiver::processSample(
     }
 
     /*
-     * Qt 5.15 可直接解释 BGR888，因此无需遍历整帧交换红蓝通道。
+     * GStreamer 输出 BGR。Qt 5.12 没有 Format_BGR888，先按 RGB888
+     * 包装，再交换红蓝通道，兼容 Qt 5.12/5.15。
      */
     const QImage wrappedImage(
         data,
         width,
         height,
         bytesPerLine,
-        QImage::Format_BGR888);
+        QImage::Format_RGB888);
 
     /*
      * copy() 确保 QImage 拥有自己的像素内存。
@@ -403,7 +404,7 @@ GstFlowReturn GstVideoReceiver::processSample(
      * GstBuffer 在 unmap/unref 后会失效，因此不能直接
      * 把 wrappedImage 发送到界面线程。
      */
-    QImage ownedImage = wrappedImage.copy();
+    QImage ownedImage = wrappedImage.rgbSwapped().copy();
 
     /*
      * QImage 完成深拷贝后，可以释放 GStreamer 视频帧。
