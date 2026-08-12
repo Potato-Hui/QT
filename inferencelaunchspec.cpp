@@ -42,12 +42,16 @@ LaunchSpecResult buildInferenceLaunchSpec(
         const QString rootValue = settings.value("rknn_dir").toString().trimmed();
         const QString programValue = settings.value("program").toString().trimmed();
         const QString modelValue = settings.value("model").toString().trimmed();
+        bool threadsOk = false;
+        const int threads = settings.value("threads", 3).toInt(&threadsOk);
         settings.endGroup();
         if (rootValue.isEmpty() || programValue.isEmpty() || modelValue.isEmpty())
             return {false, {}, QStringLiteral("single_model.ini 缺少 rknn_dir、program 或 model")};
+        if (!threadsOk || threads < 1 || threads > 12)
+            return {false, {}, QStringLiteral("threads must be an integer from 1 to 12")};
         const QString root = QDir(rootValue).absolutePath();
         return validate({root, resolvePath(root, programValue),
-                         {resolvePath(root, modelValue), "/dev/video41", "12"}});
+                         {resolvePath(root, modelValue), "/dev/video41", QString::number(threads)}});
     }
 
     QString root = qEnvironmentVariable("INSULATOR_RKNN_DIR");

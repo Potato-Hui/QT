@@ -25,6 +25,7 @@ int main(int argc, char** argv)
     ini.write("rknn_dir=" + root.path().toUtf8() + "\n");
     ini.write("program=rknn_yolov8_demo\n");
     ini.write("model=model/RK3588/model.rknn\n");
+    ini.write("threads=9\n");
     ini.close();
 
     const LaunchSpecResult result = buildInferenceLaunchSpec(
@@ -34,5 +35,5 @@ int main(int argc, char** argv)
     assert(result.spec.arguments.size() == 3);
     assert(result.spec.arguments[0] == model.fileName());
     assert(result.spec.arguments[1] == "/dev/video41");
-    assert(result.spec.arguments[2] == "12");
+    assert(result.spec.arguments[2] == "9");
 }

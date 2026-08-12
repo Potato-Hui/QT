@@ -32,6 +32,7 @@ bin/single_model.ini
 rknn_dir=/root/rknn-single
 program=rknn_yolov8_demo
 model=model/RK3588/best_yolov8_fp16.rknn
+threads=3
 ```
 
 路径说明：
@@ -39,6 +40,7 @@ model=model/RK3588/best_yolov8_fp16.rknn
 - `rknn_dir`：RKNN 推理程序所在目录。
 - `program`：推理程序文件名。
 - `model`：相对于 `rknn_dir` 的模型路径，也可以使用绝对路径。
+- `threads`：传给推理程序的线程数，必须是 1 到 12 之间的整数；每次点击“开始检测”都会重新读取。
 
 修改 `model` 后，停止当前检测并再次点击“开始检测”即可加载新模型，不需要重新编译 Qt 程序。新模型需要保持与推理程序兼容的输入和输出结构。
 
