@@ -1,7 +1,7 @@
 # InsulatorMonitor
 
 面向 RK3588 Linux 板卡的绝缘子智能检测 Qt 5 应用。Qt 负责界面、检测进程管理和 TCP-JPEG 视频显示，RKNN 程序负责摄像头采集、模型推理、检测框绘制和结果输出。
-
+//更新一些
 ## 功能
 
 - Qt 5.15 Widgets 白色主题界面
