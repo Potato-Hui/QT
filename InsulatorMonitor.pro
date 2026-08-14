@@ -15,7 +15,8 @@ SOURCES += \
     mainwindow.cpp \
     inferencecontroller.cpp \
     inferencelaunchspec.cpp \
-    gstvideoreceiver.cpp
+    gstvideoreceiver.cpp \
+    photoarchive.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -25,7 +26,8 @@ HEADERS += \
     inferenceprofile.h \
     inferencelifecycle.h \
     gstvideoreceiver.h \
-    latest_value_slot.hpp
+    latest_value_slot.hpp \
+    photoarchive.h
 
 FORMS += \
     mainwindow.ui
