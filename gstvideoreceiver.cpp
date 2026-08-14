@@ -14,7 +14,6 @@
  *   -> BGR
  *   -> appsink
  */
-//111
 GstVideoReceiver::GstVideoReceiver(QObject *parent)
     : QObject(parent)
     , m_busTimer(new QTimer(this))

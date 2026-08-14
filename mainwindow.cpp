@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::settingsRequested);
     connect(ui->recordsTable, &QTableWidget::cellClicked,
             this, &MainWindow::openHistoryPhoto);
-
+    //connect(  发送者,        &发送者类名::信号,      接收者,       &接收者类名::槽函数 );
     m_clockTimer->start(1000);
     updateClock();
     QDir().mkpath(m_storagePath);
@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_storageTimer->start(5000);
     updateStorageSpace();
     updateDetectionButton();
-    setBatteryLevel(86, false);
+    setBatteryLevel(100, false);//修改电池剩余电量为100%，未充电
     setDeviceStatus(true, true);
     ui->pageStack->setCurrentWidget(ui->monitorPage);
     auto *recordsHeader = ui->recordsTable->horizontalHeader();
@@ -64,7 +64,9 @@ MainWindow::MainWindow(QWidget *parent)
     recordsHeader->setSectionResizeMode(2, QHeaderView::Fixed);
     recordsHeader->setSectionResizeMode(3, QHeaderView::Fixed);
     recordsHeader->setStretchLastSection(true);
+    //设置0-3列为固定宽度，最后一列自动拉伸
     ui->recordsTable->setIconSize(QSize(180, 112));
+    // 设置表格中图标的显示大小为 180×112 像素
     ui->recordsTable->verticalHeader()->setVisible(false);
     ui->recordsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->recordsTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -76,7 +78,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setPreviewFrame(const QImage &frame)
+void MainWindow::setPreviewFrame(const QImage &frame)//接受图像，保存并显示
 {
     if (frame.isNull()) {
         return;
@@ -91,7 +93,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     updatePreviewPixmap();
 }
 
-void MainWindow::setBatteryLevel(int percent, bool charging)
+void MainWindow::setBatteryLevel(int percent, bool charging)//正点原子3588是直接供电的，并没有电池，所以这里直接设置为100%，未充电
 {
     percent = qBound(0, percent, 100);
     ui->batteryProgress->setValue(percent);
@@ -129,6 +131,10 @@ void MainWindow::setDetectionResult(const QString &result,
                                     double confidence,
                                     qint64 totalPixels,
                                     qint64 defectPixels)
+//显示置信度
+//显示缺陷像素数量
+//显示缺陷像素占总像素的百分比
+//目前这个函数并不能完成实时显示，后续考虑删除
 {
     ui->resultValueLabel->setText(result.isEmpty() ? QStringLiteral("等待检测") : result);
     ui->confidenceValueLabel->setText(QStringLiteral("%1%")
@@ -145,7 +151,7 @@ void MainWindow::setDetectionResult(const QString &result,
                     || result.contains(QStringLiteral("闪络"))
                     || ratio > 0.0;
     ui->resultValueLabel->setProperty("resultState", alarm ? "alarm" : "normal");
-    ui->resultValueLabel->style()->unpolish(ui->resultValueLabel);
+    ui->resultValueLabel->style()->unpolish(ui->resultValueLabel);//更新样式
     ui->resultValueLabel->style()->polish(ui->resultValueLabel);
 }
 
@@ -156,10 +162,10 @@ void MainWindow::updateClock()
     ui->dateLabel->setText(now.toString(QStringLiteral("yyyy年MM月dd日  dddd")));
 }
 
-void MainWindow::toggleDetection()
+void MainWindow::toggleDetection()//点击开始检测按钮
 {
     if (m_detecting) {
-        emit detectionStopRequested();
+        emit detectionStopRequested();//点击关闭界面后，画面应该消失，后面需要修改
     } else {
         emit detectionStartRequested();
     }
@@ -204,7 +210,7 @@ void MainWindow::setPerformanceMetrics(double pipelineFps,
             .arg(latencyMs, 0, 'f', 0));
 }
 
-void MainWindow::openRecordsPage()
+void MainWindow::openRecordsPage()//照片界面
 {
     refreshHistoryPhotos();
     ui->pageStack->setCurrentWidget(ui->recordsPage);
