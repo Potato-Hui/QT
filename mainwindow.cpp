@@ -35,8 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::requestSnapshot);
     connect(ui->recordsButton, &QPushButton::clicked,
             this, &MainWindow::openRecordsPage);
-    connect(ui->recordsNavButton, &QPushButton::clicked,
-            this, &MainWindow::openRecordsPage);
     connect(ui->backButton, &QPushButton::clicked,
             this, &MainWindow::openMonitorPage);
     connect(ui->settingsButton, &QPushButton::clicked,
@@ -52,8 +50,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_storageTimer->start(5000);
     updateStorageSpace();
     updateDetectionButton();
-    setBatteryLevel(100, false);//修改电池剩余电量为100%，未充电
-    setDeviceStatus(true, true);
     ui->pageStack->setCurrentWidget(ui->monitorPage);
     auto *recordsHeader = ui->recordsTable->horizontalHeader();
     // Keep the history table columns large enough for an actual thumbnail and
@@ -93,59 +89,18 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     updatePreviewPixmap();
 }
 
-void MainWindow::setBatteryLevel(int percent, bool charging)//正点原子3588是直接供电的，并没有电池，所以这里直接设置为100%，未充电
-{
-    percent = qBound(0, percent, 100);
-    ui->batteryProgress->setValue(percent);
-    ui->batteryValueLabel->setText(charging
-        ? QStringLiteral("%1% 充电中").arg(percent)
-        : QStringLiteral("%1%").arg(percent));
-
-    const char *level = percent <= 15 ? "critical"
-                           : percent <= 30 ? "warning"
-                                           : "normal";
-    ui->batteryProgress->setProperty("level", level);
-    ui->batteryProgress->style()->unpolish(ui->batteryProgress);
-    ui->batteryProgress->style()->polish(ui->batteryProgress);
-}
-
-void MainWindow::setDeviceStatus(bool cameraReady, bool modelReady)
-{
-    const bool ready = cameraReady && modelReady;
-    ui->deviceStatusDot->setProperty("state", ready ? "online" : "error");
-    ui->deviceStatusDot->style()->unpolish(ui->deviceStatusDot);
-    ui->deviceStatusDot->style()->polish(ui->deviceStatusDot);
-
-    if (ready) {
-        ui->deviceStatusLabel->setText(QStringLiteral("设备正常"));
-    } else if (!cameraReady && !modelReady) {
-        ui->deviceStatusLabel->setText(QStringLiteral("相机、模型异常"));
-    } else if (!cameraReady) {
-        ui->deviceStatusLabel->setText(QStringLiteral("相机异常"));
-    } else {
-        ui->deviceStatusLabel->setText(QStringLiteral("模型异常"));
-    }
-}
-
 void MainWindow::setDetectionResult(const QString &result,
                                     double confidence,
                                     qint64 totalPixels,
                                     qint64 defectPixels)
-//显示置信度
-//显示缺陷像素数量
-//显示缺陷像素占总像素的百分比
-//目前这个函数并不能完成实时显示，后续考虑删除
 {
     ui->resultValueLabel->setText(result.isEmpty() ? QStringLiteral("等待检测") : result);
     ui->confidenceValueLabel->setText(QStringLiteral("%1%")
                                          .arg(confidence * 100.0, 0, 'f', 1));
-    ui->totalPixelsValueLabel->setText(QString::number(totalPixels));
-    ui->defectPixelsValueLabel->setText(QString::number(defectPixels));
 
     const double ratio = totalPixels > 0
         ? (100.0 * static_cast<double>(defectPixels) / static_cast<double>(totalPixels))
         : 0.0;
-    ui->defectRatioValueLabel->setText(QStringLiteral("%1%").arg(ratio, 0, 'f', 2));
 
     const bool alarm = result.contains(QStringLiteral("破损"))
                     || result.contains(QStringLiteral("闪络"))
@@ -204,6 +159,9 @@ void MainWindow::setPerformanceMetrics(double pipelineFps,
         return;
     }
 
+    ui->fpsValueLabel->setText(QString::number(pipelineFps, 'f', 1));
+    ui->latencyValueLabel->setText(
+        QStringLiteral("%1 ms").arg(latencyMs, 0, 'f', 0));
     ui->runStatusLabel->setText(
         QStringLiteral("正在检测 · FPS %1 · 延迟 %2 ms")
             .arg(pipelineFps, 0, 'f', 1)

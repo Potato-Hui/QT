@@ -22,8 +22,6 @@ public:
 
 public slots:
     void setPreviewFrame(const QImage &frame);
-    void setBatteryLevel(int percent, bool charging = false);
-    void setDeviceStatus(bool cameraReady, bool modelReady);
     void setDetectionResult(const QString &result,
                             double confidence,
                             qint64 totalPixels,

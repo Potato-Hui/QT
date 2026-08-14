@@ -96,4 +96,20 @@ if(BUILD_TESTING)
         "${CMAKE_SOURCE_DIR}")
     target_link_libraries(photoarchive_test PRIVATE Qt5::Core Qt5::Gui)
     add_test(NAME photoarchive_test COMMAND photoarchive_test)
+
+    add_executable(mainwindow_structure_test
+        tests/mainwindow_structure_test.cpp
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
+        photoarchive.cpp
+        photoarchive.h
+        resources.qrc)
+    target_include_directories(mainwindow_structure_test PRIVATE
+        "${CMAKE_SOURCE_DIR}")
+    target_link_libraries(mainwindow_structure_test PRIVATE
+        Qt5::Core Qt5::Gui Qt5::Widgets)
+    add_test(NAME mainwindow_structure_test COMMAND mainwindow_structure_test)
+    set_tests_properties(mainwindow_structure_test PROPERTIES
+        ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
 endif()
