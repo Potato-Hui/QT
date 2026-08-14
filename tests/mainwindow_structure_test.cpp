@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include <QFile>
 #include <QLabel>
 #include <QPushButton>
 #include <QStackedWidget>
@@ -18,6 +19,12 @@ Widget* required(MainWindow& window, const char* objectName)
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
+
+    QFile styleFile(QStringLiteral(":/styles/white_theme.qss"));
+    assert(styleFile.open(QIODevice::ReadOnly | QIODevice::Text));
+    const QByteArray style = styleFile.readAll();
+    app.setStyleSheet(QString::fromUtf8(style));
+
     MainWindow window;
 
     QStackedWidget* pages = required<QStackedWidget>(window, "pageStack");
@@ -46,6 +53,19 @@ int main(int argc, char** argv)
     assert(window.findChild<QWidget*>("deviceStatusDot") == nullptr);
     assert(window.findChild<QWidget*>("deviceStatusLabel") == nullptr);
     assert(window.findChild<QWidget*>("recordsNavButton") == nullptr);
+
+    assert(style.contains("QLabel[role=\"pageTitle\"]"));
+    assert(style.contains("QPushButton[dangerOutline=\"true\"]"));
+    assert(style.contains("QPushButton[primaryBlue=\"true\"]"));
+    assert(style.contains("QWidget#photoDetailPage"));
+
+    const QString screenshotPath = qEnvironmentVariable("UI_SCREENSHOT_PATH");
+    if (!screenshotPath.isEmpty()) {
+        window.resize(1280, 720);
+        window.show();
+        app.processEvents();
+        assert(window.grab().save(screenshotPath));
+    }
 
     return 0;
 }
