@@ -22,10 +22,7 @@ public:
 
 public slots:
     void setPreviewFrame(const QImage &frame);
-    void setDetectionResult(const QString &result,
-                            double confidence,
-                            qint64 totalPixels,
-                            qint64 defectPixels);
+
     void setDetectionUiState(bool detecting,
                              bool busy,
                              bool error,
