@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QFileInfoList>
 #include <QHeaderView>
+#include <QHBoxLayout>
 #include <QIcon>
 #include <QMessageBox>
 #include <QPixmap>
@@ -14,6 +15,7 @@
 #include <QStorageInfo>
 #include <QStyle>
 #include <QTimer>
+#include <QToolButton>
 #include <QLabel>
 #include <QVBoxLayout>
 
@@ -310,9 +312,34 @@ void MainWindow::openHistoryPhoto(int row, int column)
     }
 
     QDialog dialog(this);
+    dialog.setObjectName(QStringLiteral("historyPhotoDialog"));
+    dialog.setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
     dialog.setWindowTitle(QFileInfo(path).fileName());
     dialog.resize(960, 680);
     auto *layout = new QVBoxLayout(&dialog);
+    layout->setContentsMargins(16, 12, 16, 16);
+    layout->setSpacing(10);
+
+    auto *header = new QWidget(&dialog);
+    header->setObjectName(QStringLiteral("historyPhotoHeader"));
+    auto *headerLayout = new QHBoxLayout(header);
+    headerLayout->setContentsMargins(12, 8, 8, 8);
+    auto *titleLabel = new QLabel(QFileInfo(path).fileName(), header);
+    titleLabel->setObjectName(QStringLiteral("historyPhotoTitleLabel"));
+    titleLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+
+    auto *closeButton = new QToolButton(header);
+    closeButton->setObjectName(QStringLiteral("historyPhotoCloseButton"));
+    closeButton->setText(QStringLiteral("×"));
+    closeButton->setToolTip(QStringLiteral("关闭"));
+    closeButton->setFixedSize(52, 52);
+    connect(closeButton, &QToolButton::clicked, &dialog, &QDialog::accept);
+
+    headerLayout->addWidget(titleLabel);
+    headerLayout->addStretch();
+    headerLayout->addWidget(closeButton);
+    layout->addWidget(header);
+
     auto *imageLabel = new QLabel(&dialog);
     imageLabel->setAlignment(Qt::AlignCenter);
     imageLabel->setPixmap(pixmap.scaled(

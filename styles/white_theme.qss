@@ -303,6 +303,47 @@ QFrame#detailInfoCard {
     border-radius: 12px;
 }
 
+QDialog#historyPhotoDialog {
+    background: #FFFFFF;
+    border: 2px solid #171717;
+}
+
+QWidget#historyPhotoHeader {
+    min-height: 66px;
+    background: #EEF1F4;
+    border-bottom: 1px solid #AEB6C0;
+}
+
+QLabel#historyPhotoTitleLabel {
+    color: #132543;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+QToolButton#historyPhotoCloseButton {
+    min-width: 50px;
+    max-width: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    padding: 0;
+    background: #FFFFFF;
+    border: 1px solid #C9D3E1;
+    border-radius: 6px;
+    color: #173053;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+QToolButton#historyPhotoCloseButton:hover {
+    background: #FFF2F2;
+    border-color: #E32626;
+    color: #E32626;
+}
+
+QToolButton#historyPhotoCloseButton:pressed {
+    background: #FFE0E0;
+}
+
 QLabel#detailResultValueLabel {
     min-height: 64px;
     font-size: 23px;
@@ -328,7 +369,7 @@ QLabel#snapshotCountValueLabel {
 }
 
 QScrollBar:vertical {
-    width: 12px;
+    width: 30px;
     background: #EEF2F6;
     margin: 0;
 }

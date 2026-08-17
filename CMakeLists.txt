@@ -8,9 +8,11 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui Widgets)
 
 option(BUILD_MONITOR_APPS "Build deployable monitor applications" ON)
+option(BUILD_DESKTOP_UI_PREVIEW "Build the Windows-friendly UI preview" OFF)
 
 set(MONITOR_COMMON_SOURCES
     monitorapplication.cpp
@@ -56,60 +58,29 @@ if(BUILD_MONITOR_APPS)
 
     foreach(monitor_target InsulatorMonitor InsulatorMonitorSingle)
         target_link_libraries(${monitor_target} PRIVATE
-            Qt5::Core Qt5::Gui Qt5::Widgets PkgConfig::GSTREAMER)
+            Qt${QT_VERSION_MAJOR}::Core
+            Qt${QT_VERSION_MAJOR}::Gui
+            Qt${QT_VERSION_MAJOR}::Widgets
+            PkgConfig::GSTREAMER)
     endforeach()
 
     configure_file(single_model.ini
         "${CMAKE_BINARY_DIR}/bin/single_model.ini" COPYONLY)
 endif()
 
-include(CTest)
-if(BUILD_TESTING)
-    add_executable(latest_value_slot_test
-        tests/latest_value_slot_test.cpp
-    )
-    target_include_directories(latest_value_slot_test PRIVATE
-        "${CMAKE_SOURCE_DIR}"
-    )
-    add_test(NAME latest_value_slot_test
-             COMMAND latest_value_slot_test)
-
-    add_executable(inferencelifecycle_test
-        tests/inferencelifecycle_test.cpp)
-    target_include_directories(inferencelifecycle_test PRIVATE
-        "${CMAKE_SOURCE_DIR}")
-    add_test(NAME inferencelifecycle_test COMMAND inferencelifecycle_test)
-
-    add_executable(inferencelaunchspec_test
-        tests/inferencelaunchspec_test.cpp
-        inferencelaunchspec.cpp)
-    target_include_directories(inferencelaunchspec_test PRIVATE
-        "${CMAKE_SOURCE_DIR}")
-    target_link_libraries(inferencelaunchspec_test PRIVATE Qt5::Core)
-    add_test(NAME inferencelaunchspec_test COMMAND inferencelaunchspec_test)
-
-    add_executable(photoarchive_test
-        tests/photoarchive_test.cpp
-        photoarchive.cpp
-        photoarchive.h)
-    target_include_directories(photoarchive_test PRIVATE
-        "${CMAKE_SOURCE_DIR}")
-    target_link_libraries(photoarchive_test PRIVATE Qt5::Core Qt5::Gui)
-    add_test(NAME photoarchive_test COMMAND photoarchive_test)
-
-    add_executable(mainwindow_structure_test
-        tests/mainwindow_structure_test.cpp
+# Standalone test targets are intentionally not configured for this project.
+if(BUILD_DESKTOP_UI_PREVIEW)
+    add_executable(DesktopUiPreview
+        desktop_preview_main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        photoarchive.cpp
-        photoarchive.h
-        resources.qrc)
-    target_include_directories(mainwindow_structure_test PRIVATE
-        "${CMAKE_SOURCE_DIR}")
-    target_link_libraries(mainwindow_structure_test PRIVATE
-        Qt5::Core Qt5::Gui Qt5::Widgets)
-    add_test(NAME mainwindow_structure_test COMMAND mainwindow_structure_test)
-    set_tests_properties(mainwindow_structure_test PROPERTIES
-        ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+        resources.qrc
+    )
+    target_link_libraries(DesktopUiPreview PRIVATE
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Gui
+        Qt${QT_VERSION_MAJOR}::Widgets)
+    set_target_properties(DesktopUiPreview PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 endif()

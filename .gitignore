@@ -1,1 +1,9 @@
-/build-tests/
+# Generated build trees and CMake output.
+/build*/
+/**/CMakeFiles/
+/**/*_autogen/
+/**/CMakeCache.txt
+/**/CTestTestfile.cmake
+/**/cmake_install.cmake
+/**/build.ninja
+/**/Testing/
