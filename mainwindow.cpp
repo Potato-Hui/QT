@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "mainwindow.h"
 #include <QDateTime>
 #include <QDir>
 #include <QFileDialog>
@@ -122,6 +121,20 @@ void MainWindow::resizeEvent(QResizeEvent *event)
             && m_detailFitMode && !m_detailPixmap.isNull()) {
         updateDetailPixmap();
     }
+}
+
+void MainWindow::setDetectionResult(const QString &result,
+                                    double confidence,
+                                    qint64 totalPixels,
+                                    qint64 defectPixels)
+{
+    // Compatibility slot retained for DesktopUiPreview and older callers.
+    // The merged UI intentionally removed the old result card, so there is
+    // no longer a truthful widget target for these values.
+    Q_UNUSED(result);
+    Q_UNUSED(confidence);
+    Q_UNUSED(totalPixels);
+    Q_UNUSED(defectPixels);
 }
 
 void MainWindow::updateClock()
