@@ -75,6 +75,8 @@ if(BUILD_DESKTOP_UI_PREVIEW)
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        photoarchive.cpp
+        photoarchive.h
         resources.qrc
     )
     target_link_libraries(DesktopUiPreview PRIVATE

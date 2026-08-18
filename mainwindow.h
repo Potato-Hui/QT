@@ -1,8 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "photoarchive.h"
+
 #include <QImage>
 #include <QMainWindow>
+#include <QPixmap>
 #include <QString>
 
 QT_BEGIN_NAMESPACE
@@ -49,19 +52,34 @@ private slots:
     void openMonitorPage();
     void requestSnapshot();
     void updateStorageSpace();
-    void openHistoryPhoto(int row, int column);
+    void openPhotoDetail(int row, int column);
+    void backToRecordsPage();
+    void zoomDetailIn();
+    void zoomDetailOut();
+    void resetDetailZoom();
+    void fitDetailImage();
+    void exportCurrentPhoto();
+    void deleteCurrentPhoto();
 
 private:
     void updateDetectionButton();
     void updatePreviewPixmap();
     void refreshHistoryPhotos();
+    void updateDetailPixmap();
+    void clearDetailState();
+    double detailFitScale() const;
 
     Ui::MainWindow *ui;
     QTimer *m_clockTimer;
     QTimer *m_storageTimer;
     QString m_storagePath;
+    PhotoArchive m_photoArchive;
     bool m_detecting;
     QImage m_lastFrame;
+    QString m_currentPhotoPath;
+    QPixmap m_detailPixmap;
+    double m_detailScale;
+    bool m_detailFitMode;
 };
 
 #endif // MAINWINDOW_H

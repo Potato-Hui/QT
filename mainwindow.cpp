@@ -3,21 +3,32 @@
 
 #include <QDateTime>
 #include <QDir>
-#include <QDialog>
+#include <QFileDialog>
 #include <QFileInfo>
-#include <QFileInfoList>
 #include <QHeaderView>
-#include <QHBoxLayout>
 #include <QIcon>
 #include <QMessageBox>
 #include <QPixmap>
 #include <QResizeEvent>
+#include <QScrollArea>
+#include <QStandardPaths>
 #include <QStorageInfo>
 #include <QStyle>
 #include <QTimer>
-#include <QToolButton>
-#include <QLabel>
-#include <QVBoxLayout>
+
+namespace {
+
+QString formatFileSize(qint64 bytes)
+{
+    constexpr double bytesPerKilobyte = 1024.0;
+    constexpr double bytesPerMegabyte = 1024.0 * 1024.0;
+    if (bytes >= static_cast<qint64>(bytesPerMegabyte)) {
+        return QStringLiteral("%1 MB").arg(bytes / bytesPerMegabyte, 0, 'f', 1);
+    }
+    return QStringLiteral("%1 KB").arg(bytes / bytesPerKilobyte, 0, 'f', 1);
+}
+
+} // namespace
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,7 +36,10 @@ MainWindow::MainWindow(QWidget *parent)
     , m_clockTimer(new QTimer(this))
     , m_storageTimer(new QTimer(this))
     , m_storagePath(QDir::homePath() + QStringLiteral("/InsulatorMonitor/data"))
+    , m_photoArchive(m_storagePath)
     , m_detecting(false)
+    , m_detailScale(1.0)
+    , m_detailFitMode(true)
 {
     ui->setupUi(this);
     setWindowTitle(QStringLiteral("绝缘子智能检测系统"));
@@ -42,7 +56,21 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->settingsButton, &QPushButton::clicked,
             this, &MainWindow::settingsRequested);
     connect(ui->recordsTable, &QTableWidget::cellClicked,
-            this, &MainWindow::openHistoryPhoto);
+            this, &MainWindow::openPhotoDetail);
+    connect(ui->backToRecordsButton, &QPushButton::clicked,
+            this, &MainWindow::backToRecordsPage);
+    connect(ui->zoomInButton, &QPushButton::clicked,
+            this, &MainWindow::zoomDetailIn);
+    connect(ui->zoomOutButton, &QPushButton::clicked,
+            this, &MainWindow::zoomDetailOut);
+    connect(ui->zoomResetButton, &QPushButton::clicked,
+            this, &MainWindow::resetDetailZoom);
+    connect(ui->fitImageButton, &QPushButton::clicked,
+            this, &MainWindow::fitDetailImage);
+    connect(ui->exportPhotoButton, &QPushButton::clicked,
+            this, &MainWindow::exportCurrentPhoto);
+    connect(ui->deletePhotoButton, &QPushButton::clicked,
+            this, &MainWindow::deleteCurrentPhoto);
     //connect(  发送者,        &发送者类名::信号,      接收者,       &接收者类名::槽函数 );
     m_clockTimer->start(1000);
     updateClock();
@@ -68,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->recordsTable->verticalHeader()->setVisible(false);
     ui->recordsTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->recordsTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    clearDetailState();
     refreshHistoryPhotos();
 }
 
@@ -89,6 +118,10 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
     QMainWindow::resizeEvent(event);
     updatePreviewPixmap();
+    if (ui->pageStack->currentWidget() == ui->photoDetailPage
+            && m_detailFitMode && !m_detailPixmap.isNull()) {
+        updateDetailPixmap();
+    }
 }
 
 void MainWindow::setDetectionResult(const QString &result,
@@ -181,6 +214,12 @@ void MainWindow::openMonitorPage()
     ui->pageStack->setCurrentWidget(ui->monitorPage);
 }
 
+void MainWindow::backToRecordsPage()
+{
+    refreshHistoryPhotos();
+    ui->pageStack->setCurrentWidget(ui->recordsPage);
+}
+
 void MainWindow::requestSnapshot()
 {
     if (m_lastFrame.isNull()) {
@@ -229,14 +268,9 @@ void MainWindow::updateStorageSpace()
 
 void MainWindow::refreshHistoryPhotos()
 {
-    QDir directory(m_storagePath);
-    const QStringList filters{
-        QStringLiteral("*.jpg"),
-        QStringLiteral("*.jpeg"),
-        QStringLiteral("*.png")};
-    const QFileInfoList photos = directory.entryInfoList(
-        filters, QDir::Files | QDir::Readable, QDir::Time);
+    const QVector<PhotoRecord> photos = m_photoArchive.records();
 
+    ui->recordsTable->clearSpans();
     ui->recordsTable->clearContents();
     ui->recordsTable->setColumnCount(4);
     ui->recordsTable->setHorizontalHeaderLabels({
@@ -249,33 +283,34 @@ void MainWindow::refreshHistoryPhotos()
     ui->recordsTable->setColumnWidth(1, 390);
     ui->recordsTable->setColumnWidth(2, 260);
     ui->recordsTable->setColumnWidth(3, 160);
+    ui->recordsCountLabel->setText(
+        QStringLiteral("共 %1 张").arg(photos.size()));
 
     for (int row = 0; row < photos.size(); ++row) {
-        const QFileInfo &photo = photos.at(row);
+        const PhotoRecord &photo = photos.at(row);
         auto *thumbnail = new QTableWidgetItem;
-        const QPixmap pixmap(photo.absoluteFilePath());
+        const QPixmap pixmap(photo.path);
         if (!pixmap.isNull()) {
             thumbnail->setIcon(QIcon(pixmap.scaled(
                 180, 112, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
         }
-        thumbnail->setData(Qt::UserRole, photo.absoluteFilePath());
+        thumbnail->setData(Qt::UserRole, photo.path);
         thumbnail->setTextAlignment(Qt::AlignCenter);
         ui->recordsTable->setItem(row, 0, thumbnail);
 
-        auto *name = new QTableWidgetItem(photo.fileName());
-        name->setData(Qt::UserRole, photo.absoluteFilePath());
+        auto *name = new QTableWidgetItem(photo.fileName);
+        name->setData(Qt::UserRole, photo.path);
         name->setTextAlignment(Qt::AlignVCenter | Qt::AlignLeft);
         ui->recordsTable->setItem(row, 1, name);
 
         auto *time = new QTableWidgetItem(
-            photo.lastModified().toString(QStringLiteral("yyyy-MM-dd HH:mm:ss")));
-        time->setData(Qt::UserRole, photo.absoluteFilePath());
+            photo.modified.toString(QStringLiteral("yyyy-MM-dd HH:mm:ss")));
+        time->setData(Qt::UserRole, photo.path);
         time->setTextAlignment(Qt::AlignVCenter | Qt::AlignLeft);
         ui->recordsTable->setItem(row, 2, time);
 
-        auto *size = new QTableWidgetItem(
-            QStringLiteral("%1 KB").arg(photo.size() / 1024.0, 0, 'f', 1));
-        size->setData(Qt::UserRole, photo.absoluteFilePath());
+        auto *size = new QTableWidgetItem(formatFileSize(photo.bytes));
+        size->setData(Qt::UserRole, photo.path);
         size->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
         ui->recordsTable->setItem(row, 3, size);
         ui->recordsTable->setRowHeight(row, 136);
@@ -291,7 +326,7 @@ void MainWindow::refreshHistoryPhotos()
     }
 }
 
-void MainWindow::openHistoryPhoto(int row, int column)
+void MainWindow::openPhotoDetail(int row, int column)
 {
     QTableWidgetItem *item = ui->recordsTable->item(row, column);
     if (item == nullptr) {
@@ -303,49 +338,228 @@ void MainWindow::openHistoryPhoto(int row, int column)
         return;
     }
 
+    const QFileInfo fileInfo(path);
     const QPixmap pixmap(path);
-    if (pixmap.isNull()) {
+    if (!fileInfo.exists() || !fileInfo.isReadable() || pixmap.isNull()) {
         QMessageBox::warning(this,
                              QStringLiteral("无法查看照片"),
                              QStringLiteral("照片文件无法读取：%1").arg(path));
         return;
     }
 
-    QDialog dialog(this);
-    dialog.setObjectName(QStringLiteral("historyPhotoDialog"));
-    dialog.setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
-    dialog.setWindowTitle(QFileInfo(path).fileName());
-    dialog.resize(960, 680);
-    auto *layout = new QVBoxLayout(&dialog);
-    layout->setContentsMargins(16, 12, 16, 16);
-    layout->setSpacing(10);
+    m_currentPhotoPath = fileInfo.absoluteFilePath();
+    m_detailPixmap = pixmap;
+    m_detailScale = 1.0;
+    m_detailFitMode = true;
 
-    auto *header = new QWidget(&dialog);
-    header->setObjectName(QStringLiteral("historyPhotoHeader"));
-    auto *headerLayout = new QHBoxLayout(header);
-    headerLayout->setContentsMargins(12, 8, 8, 8);
-    auto *titleLabel = new QLabel(QFileInfo(path).fileName(), header);
-    titleLabel->setObjectName(QStringLiteral("historyPhotoTitleLabel"));
-    titleLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    ui->detailFileNameLabel->setText(fileInfo.fileName());
+    ui->detailFileSizeValueLabel->setText(formatFileSize(fileInfo.size()));
+    ui->detailImageSizeValueLabel->setText(
+        QStringLiteral("%1 × %2")
+            .arg(m_detailPixmap.width())
+            .arg(m_detailPixmap.height()));
+    ui->detailPathValueLabel->setText(m_currentPhotoPath);
+    ui->detailResultValueLabel->setText(QStringLiteral("未记录"));
 
-    auto *closeButton = new QToolButton(header);
-    closeButton->setObjectName(QStringLiteral("historyPhotoCloseButton"));
-    closeButton->setText(QStringLiteral("×"));
-    closeButton->setToolTip(QStringLiteral("关闭"));
-    closeButton->setFixedSize(52, 52);
-    connect(closeButton, &QToolButton::clicked, &dialog, &QDialog::accept);
+    ui->pageStack->setCurrentWidget(ui->photoDetailPage);
+    updateDetailPixmap();
+    QTimer::singleShot(0, this, [this] {
+        if (ui->pageStack->currentWidget() == ui->photoDetailPage) {
+            updateDetailPixmap();
+        }
+    });
+}
 
-    headerLayout->addWidget(titleLabel);
-    headerLayout->addStretch();
-    headerLayout->addWidget(closeButton);
-    layout->addWidget(header);
+double MainWindow::detailFitScale() const
+{
+    if (m_detailPixmap.isNull()) {
+        return 1.0;
+    }
 
-    auto *imageLabel = new QLabel(&dialog);
-    imageLabel->setAlignment(Qt::AlignCenter);
-    imageLabel->setPixmap(pixmap.scaled(
-        900, 600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    layout->addWidget(imageLabel);
-    dialog.exec();
+    const QSize viewportSize = ui->detailImageScrollArea->viewport()->size();
+    if (viewportSize.width() <= 0 || viewportSize.height() <= 0) {
+        return 1.0;
+    }
+
+    const double widthScale = static_cast<double>(viewportSize.width())
+        / m_detailPixmap.width();
+    const double heightScale = static_cast<double>(viewportSize.height())
+        / m_detailPixmap.height();
+    return qMin(widthScale, heightScale);
+}
+
+void MainWindow::updateDetailPixmap()
+{
+    if (m_detailPixmap.isNull()) {
+        return;
+    }
+
+    double displayScale = m_detailScale;
+    if (m_detailFitMode) {
+        displayScale = detailFitScale();
+        ui->detailImageLabel->setMinimumSize(0, 0);
+        ui->zoomValueLabel->setText(QStringLiteral("适应"));
+    } else {
+        const QSize scaledSize(
+            qMax(1, qRound(m_detailPixmap.width() * displayScale)),
+            qMax(1, qRound(m_detailPixmap.height() * displayScale)));
+        ui->detailImageLabel->setMinimumSize(scaledSize);
+        ui->zoomValueLabel->setText(
+            QStringLiteral("%1%").arg(qRound(displayScale * 100.0)));
+    }
+
+    const QSize targetSize(
+        qMax(1, qRound(m_detailPixmap.width() * displayScale)),
+        qMax(1, qRound(m_detailPixmap.height() * displayScale)));
+    ui->detailImageLabel->setText(QString());
+    ui->detailImageLabel->setPixmap(m_detailPixmap.scaled(
+        targetSize, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->detailImageLabel->updateGeometry();
+
+    ui->zoomOutButton->setEnabled(displayScale > 0.25);
+    ui->zoomInButton->setEnabled(displayScale < 4.0);
+    ui->zoomResetButton->setEnabled(true);
+    ui->fitImageButton->setEnabled(true);
+    ui->exportPhotoButton->setEnabled(!m_currentPhotoPath.isEmpty());
+    ui->deletePhotoButton->setEnabled(!m_currentPhotoPath.isEmpty());
+}
+
+void MainWindow::zoomDetailIn()
+{
+    if (m_detailPixmap.isNull()) {
+        return;
+    }
+
+    const double currentScale = m_detailFitMode ? detailFitScale() : m_detailScale;
+    m_detailFitMode = false;
+    m_detailScale = qBound(0.25, currentScale + 0.25, 4.0);
+    updateDetailPixmap();
+}
+
+void MainWindow::zoomDetailOut()
+{
+    if (m_detailPixmap.isNull()) {
+        return;
+    }
+
+    const double currentScale = m_detailFitMode ? detailFitScale() : m_detailScale;
+    if (currentScale <= 0.25) {
+        return;
+    }
+    m_detailFitMode = false;
+    m_detailScale = qBound(0.25, currentScale - 0.25, 4.0);
+    updateDetailPixmap();
+}
+
+void MainWindow::resetDetailZoom()
+{
+    if (m_detailPixmap.isNull()) {
+        return;
+    }
+    m_detailFitMode = false;
+    m_detailScale = 1.0;
+    updateDetailPixmap();
+}
+
+void MainWindow::fitDetailImage()
+{
+    if (m_detailPixmap.isNull()) {
+        return;
+    }
+    m_detailFitMode = true;
+    updateDetailPixmap();
+}
+
+void MainWindow::exportCurrentPhoto()
+{
+    if (m_currentPhotoPath.isEmpty() || m_detailPixmap.isNull()) {
+        return;
+    }
+
+    QString exportDirectory = QStandardPaths::writableLocation(
+        QStandardPaths::DocumentsLocation);
+    if (exportDirectory.isEmpty()) {
+        exportDirectory = QDir::homePath();
+    }
+    const QString defaultPath = QDir(exportDirectory).filePath(
+        QFileInfo(m_currentPhotoPath).fileName());
+    const QString destinationPath = QFileDialog::getSaveFileName(
+        this,
+        QStringLiteral("导出照片"),
+        defaultPath,
+        QStringLiteral("照片 (*.jpg *.jpeg *.png);;所有文件 (*)"));
+    if (destinationPath.isEmpty()) {
+        return;
+    }
+
+    QString errorMessage;
+    if (!m_photoArchive.exportPhoto(
+            m_currentPhotoPath, destinationPath, &errorMessage)) {
+        QMessageBox::critical(this,
+                              QStringLiteral("导出失败"),
+                              errorMessage);
+        return;
+    }
+
+    QMessageBox::information(
+        this,
+        QStringLiteral("导出成功"),
+        QStringLiteral("照片已导出到：%1").arg(destinationPath));
+}
+
+void MainWindow::deleteCurrentPhoto()
+{
+    if (m_currentPhotoPath.isEmpty() || m_detailPixmap.isNull()) {
+        return;
+    }
+
+    const QString fileName = QFileInfo(m_currentPhotoPath).fileName();
+    if (QMessageBox::question(
+            this,
+            QStringLiteral("删除照片"),
+            QStringLiteral("确定要删除“%1”吗？此操作无法撤销。").arg(fileName),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No) != QMessageBox::Yes) {
+        return;
+    }
+
+    QString errorMessage;
+    if (!m_photoArchive.remove(m_currentPhotoPath, &errorMessage)) {
+        QMessageBox::critical(this,
+                              QStringLiteral("删除失败"),
+                              errorMessage);
+        return;
+    }
+
+    clearDetailState();
+    refreshHistoryPhotos();
+    updateStorageSpace();
+    ui->pageStack->setCurrentWidget(ui->recordsPage);
+}
+
+void MainWindow::clearDetailState()
+{
+    m_currentPhotoPath.clear();
+    m_detailPixmap = QPixmap();
+    m_detailScale = 1.0;
+    m_detailFitMode = true;
+
+    ui->detailFileNameLabel->setText(QStringLiteral("--"));
+    ui->detailFileSizeValueLabel->setText(QStringLiteral("--"));
+    ui->detailImageSizeValueLabel->setText(QStringLiteral("--"));
+    ui->detailPathValueLabel->setText(QStringLiteral("--"));
+    ui->detailResultValueLabel->setText(QStringLiteral("未记录"));
+    ui->zoomValueLabel->setText(QStringLiteral("100%"));
+    ui->detailImageLabel->setMinimumSize(0, 0);
+    ui->detailImageLabel->setPixmap(QPixmap());
+    ui->detailImageLabel->setText(
+        QStringLiteral("选择历史照片后显示大图"));
+    ui->zoomInButton->setEnabled(false);
+    ui->zoomOutButton->setEnabled(false);
+    ui->zoomResetButton->setEnabled(false);
+    ui->fitImageButton->setEnabled(false);
+    ui->exportPhotoButton->setEnabled(false);
+    ui->deletePhotoButton->setEnabled(false);
 }
 
 void MainWindow::updateDetectionButton()

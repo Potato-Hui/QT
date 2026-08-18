@@ -290,6 +290,12 @@ QFrame#detailImageCard {
     border-radius: 12px;
 }
 
+QScrollArea#detailImageScrollArea,
+QWidget#detailImageScrollAreaContents {
+    background: #132033;
+    border: none;
+}
+
 QLabel#detailImageLabel {
     background: #132033;
     color: #AAB6C8;
@@ -301,47 +307,6 @@ QFrame#detailInfoCard {
     background: #FFFFFF;
     border: 1px solid #D9E1EB;
     border-radius: 12px;
-}
-
-QDialog#historyPhotoDialog {
-    background: #FFFFFF;
-    border: 2px solid #171717;
-}
-
-QWidget#historyPhotoHeader {
-    min-height: 66px;
-    background: #EEF1F4;
-    border-bottom: 1px solid #AEB6C0;
-}
-
-QLabel#historyPhotoTitleLabel {
-    color: #132543;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-QToolButton#historyPhotoCloseButton {
-    min-width: 50px;
-    max-width: 50px;
-    min-height: 50px;
-    max-height: 50px;
-    padding: 0;
-    background: #FFFFFF;
-    border: 1px solid #C9D3E1;
-    border-radius: 6px;
-    color: #173053;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-QToolButton#historyPhotoCloseButton:hover {
-    background: #FFF2F2;
-    border-color: #E32626;
-    color: #E32626;
-}
-
-QToolButton#historyPhotoCloseButton:pressed {
-    background: #FFE0E0;
 }
 
 QLabel#detailResultValueLabel {
