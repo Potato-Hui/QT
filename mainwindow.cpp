@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "mainwindow.h"
 #include <QDateTime>
 #include <QDir>
 #include <QFileDialog>
@@ -122,27 +122,6 @@ void MainWindow::resizeEvent(QResizeEvent *event)
             && m_detailFitMode && !m_detailPixmap.isNull()) {
         updateDetailPixmap();
     }
-}
-
-void MainWindow::setDetectionResult(const QString &result,
-                                    double confidence,
-                                    qint64 totalPixels,
-                                    qint64 defectPixels)
-{
-    ui->resultValueLabel->setText(result.isEmpty() ? QStringLiteral("等待检测") : result);
-    ui->confidenceValueLabel->setText(QStringLiteral("%1%")
-                                         .arg(confidence * 100.0, 0, 'f', 1));
-
-    const double ratio = totalPixels > 0
-        ? (100.0 * static_cast<double>(defectPixels) / static_cast<double>(totalPixels))
-        : 0.0;
-
-    const bool alarm = result.contains(QStringLiteral("破损"))
-                    || result.contains(QStringLiteral("闪络"))
-                    || ratio > 0.0;
-    ui->resultValueLabel->setProperty("resultState", alarm ? "alarm" : "normal");
-    ui->resultValueLabel->style()->unpolish(ui->resultValueLabel);//更新样式
-    ui->resultValueLabel->style()->polish(ui->resultValueLabel);
 }
 
 void MainWindow::updateClock()
