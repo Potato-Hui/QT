@@ -7,3 +7,6 @@
 /**/cmake_install.cmake
 /**/build.ninja
 /**/Testing/
+
+# Local thermal-camera credentials. Commit only the example file.
+thermal_camera.ini

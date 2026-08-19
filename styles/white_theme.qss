@@ -11,6 +11,7 @@ QWidget#centralWidget,
 QWidget#monitorPage,
 QWidget#recordsPage,
 QWidget#photoDetailPage,
+QWidget#settingPage,
 QStackedWidget#pageStack {
     background: #F5F7FA;
 }
@@ -288,6 +289,25 @@ QFrame#detailImageCard {
     background: #132033;
     border: 1px solid #D9E1EB;
     border-radius: 12px;
+}
+
+QPushButton#VisibleLightCamera,
+QPushButton#ThermalImagingMode {
+    min-width: 210px;
+    min-height: 58px;
+}
+
+QPushButton#VisibleLightCamera:checked,
+QPushButton#ThermalImagingMode:checked {
+    background: #1267E9;
+    border-color: #1267E9;
+    color: #FFFFFF;
+}
+
+QPushButton#VisibleLightCamera:checked:hover,
+QPushButton#ThermalImagingMode:checked:hover {
+    background: #0E58CB;
+    border-color: #0E58CB;
 }
 
 QScrollArea#detailImageScrollArea,

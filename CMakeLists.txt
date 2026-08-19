@@ -20,6 +20,7 @@ set(MONITOR_COMMON_SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    cameramode.h
     photoarchive.cpp
     photoarchive.h
 
@@ -66,6 +67,8 @@ if(BUILD_MONITOR_APPS)
 
     configure_file(single_model.ini
         "${CMAKE_BINARY_DIR}/bin/single_model.ini" COPYONLY)
+    configure_file(thermal_camera.example.ini
+        "${CMAKE_BINARY_DIR}/bin/thermal_camera.example.ini" COPYONLY)
 endif()
 
 # Standalone test targets are intentionally not configured for this project.
@@ -75,6 +78,7 @@ if(BUILD_DESKTOP_UI_PREVIEW)
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        cameramode.h
         photoarchive.cpp
         photoarchive.h
         resources.qrc

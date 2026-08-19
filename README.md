@@ -121,6 +121,23 @@ jpegparse ! jpegdec ! videoconvert ! appsink
 
 视频管线只保留最新帧，避免界面处理速度较慢时产生持续累积的延迟。RKNN 程序输出的 `@metrics` 消息用于更新 FPS 和延迟信息。
 
+## 热像仪模式
+
+热像仪模式不启动 RKNN。程序会先通过受 Qt 管理的 `ifconfig` 进程配置有线网卡，再用 GStreamer RTSP/appsink 将热成像帧送到主界面。
+
+将 `thermal_camera.example.ini` 复制为可执行文件旁边的 `thermal_camera.ini`，再填写实际账号和密码：
+
+```ini
+[ThermalCamera]
+interface=eth1
+address=192.168.1.100
+netmask=255.255.255.0
+url=rtsp://username:password@192.168.1.111:554/video1/stream0
+latency=0
+```
+
+`thermal_camera.ini` 已被 Git 忽略。程序需要以 root 身份运行，或拥有配置网卡所需的 `CAP_NET_ADMIN` 权限。热像仪解码依赖 `rtspsrc`、`rtph264depay`、`h264parse` 和 RK3588 的 `mppvideodec` 插件。
+
 ## 板卡部署检查
 
 确认必要的 GStreamer 插件：

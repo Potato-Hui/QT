@@ -7,8 +7,9 @@ TEMPLATE = app
 SOURCES += main_single.cpp monitorapplication.cpp mainwindow.cpp \
     inferencecontroller.cpp inferencelaunchspec.cpp gstvideoreceiver.cpp \
     photoarchive.cpp
-HEADERS += monitorapplication.h mainwindow.h inferencecontroller.h \
+HEADERS += cameramode.h monitorapplication.h mainwindow.h inferencecontroller.h \
     inferencelaunchspec.h inferenceprofile.h inferencelifecycle.h \
     gstvideoreceiver.h latest_value_slot.hpp photoarchive.h
 FORMS += mainwindow.ui
 RESOURCES += resources.qrc
+DISTFILES += thermal_camera.example.ini

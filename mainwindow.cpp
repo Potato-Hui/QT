@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QButtonGroup>
 #include <QDateTime>
 #include <QDir>
 #include <QFileDialog>
@@ -72,6 +73,19 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::deleteCurrentPhoto);
     connect(ui->settingBackButton, &QPushButton::clicked,
             this, &MainWindow::openMonitorPage);
+    auto *cameraModeGroup = new QButtonGroup(this);
+    cameraModeGroup->setExclusive(true);
+    ui->VisibleLightCamera->setCheckable(true);
+    ui->ThermalImagingMode->setCheckable(true);
+    cameraModeGroup->addButton(ui->VisibleLightCamera);
+    cameraModeGroup->addButton(ui->ThermalImagingMode);
+    ui->VisibleLightCamera->setChecked(true);
+    connect(ui->VisibleLightCamera, &QPushButton::clicked, this, [this]() {
+        emit cameraModeSelectionRequested(CameraMode::VisibleLight);
+    });
+    connect(ui->ThermalImagingMode, &QPushButton::clicked, this, [this]() {
+        emit cameraModeSelectionRequested(CameraMode::Thermal);
+    });
     //connect(  发送者,        &发送者类名::信号,      接收者,       &接收者类名::槽函数 );
     m_clockTimer->start(1000);
     updateClock();
@@ -195,6 +209,20 @@ void MainWindow::setPerformanceMetrics(double pipelineFps,
         QStringLiteral("正在检测 · FPS %1 · 延迟 %2 ms")
             .arg(pipelineFps, 0, 'f', 1)
             .arg(latencyMs, 0, 'f', 0));
+}
+
+void MainWindow::setSelectedCameraMode(
+    CameraMode mode,
+    const QString &message)
+{
+    if (mode == CameraMode::VisibleLight) {
+        ui->VisibleLightCamera->setChecked(true);
+    } else if (mode == CameraMode::Thermal) {
+        ui->ThermalImagingMode->setChecked(true);
+    }
+    if (!message.isEmpty()) {
+        ui->runStatusLabel->setText(message);
+    }
 }
 
 void MainWindow::openSettingsPage()

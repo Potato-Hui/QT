@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "cameramode.h"
 #include "photoarchive.h"
 
 #include <QImage>
@@ -36,12 +37,16 @@ public slots:
                              const QString &message);
     void setPerformanceMetrics(double pipelineFps,
                                double latencyMs);
+    void setSelectedCameraMode(
+        CameraMode mode,
+        const QString &message = QString());
 
 signals:
     void detectionStartRequested();
     void detectionStopRequested();
     void snapshotRequested();
     void settingsRequested();
+    void cameraModeSelectionRequested(CameraMode mode);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
