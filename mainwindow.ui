@@ -1026,51 +1026,6 @@
        </layout>
       </widget>
       <widget class="QWidget" name="settingPage">
-       <widget class="QLabel" name="settingTitleLabel">
-        <property name="geometry">
-         <rect>
-          <x>700</x>
-          <y>80</y>
-          <width>91</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string> 系统设置</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="ThermalImagingMode">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>220</y>
-          <width>172</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>热像仪</string>
-        </property>
-        <property name="running" stdset="0">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisibleLightCamera">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>140</y>
-          <width>172</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>可见光摄像头</string>
-        </property>
-        <property name="running" stdset="0">
-         <bool>false</bool>
-        </property>
-       </widget>
        <widget class="QPushButton" name="settingBackButton">
         <property name="geometry">
          <rect>
@@ -1097,6 +1052,60 @@
         </property>
         <property name="compact" stdset="0">
          <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>600</x>
+          <y>130</y>
+          <width>231</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="VisibleLightCamera">
+           <property name="text">
+            <string>可见光摄像头</string>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+           <property name="running" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ThermalImagingMode">
+           <property name="text">
+            <string>热像仪</string>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+           <property name="running" stdset="0">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QLabel" name="settingTitleLabel">
+        <property name="geometry">
+         <rect>
+          <x>690</x>
+          <y>90</y>
+          <width>91</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> 系统设置</string>
         </property>
        </widget>
       </widget>

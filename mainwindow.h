@@ -7,7 +7,7 @@
 #include <QMainWindow>
 #include <QPixmap>
 #include <QString>
-
+#include "detectionmode.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -42,7 +42,7 @@ signals:
     void detectionStopRequested();
     void snapshotRequested();
     void settingsRequested();
-
+    void detectionModeChanged(DetectionMode mode);
 protected:
     void resizeEvent(QResizeEvent *event) override;
 

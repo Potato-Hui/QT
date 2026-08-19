@@ -72,6 +72,18 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::deleteCurrentPhoto);
     connect(ui->settingBackButton, &QPushButton::clicked,
             this, &MainWindow::openMonitorPage);
+    connect(ui->VisibleLightCamera,&QPushButton::clicked,
+        this,
+        [this]() {
+            emit detectionModeChanged(
+                DetectionMode::StandardCamera);
+        });//普通摄像头
+    connect(ui->ThermalImagingMode,&QPushButton::clicked,
+        this,
+        [this]() {
+            emit detectionModeChanged(
+                DetectionMode::ThermalCamera);
+        });//普通摄像头
     //connect(  发送者,        &发送者类名::信号,      接收者,       &接收者类名::槽函数 );
     m_clockTimer->start(1000);
     updateClock();

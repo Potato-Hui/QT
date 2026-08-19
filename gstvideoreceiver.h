@@ -21,8 +21,12 @@ class GstVideoReceiver : public QObject
 public:
     explicit GstVideoReceiver(QObject *parent = nullptr);
     ~GstVideoReceiver() override;
-
-    bool start();
+    enum class VideoSource
+        {
+            RknnTcpJpeg,
+            ThermalRtsp
+        };
+    bool start(VideoSource source);
     void stop();
     bool isRunning() const;
 

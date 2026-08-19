@@ -52,7 +52,7 @@ GstVideoReceiver::~GstVideoReceiver()
     stop();
 }
 
-bool GstVideoReceiver::start()
+bool GstVideoReceiver::start(VideoSource source)
 {
     /*
      * 防止重复启动造成旧管线、Bus 和 signal handler 泄漏。
@@ -60,18 +60,36 @@ bool GstVideoReceiver::start()
     stop();
 
     m_firstFrameEmitted.store(false);
-
-    const char *pipelineDescription =
-        "tcpclientsrc host=127.0.0.1 port=5000 ! "
-        "jpegparse ! "
-        "jpegdec ! "
-        "videoconvert ! "
-        "video/x-raw,format=BGR ! "
-        "appsink name=qt_video_sink "
-        "emit-signals=true "
-        "max-buffers=1 "
-        "drop=true "
-        "sync=false";
+    QByteArray pipelineDescription;
+    if (source == VideoSource::ThermalRtsp) {
+           pipelineDescription =
+               "rtspsrc "
+               "location=\"rtsp://admin:admin123@192.168.1.111:554/video1/stream0\" "
+               "protocols=tcp "
+               "latency=0 ! "
+               "rtph264depay ! "
+               "h264parse ! "
+               "mppvideodec ! "
+               "videoconvert ! "
+               "video/x-raw,format=BGR ! "
+               "appsink name=qt_video_sink "
+               "emit-signals=true "
+               "max-buffers=1 "
+               "drop=true "
+               "sync=false";
+       } else {
+           pipelineDescription =
+               "tcpclientsrc host=127.0.0.1 port=5000 ! "
+               "jpegparse ! "
+               "jpegdec ! "
+               "videoconvert ! "
+               "video/x-raw,format=BGR ! "
+               "appsink name=qt_video_sink "
+               "emit-signals=true "
+               "max-buffers=1 "
+               "drop=true "
+               "sync=false";
+       }
 
     GError *error = nullptr;
 

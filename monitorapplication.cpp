@@ -45,6 +45,8 @@ int runMonitorApplication(int argc, char *argv[], InferenceProfile profile)
                      [](const QString& message) { qInfo().noquote() << message; });
     QObject::connect(&controller, &InferenceController::metricsUpdated,
                      &window, &MainWindow::setPerformanceMetrics);
+    QObject::connect(&window,&MainWindow::detectionModeChanged,&controller,&InferenceController::setDetectionMode);
+
     window.showFullScreen();
     return app.exec();
 }

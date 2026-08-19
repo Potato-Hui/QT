@@ -8,7 +8,7 @@
 #include <QProcess>
 #include <QString>
 #include "inferenceprofile.h"
-
+#include "detectionmode.h"
 class QTimer;
 class GstVideoReceiver;
 
@@ -37,7 +37,7 @@ public:
 public slots:
     void startDetection();
     void stopDetection();
-
+    void setDetectionMode(DetectionMode mode);
 signals:
     void frameReady(const QImage &frame);
 

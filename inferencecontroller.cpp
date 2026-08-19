@@ -7,6 +7,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QTimer>
+#include <QByteArray>
+DetectionMode m_detectionMode =DetectionMode::StandardCamera;
 
 InferenceController::InferenceController(
     InferenceProfile profile,
@@ -118,35 +120,105 @@ InferenceController::~InferenceController()
 }
 void InferenceController::startDetection()
 {
+    /*
+     * 当前不是空闲或错误状态时，不允许重复启动。
+     */
     if (m_state != State::Idle &&
         m_state != State::Error) {
         return;
     }
 
-    if (m_process->state() != QProcess::NotRunning) {
+    /*
+     * 如果上一次的 RKNN 进程还没有退出，
+     * 先清理旧进程。
+     */
+    if (m_process->state() !=
+        QProcess::NotRunning) {
+
         if (m_state == State::Error) {
             m_restartRequested = true;
+
             emit logReceived(
-                QStringLiteral("正在清理上一次推理进程，清理完成后重新启动"));
+                QStringLiteral(
+                    "正在清理上一次推理进程，清理完成后重新启动"));
+
             m_process->terminate();
             m_stopTimer->start();
         }
+
         return;
     }
 
     m_restartRequested = false;
+
+    /*
+     * 停止并释放上一次的视频管线。
+     */
     cleanupReceiver();
 
-    const LaunchSpecResult launch = buildInferenceLaunchSpec(
-        m_profile, QCoreApplication::applicationDirPath());
+    /*
+     * 热像仪模式：
+     * 不启动 RKNN，直接连接 RTSP 视频流。
+     */
+    if (m_detectionMode ==
+        DetectionMode::ThermalCamera) {
+
+        setState(
+            State::Starting,
+            QStringLiteral("正在连接热像仪"));
+
+        /*
+         * 如果在规定时间内没有收到第一帧，
+         * handleStartupTimeout() 会报告启动超时。
+         */
+        m_startupTimer->start();
+
+        const bool started =
+            m_videoReceiver->start(
+                GstVideoReceiver::VideoSource::
+                    ThermalRtsp);
+
+        if (!started) {
+            m_startupTimer->stop();
+
+            enterError(
+                QStringLiteral(
+                    "热像仪视频管线启动失败"));
+
+            return;
+        }
+
+        /*
+         * 管线启动不代表已经收到视频。
+         * 收到第一帧后，handleFirstFrame()
+         * 才会把状态改成 Running。
+         */
+        return;
+    }
+
+    /*
+     * 标准摄像头模式：
+     * 继续使用原来的 RKNN 推理程序。
+     */
+    const LaunchSpecResult launch =
+        buildInferenceLaunchSpec(
+            m_profile,
+            QCoreApplication::applicationDirPath());
+
     if (!launch.ok) {
         enterError(launch.error);
         return;
     }
 
-    m_process->setWorkingDirectory(launch.spec.workingDirectory);
-    m_process->setProgram(launch.spec.program);
-    m_process->setArguments(launch.spec.arguments);
+    m_process->setWorkingDirectory(
+        launch.spec.workingDirectory);
+
+    m_process->setProgram(
+        launch.spec.program);
+
+    m_process->setArguments(
+        launch.spec.arguments);
+
     m_process->setProcessChannelMode(
         QProcess::SeparateChannels);
 
@@ -157,7 +229,6 @@ void InferenceController::startDetection()
     m_startupTimer->start();
     m_process->start();
 }
-
 void InferenceController::readProcessOutput()
 {
     while (m_process->canReadLine()) {
@@ -225,9 +296,21 @@ void InferenceController::parseProtocolLine(
         if (state == QStringLiteral("ready") &&
             m_state == State::Starting) {
 
-            if (!m_videoReceiver->start()) {
+            if (!m_videoReceiver->start(
+                    GstVideoReceiver::VideoSource::
+                        RknnTcpJpeg)) {
+
                 enterError(
-                    QStringLiteral("TCP 视频接收启动失败"));
+                    QStringLiteral(
+                        "TCP 视频接收启动失败"));
+            }
+            if (!m_videoReceiver->start(
+                    GstVideoReceiver::VideoSource::
+                        ThermalRtsp)) {
+
+                enterError(
+                    QStringLiteral(
+                        "热像仪视频管线启动失败"));
             }
         }
 
@@ -446,4 +529,19 @@ void InferenceController::cleanupReceiver()
     if (m_videoReceiver != nullptr) {
         m_videoReceiver->stop();
     }
+}
+void InferenceController::setDetectionMode(
+    DetectionMode mode)
+{
+    if (m_state != State::Idle &&
+        m_state != State::Error) {
+        return;
+    }
+
+    m_detectionMode = mode;
+
+    emit logReceived(
+        mode == DetectionMode::ThermalCamera
+            ? QStringLiteral("已选择热像仪模式")
+            : QStringLiteral("已选择普通摄像头模式"));
 }

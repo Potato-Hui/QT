@@ -19,6 +19,7 @@ SOURCES += \
     photoarchive.cpp
 
 HEADERS += \
+    detectionmode.h \
     mainwindow.h \
     monitorapplication.h \
     inferencecontroller.h \
