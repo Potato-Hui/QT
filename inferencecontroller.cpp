@@ -171,6 +171,27 @@ void InferenceController::readProcessOutput()
     }
 }
 
+void InferenceController::requestSnapshot(const SnapshotRequest& request)
+{
+    if (request.requestId.isEmpty() || request.outputDir.isEmpty()) {
+        emit snapshotFailed(request.requestId, QStringLiteral("快照请求无效"));
+        return;
+    }
+    if (m_state != State::Running || m_process->state() != QProcess::Running) {
+        emit snapshotFailed(request.requestId, QStringLiteral("RKNN 推理程序未运行"));
+        return;
+    }
+    if (!m_pendingSnapshotId.isEmpty()) {
+        emit snapshotFailed(request.requestId, QStringLiteral("上一张快照仍在生成"));
+        return;
+    }
+
+    m_pendingSnapshotId = request.requestId;
+    if (m_process->write(snapshotRequestLine(request)) < 0) {
+        failPendingSnapshot(QStringLiteral("无法发送快照请求"));
+    }
+}
+
 void InferenceController::readProcessError()
 {
     const QString text = QString::fromUtf8(
@@ -196,6 +217,9 @@ void InferenceController::parseProtocolLine(
     } else if (line.startsWith("@error ")) {
         prefix = "@error";
         jsonData = line.mid(7);
+    } else if (line.startsWith("@snapshot ")) {
+        prefix = "@snapshot";
+        jsonData = line.mid(10);
     } else {
         return;
     }
@@ -216,6 +240,27 @@ void InferenceController::parseProtocolLine(
     }
 
     const QJsonObject object = document.object();
+
+    if (prefix == "@snapshot") {
+        const QString requestId = object.value(QStringLiteral("request_id")).toString();
+        if (requestId.isEmpty() || requestId != m_pendingSnapshotId) {
+            emit logReceived(QStringLiteral("忽略不匹配的快照回执"));
+            return;
+        }
+        m_pendingSnapshotId.clear();
+        if (object.value(QStringLiteral("state")).toString() == QStringLiteral("ready")) {
+            const QString recordDir = object.value(QStringLiteral("record_dir")).toString();
+            if (recordDir.isEmpty()) {
+                emit snapshotFailed(requestId, QStringLiteral("快照回执缺少记录目录"));
+            } else {
+                emit snapshotReady({requestId, recordDir});
+            }
+        } else {
+            emit snapshotFailed(requestId,
+                object.value(QStringLiteral("message")).toString(QStringLiteral("RKNN 快照生成失败")));
+        }
+        return;
+    }
 
     if (prefix == "@status") {
         const QString state =
@@ -291,6 +336,7 @@ void InferenceController::stopDetection()
 
     m_startupTimer->stop();
     m_videoWatchdog->stop();
+    failPendingSnapshot(QStringLiteral("检测已停止"));
 
     setState(
         State::Stopping,
@@ -330,6 +376,7 @@ void InferenceController::handleProcessFinished(
     m_videoWatchdog->stop();
 
     cleanupReceiver();
+    failPendingSnapshot(QStringLiteral("RKNN 推理程序已退出"));
 
     if (m_state == State::Stopping) {
         setState(
@@ -421,6 +468,7 @@ void InferenceController::enterError(
     m_videoWatchdog->stop();
 
     cleanupReceiver();
+    failPendingSnapshot(message);
     setState(State::Error, message);
 
     if (m_process->state() !=
@@ -446,4 +494,14 @@ void InferenceController::cleanupReceiver()
     if (m_videoReceiver != nullptr) {
         m_videoReceiver->stop();
     }
+}
+
+void InferenceController::failPendingSnapshot(const QString& message)
+{
+    if (m_pendingSnapshotId.isEmpty()) {
+        return;
+    }
+    const QString requestId = m_pendingSnapshotId;
+    m_pendingSnapshotId.clear();
+    emit snapshotFailed(requestId, message);
 }

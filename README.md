@@ -121,6 +121,32 @@ jpegparse ! jpegdec ! videoconvert ! appsink
 
 视频管线只保留最新帧，避免界面处理速度较慢时产生持续累积的延迟。RKNN 程序输出的 `@metrics` 消息用于更新 FPS 和延迟信息。
 
+### 同帧拍照协议
+
+Qt 拍照时会向 RKNN 程序标准输入写入一行：
+
+```text
+@snapshot {"request_id":"<uuid>","output_dir":"/data/records/<uuid>"}
+```
+
+RKNN 必须针对同一张未绘制画面的原始帧生成 `image.jpg`、`masks/*.png` 和
+`metadata.json`，在临时目录完成后原子改名，再输出：
+
+```text
+@snapshot {"request_id":"<uuid>","state":"ready","record_dir":"/data/records/<uuid>"}
+```
+
+每个 mask 为与 `bbox_xyxy` 对应的单通道 8 位 PNG，像素只能是 `0` 或 `255`。
+Qt 校验该数据包后调用 `QtInsulatorQuantifier`，并在相同目录写入 `result.json`。
+
+RK3588 构建还需指定量化 SDK：
+
+```bash
+INSULATOR_QUANTIFIER_INCLUDE_DIR=/path/to/include \
+INSULATOR_QUANTIFIER_LIBRARY=/path/to/libQtInsulatorQuantifier.so \
+./build_rk3588.sh
+```
+
 ## 板卡部署检查
 
 确认必要的 GStreamer 插件：

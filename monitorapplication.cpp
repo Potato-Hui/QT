@@ -31,6 +31,14 @@ int runMonitorApplication(int argc, char *argv[], InferenceProfile profile)
                      &controller, &InferenceController::startDetection);
     QObject::connect(&window, &MainWindow::detectionStopRequested,
                      &controller, &InferenceController::stopDetection);
+    qRegisterMetaType<SnapshotRequest>("SnapshotRequest");
+    qRegisterMetaType<SnapshotPackage>("SnapshotPackage");
+    QObject::connect(&window, &MainWindow::snapshotRequested,
+                     &controller, &InferenceController::requestSnapshot);
+    QObject::connect(&controller, &InferenceController::snapshotReady,
+                     &window, &MainWindow::processSnapshotPackage);
+    QObject::connect(&controller, &InferenceController::snapshotFailed,
+                     &window, &MainWindow::handleSnapshotFailure);
     QObject::connect(&controller, &InferenceController::stateChanged,
         &window, [&window](InferenceController::State state, const QString& message) {
             switch (state) {

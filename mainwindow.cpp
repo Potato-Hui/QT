@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "quantificationservice.h"
 #include "ui_mainwindow.h"
 #include <QDateTime>
 #include <QDir>
@@ -14,6 +15,10 @@
 #include <QStorageInfo>
 #include <QStyle>
 #include <QTimer>
+#include <QThread>
+#include <QUuid>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
 
@@ -27,6 +32,41 @@ QString formatFileSize(qint64 bytes)
     return QStringLiteral("%1 KB").arg(bytes / bytesPerKilobyte, 0, 'f', 1);
 }
 
+QString recordRootPath()
+{
+#ifdef Q_OS_WIN
+    return QDir::homePath() + QStringLiteral("/InsulatorMonitor/records");
+#else
+    return QStringLiteral("/data/records");
+#endif
+}
+
+QString resultSummary(const QJsonObject& result)
+{
+    const QString level = result.value(QStringLiteral("overall_level")).toString();
+    const QString recommendation = result.value(QStringLiteral("recommendation")).toString();
+    QStringList lines;
+    if (!level.isEmpty()) {
+        lines.append(level);
+    }
+    if (!recommendation.isEmpty()) {
+        lines.append(recommendation);
+    }
+    if (result.contains(QStringLiteral("disc_count"))) {
+        lines.append(QStringLiteral("绝缘子片：%1，缺陷实例：%2")
+            .arg(result.value(QStringLiteral("disc_count")).toInt())
+            .arg(result.value(QStringLiteral("defect_instance_count")).toInt()));
+    }
+    if (result.contains(QStringLiteral("highest_risk_disc_id"))) {
+        lines.append(QStringLiteral("最高风险片：%1")
+            .arg(result.value(QStringLiteral("highest_risk_disc_id")).toInt()));
+    }
+    if (lines.isEmpty()) {
+        return QStringLiteral("量化完成");
+    }
+    return lines.join(QStringLiteral("\n"));
+}
+
 } // namespace
 
 MainWindow::MainWindow(QWidget *parent)
@@ -34,9 +74,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , m_clockTimer(new QTimer(this))
     , m_storageTimer(new QTimer(this))
-    , m_storagePath(QDir::homePath() + QStringLiteral("/InsulatorMonitor/data"))
+    , m_storagePath(recordRootPath())
     , m_photoArchive(m_storagePath)
+    , m_quantificationThread(new QThread(this))
+    , m_quantificationService(new QuantificationService(m_storagePath))
     , m_detecting(false)
+    , m_snapshotPending(false)
     , m_detailScale(1.0)
     , m_detailFitMode(true)
 {
@@ -72,6 +115,16 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::deleteCurrentPhoto);
     connect(ui->settingBackButton, &QPushButton::clicked,
             this, &MainWindow::openMonitorPage);
+    m_quantificationService->moveToThread(m_quantificationThread);
+    connect(this, &MainWindow::quantificationRequested,
+            m_quantificationService, &QuantificationService::process);
+    connect(m_quantificationService, &QuantificationService::completed,
+            this, &MainWindow::handleQuantificationCompleted);
+    connect(m_quantificationService, &QuantificationService::failed,
+            this, &MainWindow::handleQuantificationFailed);
+    connect(m_quantificationThread, &QThread::finished,
+            m_quantificationService, &QObject::deleteLater);
+    m_quantificationThread->start();
     //connect(  发送者,        &发送者类名::信号,      接收者,       &接收者类名::槽函数 );
     m_clockTimer->start(1000);
     updateClock();
@@ -81,6 +134,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_storageTimer->start(5000);
     updateStorageSpace();
     updateDetectionButton();
+    updateSnapshotButton();
     ui->pageStack->setCurrentWidget(ui->monitorPage);
     auto *recordsHeader = ui->recordsTable->horizontalHeader();
     // Keep the history table columns large enough for an actual thumbnail and
@@ -103,6 +157,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    m_quantificationThread->quit();
+    m_quantificationThread->wait();
     delete ui;
 }
 
@@ -162,6 +218,7 @@ void MainWindow::setDetectionUiState(bool detecting,
 {
     m_detecting = detecting;
     updateDetectionButton();
+    updateSnapshotButton();
     ui->detectButton->setEnabled(!busy);
 
     if (busy) {
@@ -221,34 +278,62 @@ void MainWindow::backToRecordsPage()
 
 void MainWindow::requestSnapshot()
 {
-    if (m_lastFrame.isNull()) {
+    if (!m_detecting) {
         QMessageBox::warning(
             this,
             QStringLiteral("拍照失败"),
-            QStringLiteral("当前没有可保存的摄像头画面"));
+            QStringLiteral("请先启动 RKNN 检测后再拍照"));
+        return;
+    }
+    if (m_snapshotPending) {
         return;
     }
 
     QDir().mkpath(m_storagePath);
+    const QString requestId = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    m_snapshotPending = true;
+    updateSnapshotButton();
+    emit snapshotRequested({requestId, QDir(m_storagePath).filePath(requestId)});
+}
 
-    const QString fileName =
-        QStringLiteral("snapshot_%1.jpg")
-        .arg(QDateTime::currentDateTime()
-             .toString(QStringLiteral("yyyyMMdd_HHmmss")));
-    const QString filePath = QDir(m_storagePath).filePath(fileName);
+void MainWindow::processSnapshotPackage(const SnapshotPackage& package)
+{
+    if (m_snapshotPending) {
+        emit quantificationRequested(package);
+    }
+}
 
-    if (!m_lastFrame.save(filePath, "JPG", 90)) {
-        QMessageBox::critical(
-            this,
-            QStringLiteral("拍照失败"),
-            QStringLiteral("无法保存图片：%1").arg(filePath));
+void MainWindow::handleSnapshotFailure(const QString& requestId, const QString& message)
+{
+    Q_UNUSED(requestId)
+    if (!m_snapshotPending) {
         return;
     }
+    m_snapshotPending = false;
+    updateSnapshotButton();
+    QMessageBox::warning(this, QStringLiteral("拍照失败"), message);
+}
 
-    emit snapshotRequested();
-    const int count = ui->snapshotCountValueLabel->text().toInt() + 1;
-    ui->snapshotCountValueLabel->setText(QString::number(count));
+void MainWindow::handleQuantificationCompleted(const SnapshotPackage& package,
+                                                const QJsonObject& result)
+{
+    Q_UNUSED(package)
+    m_snapshotPending = false;
+    updateSnapshotButton();
+    ui->detailResultValueLabel->setText(resultSummary(result));
+    ui->runStatusLabel->setText(resultSummary(result));
+    ui->snapshotCountValueLabel->setText(QString::number(m_photoArchive.records().size()));
+    refreshHistoryPhotos();
     updateStorageSpace();
+}
+
+void MainWindow::handleQuantificationFailed(const SnapshotPackage& package,
+                                             const QString& message)
+{
+    moveFailedRecord(package);
+    m_snapshotPending = false;
+    updateSnapshotButton();
+    QMessageBox::warning(this, QStringLiteral("量化失败"), message);
 }
 
 void MainWindow::updateStorageSpace()
@@ -283,7 +368,7 @@ void MainWindow::refreshHistoryPhotos()
     ui->recordsTable->setColumnWidth(2, 260);
     ui->recordsTable->setColumnWidth(3, 160);
     ui->recordsCountLabel->setText(
-        QStringLiteral("共 %1 张").arg(photos.size()));
+        QStringLiteral("共 %1 条").arg(photos.size()));
 
     for (int row = 0; row < photos.size(); ++row) {
         const PhotoRecord &photo = photos.at(row);
@@ -318,7 +403,7 @@ void MainWindow::refreshHistoryPhotos()
     if (photos.isEmpty()) {
         ui->recordsTable->setRowCount(1);
         auto *empty = new QTableWidgetItem(
-            QStringLiteral("暂无历史照片，请先拍照保存"));
+            QStringLiteral("暂无完成记录，请先拍照并完成量化"));
         empty->setTextAlignment(Qt::AlignCenter);
         ui->recordsTable->setItem(0, 0, empty);
         ui->recordsTable->setSpan(0, 0, 1, 4);
@@ -358,7 +443,16 @@ void MainWindow::openPhotoDetail(int row, int column)
             .arg(m_detailPixmap.width())
             .arg(m_detailPixmap.height()));
     ui->detailPathValueLabel->setText(m_currentPhotoPath);
-    ui->detailResultValueLabel->setText(QStringLiteral("未记录"));
+    QFile resultFile(fileInfo.absoluteDir().filePath(QStringLiteral("result.json")));
+    QJsonParseError parseError;
+    if (resultFile.open(QIODevice::ReadOnly)) {
+        const QJsonDocument resultDocument = QJsonDocument::fromJson(resultFile.readAll(), &parseError);
+        ui->detailResultValueLabel->setText(
+            parseError.error == QJsonParseError::NoError && resultDocument.isObject()
+                ? resultSummary(resultDocument.object()) : QStringLiteral("结果文件无效"));
+    } else {
+        ui->detailResultValueLabel->setText(QStringLiteral("结果文件无法读取"));
+    }
 
     ui->pageStack->setCurrentWidget(ui->photoDetailPage);
     updateDetailPixmap();
@@ -480,19 +574,16 @@ void MainWindow::exportCurrentPhoto()
     if (exportDirectory.isEmpty()) {
         exportDirectory = QDir::homePath();
     }
-    const QString defaultPath = QDir(exportDirectory).filePath(
-        QFileInfo(m_currentPhotoPath).fileName());
-    const QString destinationPath = QFileDialog::getSaveFileName(
+    const QString destinationPath = QFileDialog::getExistingDirectory(
         this,
-        QStringLiteral("导出照片"),
-        defaultPath,
-        QStringLiteral("照片 (*.jpg *.jpeg *.png);;所有文件 (*)"));
+        QStringLiteral("选择导出目录"),
+        exportDirectory);
     if (destinationPath.isEmpty()) {
         return;
     }
 
     QString errorMessage;
-    if (!m_photoArchive.exportPhoto(
+    if (!m_photoArchive.exportRecord(
             m_currentPhotoPath, destinationPath, &errorMessage)) {
         QMessageBox::critical(this,
                               QStringLiteral("导出失败"),
@@ -503,7 +594,7 @@ void MainWindow::exportCurrentPhoto()
     QMessageBox::information(
         this,
         QStringLiteral("导出成功"),
-        QStringLiteral("照片已导出到：%1").arg(destinationPath));
+            QStringLiteral("完整记录已导出到：%1").arg(destinationPath));
 }
 
 void MainWindow::deleteCurrentPhoto()
@@ -512,7 +603,7 @@ void MainWindow::deleteCurrentPhoto()
         return;
     }
 
-    const QString fileName = QFileInfo(m_currentPhotoPath).fileName();
+    const QString fileName = QFileInfo(m_currentPhotoPath).absoluteDir().dirName();
     if (QMessageBox::question(
             this,
             QStringLiteral("删除照片"),
@@ -576,6 +667,28 @@ void MainWindow::updateDetectionButton()
     ui->runStatusDot->setProperty("state", m_detecting ? "running" : "idle");
     ui->runStatusDot->style()->unpolish(ui->runStatusDot);
     ui->runStatusDot->style()->polish(ui->runStatusDot);
+}
+
+void MainWindow::updateSnapshotButton()
+{
+    ui->snapshotButton->setEnabled(m_detecting && !m_snapshotPending);
+    ui->snapshotButton->setText(m_snapshotPending
+        ? QStringLiteral("保存并量化中…") : QStringLiteral("拍照保存"));
+}
+
+void MainWindow::moveFailedRecord(const SnapshotPackage& package)
+{
+    const QFileInfo recordInfo(package.recordDir);
+    if (recordInfo.absoluteDir().absolutePath() != m_storagePath || !recordInfo.exists()) {
+        return;
+    }
+    const QDir failedRoot(QDir(m_storagePath).filePath(QStringLiteral(".failed")));
+    QDir().mkpath(failedRoot.absolutePath());
+    const QString destination = failedRoot.filePath(recordInfo.fileName());
+    if (!QFileInfo::exists(destination)) {
+        QDir(m_storagePath).rename(recordInfo.fileName(),
+                                   QDir(QStringLiteral(".failed")).filePath(recordInfo.fileName()));
+    }
 }
 
 void MainWindow::updatePreviewPixmap()

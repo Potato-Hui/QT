@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "photoarchive.h"
+#include "snapshotprotocol.h"
 
 #include <QImage>
 #include <QMainWindow>
@@ -14,6 +15,9 @@ QT_END_NAMESPACE
 
 class QTimer;
 class QResizeEvent;
+class QThread;
+class QuantificationService;
+class QJsonObject;
 
 class MainWindow : public QMainWindow
 {
@@ -36,11 +40,14 @@ public slots:
                              const QString &message);
     void setPerformanceMetrics(double pipelineFps,
                                double latencyMs);
+    void processSnapshotPackage(const SnapshotPackage& package);
+    void handleSnapshotFailure(const QString& requestId, const QString& message);
 
 signals:
     void detectionStartRequested();
     void detectionStopRequested();
-    void snapshotRequested();
+    void snapshotRequested(const SnapshotRequest& request);
+    void quantificationRequested(const SnapshotPackage& package);
     void settingsRequested();
 
 protected:
@@ -62,12 +69,18 @@ private slots:
     void exportCurrentPhoto();
     void deleteCurrentPhoto();
     void openSettingsPage();
+    void handleQuantificationCompleted(const SnapshotPackage& package,
+                                       const QJsonObject& result);
+    void handleQuantificationFailed(const SnapshotPackage& package,
+                                    const QString& message);
 private:
     void updateDetectionButton();
     void updatePreviewPixmap();
     void refreshHistoryPhotos();
     void updateDetailPixmap();
     void clearDetailState();
+    void updateSnapshotButton();
+    void moveFailedRecord(const SnapshotPackage& package);
     double detailFitScale() const;
 
     Ui::MainWindow *ui;
@@ -75,7 +88,10 @@ private:
     QTimer *m_storageTimer;
     QString m_storagePath;
     PhotoArchive m_photoArchive;
+    QThread* m_quantificationThread;
+    QuantificationService* m_quantificationService;
     bool m_detecting;
+    bool m_snapshotPending;
     QImage m_lastFrame;
     QString m_currentPhotoPath;
     QPixmap m_detailPixmap;

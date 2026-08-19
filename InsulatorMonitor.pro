@@ -16,7 +16,9 @@ SOURCES += \
     inferencecontroller.cpp \
     inferencelaunchspec.cpp \
     gstvideoreceiver.cpp \
-    photoarchive.cpp
+    photoarchive.cpp \
+    snapshotprotocol.cpp \
+    quantificationservice.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -27,7 +29,20 @@ HEADERS += \
     inferencelifecycle.h \
     gstvideoreceiver.h \
     latest_value_slot.hpp \
-    photoarchive.h
+    photoarchive.h \
+    snapshotprotocol.h \
+    quantificationservice.h
+
+!isEmpty(INSULATOR_QUANTIFIER_INCLUDE_DIR):!isEmpty(INSULATOR_QUANTIFIER_LIBRARY) {
+    DEFINES += INSULATOR_QUANTIFIER_AVAILABLE
+    INCLUDEPATH += $$INSULATOR_QUANTIFIER_INCLUDE_DIR
+    LIBS += $$INSULATOR_QUANTIFIER_LIBRARY
+    isEmpty(INSULATOR_QUANTIFIER_HEADER) {
+        DEFINES += INSULATOR_QUANTIFIER_HEADER=\"QtInsulatorQuantifier.h\"
+    } else {
+        DEFINES += INSULATOR_QUANTIFIER_HEADER=\"$$INSULATOR_QUANTIFIER_HEADER\"
+    }
+}
 
 FORMS += \
     mainwindow.ui

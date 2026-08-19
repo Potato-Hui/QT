@@ -30,12 +30,12 @@ public:
     QVector<PhotoRecord> records() const;
     bool remove(const QString& path, QString* errorMessage = nullptr) const;
     PhotoClearResult clear() const;
-    bool exportPhoto(const QString& sourcePath,
-                     const QString& destinationPath,
-                     QString* errorMessage = nullptr) const;
+    bool exportRecord(const QString& sourcePath,
+                      const QString& destinationDirectory,
+                      QString* errorMessage = nullptr) const;
 
 private:
-    bool containsPath(const QString& path) const;
+    QString recordPathForImage(const QString& imagePath) const;
     QString m_directoryPath;
 };
 
