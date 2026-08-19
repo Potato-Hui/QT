@@ -61,7 +61,7 @@ private slots:
     void fitDetailImage();
     void exportCurrentPhoto();
     void deleteCurrentPhoto();
-
+    void openSettingsPage();
 private:
     void updateDetectionButton();
     void updatePreviewPixmap();

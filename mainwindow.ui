@@ -61,7 +61,7 @@
         <number>28</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="titleLayout">
+        <layout class="QVBoxLayout" name="titleLayout_setting">
          <property name="spacing">
           <number>2</number>
          </property>
@@ -80,6 +80,19 @@
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="detailHeaderSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <spacer name="headerSpacer">
@@ -127,7 +140,7 @@
     <item>
      <widget class="QStackedWidget" name="pageStack">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="monitorPage">
        <layout class="QHBoxLayout" name="monitorLayout" stretch="68,0">
@@ -406,6 +419,12 @@
              </property>
              <item>
               <widget class="QPushButton" name="detectButton">
+               <property name="minimumSize">
+                <size>
+                 <width>172</width>
+                 <height>31</height>
+                </size>
+               </property>
                <property name="text">
                 <string>开始检测</string>
                </property>
@@ -416,6 +435,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="snapshotButton">
+               <property name="minimumSize">
+                <size>
+                 <width>172</width>
+                 <height>31</height>
+                </size>
+               </property>
                <property name="text">
                 <string>拍照保存</string>
                </property>
@@ -433,14 +458,17 @@
                  </property>
                 </widget>
                </item>
-               <item>
-                <widget class="QPushButton" name="settingsButton">
-                 <property name="text">
-                  <string>设置</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="settingsButton">
+               <property name="contextMenuPolicy">
+                <enum>Qt::DefaultContextMenu</enum>
+               </property>
+               <property name="text">
+                <string>设置</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -667,7 +695,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="detailContentLayout" stretch="72,28">
+         <layout class="QHBoxLayout" name="detailContentLayout" stretch="0,28">
           <property name="spacing">
            <number>16</number>
           </property>
@@ -711,8 +739,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>860</width>
-                  <height>446</height>
+                  <width>165</width>
+                  <height>346</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="detailImageScrollLayout">
@@ -996,6 +1024,81 @@
          </layout>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="settingPage">
+       <widget class="QLabel" name="settingTitleLabel">
+        <property name="geometry">
+         <rect>
+          <x>700</x>
+          <y>80</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string> 系统设置</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="ThermalImagingMode">
+        <property name="geometry">
+         <rect>
+          <x>650</x>
+          <y>220</y>
+          <width>172</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>热像仪</string>
+        </property>
+        <property name="running" stdset="0">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="VisibleLightCamera">
+        <property name="geometry">
+         <rect>
+          <x>650</x>
+          <y>140</y>
+          <width>172</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>可见光摄像头</string>
+        </property>
+        <property name="running" stdset="0">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="settingBackButton">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>120</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>← 返回</string>
+        </property>
+        <property name="compact" stdset="0">
+         <bool>true</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->backButton, &QPushButton::clicked,
             this, &MainWindow::openMonitorPage);
     connect(ui->settingsButton, &QPushButton::clicked,
-            this, &MainWindow::settingsRequested);
+            this, &MainWindow::openSettingsPage);
     connect(ui->recordsTable, &QTableWidget::cellClicked,
             this, &MainWindow::openPhotoDetail);
     connect(ui->backToRecordsButton, &QPushButton::clicked,
@@ -70,6 +70,8 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::exportCurrentPhoto);
     connect(ui->deletePhotoButton, &QPushButton::clicked,
             this, &MainWindow::deleteCurrentPhoto);
+    connect(ui->settingBackButton, &QPushButton::clicked,
+            this, &MainWindow::openMonitorPage);
     //connect(  发送者,        &发送者类名::信号,      接收者,       &接收者类名::槽函数 );
     m_clockTimer->start(1000);
     updateClock();
@@ -193,6 +195,11 @@ void MainWindow::setPerformanceMetrics(double pipelineFps,
         QStringLiteral("正在检测 · FPS %1 · 延迟 %2 ms")
             .arg(pipelineFps, 0, 'f', 1)
             .arg(latencyMs, 0, 'f', 0));
+}
+
+void MainWindow::openSettingsPage()
+{
+    ui->pageStack->setCurrentWidget(ui->settingPage);
 }
 
 void MainWindow::openRecordsPage()//照片界面
