@@ -1,0 +1,4 @@
+#ifndef DETECTIONMODE_H
+#define DETECTIONMODE_H
+
+#endif // DETECTIONMODE_H
