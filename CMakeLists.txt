@@ -40,23 +40,33 @@ set(MONITOR_COMMON_SOURCES
     resources.qrc
 )
 
-set(INSULATOR_QUANTIFIER_INCLUDE_DIR "" CACHE PATH "QtInsulatorQuantifier SDK include directory")
-set(INSULATOR_QUANTIFIER_LIBRARY "" CACHE FILEPATH "QtInsulatorQuantifier ARM64 library")
-set(INSULATOR_QUANTIFIER_HEADER "QtInsulatorQuantifier.h" CACHE STRING "QtInsulatorQuantifier public header")
-if(INSULATOR_QUANTIFIER_INCLUDE_DIR OR INSULATOR_QUANTIFIER_LIBRARY)
-    if(NOT INSULATOR_QUANTIFIER_INCLUDE_DIR OR NOT INSULATOR_QUANTIFIER_LIBRARY)
-        message(FATAL_ERROR "Set both INSULATOR_QUANTIFIER_INCLUDE_DIR and INSULATOR_QUANTIFIER_LIBRARY")
+set(INSULATOR_QUANTIFIER_SOURCE_DIR
+    "${CMAKE_CURRENT_SOURCE_DIR}/../lianghua/cpp_qualification"
+    CACHE PATH "Insulator quantification source directory")
+set(INSULATOR_CALIBRATION_PATH "/data/config/pitch_area_model.json"
+    CACHE STRING "Deployed pitch calibration JSON path")
+
+function(add_quantification_core opencv_target)
+    if(TARGET insulator_quantification)
+        return()
     endif()
-    set(INSULATOR_QUANTIFIER_AVAILABLE ON)
-endif()
+    add_library(insulator_quantification STATIC
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/InsulatorQuantifier.cpp"
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/Gating.cpp"
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/IdealArea.cpp"
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/DamageEvaluator.cpp")
+    target_include_directories(insulator_quantification PUBLIC
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/include"
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/qt")
+    target_link_libraries(insulator_quantification PUBLIC ${opencv_target})
+endfunction()
 
 function(configure_quantifier target)
-    if(INSULATOR_QUANTIFIER_AVAILABLE)
-        target_include_directories(${target} PRIVATE "${INSULATOR_QUANTIFIER_INCLUDE_DIR}")
-        target_link_libraries(${target} PRIVATE "${INSULATOR_QUANTIFIER_LIBRARY}")
+    if(TARGET insulator_quantification)
+        target_link_libraries(${target} PRIVATE insulator_quantification)
         target_compile_definitions(${target} PRIVATE
             INSULATOR_QUANTIFIER_AVAILABLE
-            INSULATOR_QUANTIFIER_HEADER=\"${INSULATOR_QUANTIFIER_HEADER}\")
+            INSULATOR_CALIBRATION_PATH=\"${INSULATOR_CALIBRATION_PATH}\")
     endif()
 endfunction()
 
@@ -67,6 +77,11 @@ if(BUILD_MONITOR_APPS)
         gstreamer-app-1.0
         gstreamer-video-1.0
     )
+    if(NOT EXISTS "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/InsulatorQuantifier.cpp")
+        message(FATAL_ERROR "Quantification source directory not found: ${INSULATOR_QUANTIFIER_SOURCE_DIR}")
+    endif()
+    pkg_check_modules(OPENCV REQUIRED IMPORTED_TARGET opencv4)
+    add_quantification_core(PkgConfig::OPENCV)
 
     add_executable(InsulatorMonitor
         main.cpp
@@ -91,10 +106,14 @@ if(BUILD_MONITOR_APPS)
 
     configure_file(single_model.ini
         "${CMAKE_BINARY_DIR}/bin/single_model.ini" COPYONLY)
+    configure_file(
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/config/pitch_area_model.json"
+        "${CMAKE_BINARY_DIR}/bin/pitch_area_model.json" COPYONLY)
 endif()
 
 # Standalone test targets are intentionally not configured for this project.
 if(BUILD_DESKTOP_UI_PREVIEW)
+    message(STATUS "DesktopUiPreview uses generated snapshot and quantification JSON samples")
     add_executable(DesktopUiPreview
         desktop_preview_main.cpp
         mainwindow.cpp
@@ -112,7 +131,7 @@ if(BUILD_DESKTOP_UI_PREVIEW)
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Gui
         Qt${QT_VERSION_MAJOR}::Widgets)
-    configure_quantifier(DesktopUiPreview)
+    target_compile_definitions(DesktopUiPreview PRIVATE INSULATOR_DESKTOP_PREVIEW)
     set_target_properties(DesktopUiPreview PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 endif()

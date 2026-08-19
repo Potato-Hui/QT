@@ -2,6 +2,7 @@
 #include "quantificationservice.h"
 #include "ui_mainwindow.h"
 #include <QDateTime>
+#include <QDialog>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -9,12 +10,14 @@
 #include <QIcon>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QPlainTextEdit>
 #include <QResizeEvent>
 #include <QScrollArea>
 #include <QStandardPaths>
 #include <QStorageInfo>
 #include <QStyle>
 #include <QTimer>
+#include <QVBoxLayout>
 #include <QThread>
 #include <QUuid>
 #include <QJsonDocument>
@@ -35,7 +38,7 @@ QString formatFileSize(qint64 bytes)
 QString recordRootPath()
 {
 #ifdef Q_OS_WIN
-    return QDir::homePath() + QStringLiteral("/InsulatorMonitor/records");
+    return QDir::homePath() + QStringLiteral("/InsulatorMonitor/data");
 #else
     return QStringLiteral("/data/records");
 #endif
@@ -67,6 +70,19 @@ QString resultSummary(const QJsonObject& result)
     return lines.join(QStringLiteral("\n"));
 }
 
+QString formattedJsonFile(const QString& path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        return QStringLiteral("无法读取：%1").arg(path);
+    }
+    QJsonParseError error;
+    const QJsonDocument document = QJsonDocument::fromJson(file.readAll(), &error);
+    return error.error == QJsonParseError::NoError
+        ? QString::fromUtf8(document.toJson(QJsonDocument::Indented))
+        : QStringLiteral("JSON 无效：%1").arg(error.errorString());
+}
+
 } // namespace
 
 MainWindow::MainWindow(QWidget *parent)
@@ -93,6 +109,8 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::requestSnapshot);
     connect(ui->recordsButton, &QPushButton::clicked,
             this, &MainWindow::openRecordsPage);
+    connect(ui->clearRecordsButton, &QPushButton::clicked,
+            this, &MainWindow::clearAllPhotos);
     connect(ui->backButton, &QPushButton::clicked,
             this, &MainWindow::openMonitorPage);
     connect(ui->settingsButton, &QPushButton::clicked,
@@ -109,6 +127,10 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::resetDetailZoom);
     connect(ui->fitImageButton, &QPushButton::clicked,
             this, &MainWindow::fitDetailImage);
+    connect(ui->viewJsonButton, &QPushButton::clicked,
+            this, &MainWindow::viewCurrentJson);
+    connect(ui->quantifyPhotoButton, &QPushButton::clicked,
+            this, &MainWindow::quantifyCurrentPhoto);
     connect(ui->exportPhotoButton, &QPushButton::clicked,
             this, &MainWindow::exportCurrentPhoto);
     connect(ui->deletePhotoButton, &QPushButton::clicked,
@@ -265,6 +287,39 @@ void MainWindow::openRecordsPage()//照片界面
     ui->pageStack->setCurrentWidget(ui->recordsPage);
 }
 
+void MainWindow::clearAllPhotos()
+{
+    if (m_photoArchive.records().isEmpty()) {
+        return;
+    }
+    if (QMessageBox::question(
+            this,
+            QStringLiteral("清空记录"),
+            QStringLiteral("确定要删除全部拍照记录吗？此操作无法撤销。"),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No) != QMessageBox::Yes) {
+        return;
+    }
+
+    const PhotoClearResult result = m_photoArchive.clear();
+    clearDetailState();
+    refreshHistoryPhotos();
+    updateStorageSpace();
+    ui->snapshotCountValueLabel->setText(
+        QString::number(m_photoArchive.records().size()));
+
+    if (result.failed > 0) {
+        QMessageBox::warning(
+            this,
+            QStringLiteral("清空记录未完成"),
+            QStringLiteral("已删除 %1 条，%2 条删除失败。请检查文件是否被其他程序占用。")
+                .arg(result.removed)
+                .arg(result.failed));
+    } else {
+        ui->runStatusLabel->setText(QStringLiteral("拍照记录已清空"));
+    }
+}
+
 void MainWindow::openMonitorPage()
 {
     ui->pageStack->setCurrentWidget(ui->monitorPage);
@@ -292,24 +347,43 @@ void MainWindow::requestSnapshot()
     QDir().mkpath(m_storagePath);
     const QString requestId = QUuid::createUuid().toString(QUuid::WithoutBraces);
     m_snapshotPending = true;
+    m_pendingSnapshotId = requestId;
     updateSnapshotButton();
     emit snapshotRequested({requestId, QDir(m_storagePath).filePath(requestId)});
 }
 
 void MainWindow::processSnapshotPackage(const SnapshotPackage& package)
 {
-    if (m_snapshotPending) {
-        emit quantificationRequested(package);
+    const QString expectedRecordDir = QDir(m_storagePath).filePath(m_pendingSnapshotId);
+    if (m_snapshotPending && package.requestId == m_pendingSnapshotId
+        && QDir(package.recordDir).absolutePath() == QDir(expectedRecordDir).absolutePath()) {
+        m_snapshotPending = false;
+        m_pendingSnapshotId.clear();
+        updateSnapshotButton();
+        refreshHistoryPhotos();
+        ui->snapshotCountValueLabel->setText(
+            QString::number(m_photoArchive.records().size()));
+        updateStorageSpace();
+        ui->runStatusLabel->setText(QStringLiteral("照片、mask 和 metadata 已保存"));
+
+        auto* toast = new QMessageBox(
+            QMessageBox::Information, QString(), QStringLiteral("保存成功"),
+            QMessageBox::NoButton, this);
+        toast->setWindowFlag(Qt::FramelessWindowHint);
+        toast->setAttribute(Qt::WA_DeleteOnClose);
+        toast->show();
+        toast->move(geometry().center() - toast->rect().center());
+        QTimer::singleShot(1000, toast, &QWidget::close);
     }
 }
 
 void MainWindow::handleSnapshotFailure(const QString& requestId, const QString& message)
 {
-    Q_UNUSED(requestId)
-    if (!m_snapshotPending) {
+    if (!m_snapshotPending || requestId != m_pendingSnapshotId) {
         return;
     }
     m_snapshotPending = false;
+    m_pendingSnapshotId.clear();
     updateSnapshotButton();
     QMessageBox::warning(this, QStringLiteral("拍照失败"), message);
 }
@@ -330,10 +404,12 @@ void MainWindow::handleQuantificationCompleted(const SnapshotPackage& package,
 void MainWindow::handleQuantificationFailed(const SnapshotPackage& package,
                                              const QString& message)
 {
-    moveFailedRecord(package);
+    Q_UNUSED(package)
     m_snapshotPending = false;
     updateSnapshotButton();
-    QMessageBox::warning(this, QStringLiteral("量化失败"), message);
+    refreshHistoryPhotos();
+    QMessageBox::warning(this, QStringLiteral("量化未完成"),
+                         QStringLiteral("照片、mask 和 metadata 已保留。\n%1").arg(message));
 }
 
 void MainWindow::updateStorageSpace()
@@ -403,7 +479,7 @@ void MainWindow::refreshHistoryPhotos()
     if (photos.isEmpty()) {
         ui->recordsTable->setRowCount(1);
         auto *empty = new QTableWidgetItem(
-            QStringLiteral("暂无完成记录，请先拍照并完成量化"));
+            QStringLiteral("暂无拍照记录，请先拍照保存"));
         empty->setTextAlignment(Qt::AlignCenter);
         ui->recordsTable->setItem(0, 0, empty);
         ui->recordsTable->setSpan(0, 0, 1, 4);
@@ -451,7 +527,7 @@ void MainWindow::openPhotoDetail(int row, int column)
             parseError.error == QJsonParseError::NoError && resultDocument.isObject()
                 ? resultSummary(resultDocument.object()) : QStringLiteral("结果文件无效"));
     } else {
-        ui->detailResultValueLabel->setText(QStringLiteral("结果文件无法读取"));
+        ui->detailResultValueLabel->setText(QStringLiteral("尚未量化"));
     }
 
     ui->pageStack->setCurrentWidget(ui->photoDetailPage);
@@ -515,6 +591,9 @@ void MainWindow::updateDetailPixmap()
     ui->fitImageButton->setEnabled(true);
     ui->exportPhotoButton->setEnabled(!m_currentPhotoPath.isEmpty());
     ui->deletePhotoButton->setEnabled(!m_currentPhotoPath.isEmpty());
+    ui->viewJsonButton->setEnabled(!m_currentPhotoPath.isEmpty());
+    ui->quantifyPhotoButton->setEnabled(
+        QFileInfo(m_currentPhotoPath).fileName() == QStringLiteral("image.jpg"));
 }
 
 void MainWindow::zoomDetailIn()
@@ -650,6 +729,8 @@ void MainWindow::clearDetailState()
     ui->fitImageButton->setEnabled(false);
     ui->exportPhotoButton->setEnabled(false);
     ui->deletePhotoButton->setEnabled(false);
+    ui->viewJsonButton->setEnabled(false);
+    ui->quantifyPhotoButton->setEnabled(false);
 }
 
 void MainWindow::updateDetectionButton()
@@ -669,11 +750,49 @@ void MainWindow::updateDetectionButton()
     ui->runStatusDot->style()->polish(ui->runStatusDot);
 }
 
+void MainWindow::viewCurrentJson()
+{
+    if (m_currentPhotoPath.isEmpty()) {
+        return;
+    }
+
+    const QDir recordDir(QFileInfo(m_currentPhotoPath).absoluteDir());
+    QDialog dialog(this);
+    dialog.setWindowTitle(QStringLiteral("记录 JSON"));
+    dialog.resize(860, 620);
+    auto* layout = new QVBoxLayout(&dialog);
+    auto* viewer = new QPlainTextEdit(&dialog);
+    viewer->setReadOnly(true);
+    viewer->setLineWrapMode(QPlainTextEdit::NoWrap);
+    viewer->setPlainText(
+        QStringLiteral("metadata.json\n%1\n\nresult.json\n%2")
+            .arg(formattedJsonFile(recordDir.filePath(QStringLiteral("metadata.json"))),
+                 formattedJsonFile(recordDir.filePath(QStringLiteral("result.json")))));
+    layout->addWidget(viewer);
+    auto* closeButton = new QPushButton(QStringLiteral("关闭"), &dialog);
+    connect(closeButton, &QPushButton::clicked, &dialog, &QDialog::accept);
+    layout->addWidget(closeButton);
+    dialog.exec();
+}
+
+void MainWindow::quantifyCurrentPhoto()
+{
+    const QFileInfo imageInfo(m_currentPhotoPath);
+    if (imageInfo.fileName() != QStringLiteral("image.jpg")) {
+        QMessageBox::information(this, QStringLiteral("无法量化"),
+                                 QStringLiteral("旧照片没有对应的 mask 和 metadata"));
+        return;
+    }
+    const QDir recordDir(imageInfo.absoluteDir());
+    ui->runStatusLabel->setText(QStringLiteral("正在量化当前照片"));
+    emit quantificationRequested({recordDir.dirName(), recordDir.absolutePath()});
+}
+
 void MainWindow::updateSnapshotButton()
 {
     ui->snapshotButton->setEnabled(m_detecting && !m_snapshotPending);
     ui->snapshotButton->setText(m_snapshotPending
-        ? QStringLiteral("保存并量化中…") : QStringLiteral("拍照保存"));
+        ? QStringLiteral("保存中…") : QStringLiteral("拍照保存"));
 }
 
 void MainWindow::moveFailedRecord(const SnapshotPackage& package)

@@ -14,9 +14,7 @@ RK3588_SYSROOT="${RK3588_SYSROOT:-$RK3588_SDK/aarch64-buildroot-linux-gnu/sysroo
 BUILD_DIR="${BUILD_DIR:-$PROJECT_DIR/build-cross-rk3588-new}"
 TOOLCHAIN_FILE="${TOOLCHAIN_FILE:-$RK3588_SDK/share/buildroot/toolchainfile.cmake}"
 PKG_CONFIG_TOOL="${PKG_CONFIG_TOOL:-$RK3588_SDK/bin/pkg-config}"
-INSULATOR_QUANTIFIER_INCLUDE_DIR="${INSULATOR_QUANTIFIER_INCLUDE_DIR:-}"
-INSULATOR_QUANTIFIER_LIBRARY="${INSULATOR_QUANTIFIER_LIBRARY:-}"
-INSULATOR_QUANTIFIER_HEADER="${INSULATOR_QUANTIFIER_HEADER:-QtInsulatorQuantifier.h}"
+INSULATOR_QUANTIFIER_SOURCE_DIR="${INSULATOR_QUANTIFIER_SOURCE_DIR:-$PROJECT_DIR/../lianghua/cpp_qualification}"
 
 echo "=========================================="
 echo "  RK3588 cross compile: InsulatorMonitor"
@@ -26,8 +24,7 @@ echo "=========================================="
 [[ -d "$RK3588_SYSROOT" ]] || fail "sysroot 不存在：$RK3588_SYSROOT"
 [[ -f "$TOOLCHAIN_FILE" ]] || fail "工具链文件不存在：$TOOLCHAIN_FILE"
 [[ -x "$PKG_CONFIG_TOOL" ]] || fail "pkg-config 不可执行：$PKG_CONFIG_TOOL"
-[[ -d "$INSULATOR_QUANTIFIER_INCLUDE_DIR" ]] || fail "请设置量化 SDK 头文件目录：INSULATOR_QUANTIFIER_INCLUDE_DIR"
-[[ -f "$INSULATOR_QUANTIFIER_LIBRARY" ]] || fail "请设置量化 SDK ARM64 库：INSULATOR_QUANTIFIER_LIBRARY"
+[[ -f "$INSULATOR_QUANTIFIER_SOURCE_DIR/src/InsulatorQuantifier.cpp" ]] || fail "找不到量化源码：$INSULATOR_QUANTIFIER_SOURCE_DIR"
 command -v cmake >/dev/null 2>&1 || fail "找不到 cmake"
 
 cd "$PROJECT_DIR"
@@ -45,7 +42,7 @@ unset PKG_CONFIG_PATH
 
 echo "检查 GStreamer..."
 
-for module in gstreamer-1.0 gstreamer-app-1.0 gstreamer-video-1.0; do
+for module in gstreamer-1.0 gstreamer-app-1.0 gstreamer-video-1.0 opencv4; do
     "$PKG_CONFIG_TOOL" --exists "$module" \
         || fail "sysroot 中找不到 $module"
 
@@ -88,9 +85,7 @@ cmake -S "$PROJECT_DIR" \
     -DBUILD_TESTING=OFF \
     -DBUILD_MONITOR_APPS=ON \
     -DBUILD_DESKTOP_UI_PREVIEW=OFF \
-    -DINSULATOR_QUANTIFIER_INCLUDE_DIR="$INSULATOR_QUANTIFIER_INCLUDE_DIR" \
-    -DINSULATOR_QUANTIFIER_LIBRARY="$INSULATOR_QUANTIFIER_LIBRARY" \
-    -DINSULATOR_QUANTIFIER_HEADER="$INSULATOR_QUANTIFIER_HEADER"
+    -DINSULATOR_QUANTIFIER_SOURCE_DIR="$INSULATOR_QUANTIFIER_SOURCE_DIR"
 
 echo "开始编译..."
 
@@ -107,6 +102,7 @@ SINGLE_BIN="$BUILD_DIR/bin/InsulatorMonitorSingle"
 echo "=========================================="
 echo "编译完成："
 ls -lh "$MONITOR_BIN" "$SINGLE_BIN" "$BUILD_DIR/bin/single_model.ini"
+echo "部署标定文件：$BUILD_DIR/bin/pitch_area_model.json -> /data/config/pitch_area_model.json"
 
 if command -v file >/dev/null 2>&1; then
     file "$MONITOR_BIN" "$SINGLE_BIN"

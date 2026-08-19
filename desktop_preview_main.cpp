@@ -2,7 +2,11 @@
 
 #include <QApplication>
 #include <QDateTime>
+#include <QDir>
 #include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLinearGradient>
 #include <QPainter>
 #include <QTextStream>
@@ -42,6 +46,48 @@ void showRunningState(MainWindow *window)
     window->setPerformanceMetrics(29.8, 34.0);
 }
 
+void createDemoRecord(const SnapshotRequest& request, MainWindow* window)
+{
+    const QDir recordDir(request.outputDir);
+    const SnapshotPackage package{request.requestId, request.outputDir};
+    QDir().mkpath(recordDir.filePath(QStringLiteral("masks")));
+
+    const QImage image = createDemoFrame();
+    if (!image.save(recordDir.filePath(QStringLiteral("image.jpg")), "JPG", 90)) {
+        window->handleSnapshotFailure(request.requestId, QStringLiteral("无法保存预览原图"));
+        return;
+    }
+
+    const QRect bbox(340, 145, 550, 420);
+    QImage mask(bbox.size(), QImage::Format_Grayscale8);
+    mask.fill(255);
+    if (!mask.save(recordDir.filePath(QStringLiteral("masks/insulator_01.png")), "PNG")) {
+        window->handleSnapshotFailure(request.requestId, QStringLiteral("无法保存预览 mask"));
+        return;
+    }
+
+    QJsonObject instance;
+    instance.insert(QStringLiteral("instance_id"), 1);
+    instance.insert(QStringLiteral("class_id"), 0);
+    instance.insert(QStringLiteral("class_name"), QStringLiteral("insulator"));
+    instance.insert(QStringLiteral("confidence"), 0.987);
+    instance.insert(QStringLiteral("bbox_xyxy"), QJsonArray{bbox.left(), bbox.top(), bbox.right() + 1, bbox.bottom() + 1});
+    instance.insert(QStringLiteral("mask_file"), QStringLiteral("masks/insulator_01.png"));
+
+    QJsonObject metadata;
+    metadata.insert(QStringLiteral("image_width"), image.width());
+    metadata.insert(QStringLiteral("image_height"), image.height());
+    metadata.insert(QStringLiteral("instances"), QJsonArray{instance});
+    QFile metadataFile(recordDir.filePath(QStringLiteral("metadata.json")));
+    if (!metadataFile.open(QIODevice::WriteOnly)) {
+        window->handleSnapshotFailure(request.requestId, QStringLiteral("无法保存预览 metadata"));
+        return;
+    }
+    metadataFile.write(QJsonDocument(metadata).toJson(QJsonDocument::Indented));
+
+    window->processSnapshotPackage(package);
+}
+
 } // namespace
 
 int main(int argc, char *argv[])
@@ -56,11 +102,16 @@ int main(int argc, char *argv[])
     }
 
     MainWindow window;
+    qRegisterMetaType<SnapshotPackage>("SnapshotPackage");
     window.setDetectionUiState(false, false, false,
         QStringLiteral("等待开始"));
 
     QObject::connect(&window, &MainWindow::detectionStartRequested,
         &window, [&window] { showRunningState(&window); });
+    QObject::connect(&window, &MainWindow::snapshotRequested,
+        &window, [&window](const SnapshotRequest& request) {
+            createDemoRecord(request, &window);
+        });
     QObject::connect(&window, &MainWindow::detectionStopRequested,
         &window, [&window] {
             window.setDetectionUiState(false, false, false,

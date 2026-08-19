@@ -9,6 +9,7 @@
 struct PhotoRecord
 {
     QString path;
+    QString recordPath;
     QString fileName;
     QDateTime modified;
     qint64 bytes = 0;

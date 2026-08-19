@@ -10,7 +10,8 @@
 #include <QJsonObject>
 
 #ifdef INSULATOR_QUANTIFIER_AVAILABLE
-#include INSULATOR_QUANTIFIER_HEADER
+#include <QtInsulatorQuantifier.hpp>
+#include <exception>
 #endif
 
 namespace {
@@ -86,24 +87,45 @@ void QuantificationService::process(const SnapshotPackage& package)
     }
 
 #ifdef INSULATOR_QUANTIFIER_AVAILABLE
-    const QDir recordDir(package.recordDir);
-    const QString resultPath = recordDir.filePath(QStringLiteral("result.json"));
-    insulator::QtInsulatorQuantifier quantifier;
-    quantifier.processFromFiles(
-        recordDir.filePath(QStringLiteral("image.jpg")),
-        recordDir.filePath(QStringLiteral("metadata.json")),
-        QStringLiteral("/data/config/pitch_area_model.json"),
-        resultPath);
+    try {
+        const QDir recordDir(package.recordDir);
+        const QString resultPath = recordDir.filePath(QStringLiteral("result.json"));
+        insulator::QtInsulatorQuantifier quantifier;
+        quantifier.processFromFiles(
+            recordDir.filePath(QStringLiteral("image.jpg")),
+            recordDir.filePath(QStringLiteral("metadata.json")),
+            QStringLiteral(INSULATOR_CALIBRATION_PATH), resultPath);
 
+        QJsonObject result;
+        if (!readJsonObject(resultPath, &result, &errorMessage)) {
+            emit failed(package, QStringLiteral("量化结果未生成：%1").arg(errorMessage));
+            return;
+        }
+        emit completed(package, result);
+    } catch (const std::exception& error) {
+        emit failed(package, QString::fromUtf8(error.what()));
+    }
+#else
+#ifdef INSULATOR_DESKTOP_PREVIEW
+    const QDir recordDir(package.recordDir);
     QJsonObject result;
-    if (!readJsonObject(resultPath, &result, &errorMessage)) {
-        emit failed(package, QStringLiteral("量化结果未生成：%1").arg(errorMessage));
+    result.insert(QStringLiteral("basic_damage_index"), 0.0);
+    result.insert(QStringLiteral("conservative_risk_index"), 0.0);
+    result.insert(QStringLiteral("overall_level"), QStringLiteral("正常"));
+    result.insert(QStringLiteral("recommendation"), QStringLiteral("预览版模拟量化结果"));
+    result.insert(QStringLiteral("highest_risk_disc_id"), 1);
+    result.insert(QStringLiteral("disc_count"), 1);
+    result.insert(QStringLiteral("defect_instance_count"), 0);
+    QFile resultFile(recordDir.filePath(QStringLiteral("result.json")));
+    if (!resultFile.open(QIODevice::WriteOnly)
+        || resultFile.write(QJsonDocument(result).toJson(QJsonDocument::Indented)) < 0) {
+        emit failed(package, QStringLiteral("无法保存预览量化结果"));
         return;
     }
     emit completed(package, result);
 #else
-    emit failed(package,
-                QStringLiteral("当前构建未链接 QtInsulatorQuantifier SDK"));
+    emit failed(package, QStringLiteral("当前构建未链接量化模块"));
+#endif
 #endif
 }
 

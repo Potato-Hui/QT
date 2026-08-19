@@ -137,15 +137,30 @@ RKNN 必须针对同一张未绘制画面的原始帧生成 `image.jpg`、`masks
 ```
 
 每个 mask 为与 `bbox_xyxy` 对应的单通道 8 位 PNG，像素只能是 `0` 或 `255`。
-Qt 校验该数据包后调用 `QtInsulatorQuantifier`，并在相同目录写入 `result.json`。
+Qt 校验数据包后立即纳入拍照历史；用户在记录详情页点击“量化”时，才调用
+`QtInsulatorQuantifier` 并在相同目录写入 `result.json`。
 
-RK3588 构建还需指定量化 SDK：
+RK3588 构建会直接编译同级 `../lianghua/cpp_qualification` 中的量化源码，并要求
+工具链 sysroot 提供 `opencv4`（`core`、`imgproc`、`imgcodecs`）。如量化目录不在
+默认位置，可指定：
 
 ```bash
-INSULATOR_QUANTIFIER_INCLUDE_DIR=/path/to/include \
-INSULATOR_QUANTIFIER_LIBRARY=/path/to/libQtInsulatorQuantifier.so \
+INSULATOR_QUANTIFIER_SOURCE_DIR=/path/to/cpp_qualification \
 ./build_rk3588.sh
 ```
+
+将构建输出的 `pitch_area_model.json` 部署到板端：
+
+```bash
+install -D -m 644 build-cross-rk3588-new/bin/pitch_area_model.json \
+  /data/config/pitch_area_model.json
+```
+
+Windows `DesktopUiPreview` 不启动 RKNN 或 OpenCV；点击拍照会生成演示数据包到
+`%USERPROFILE%/InsulatorMonitor/data/<UUID>/`。详情页先通过“查看 JSON”检查
+`metadata.json`，点击“量化”后生成模拟 `result.json`，再可通过同一窗口查看其内容。
+历史页同时兼容 `InsulatorMonitor` 根目录和 `data` 目录中原有的单张 `snapshot_*.jpg`
+照片。
 
 ## 板卡部署检查
 

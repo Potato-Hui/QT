@@ -1000,6 +1000,26 @@
              </spacer>
             </item>
             <item>
+             <widget class="QPushButton" name="quantifyPhotoButton">
+              <property name="text">
+               <string>量化</string>
+              </property>
+              <property name="compact" stdset="0">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="viewJsonButton">
+              <property name="text">
+               <string>查看 JSON</string>
+              </property>
+              <property name="compact" stdset="0">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="exportPhotoButton">
               <property name="text">
                <string>导出照片</string>

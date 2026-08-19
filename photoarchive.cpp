@@ -5,6 +5,8 @@
 #include <QFileInfo>
 #include <QImageReader>
 
+#include <algorithm>
+
 namespace {
 
 void setError(QString* destination, const QString& message)
@@ -69,19 +71,59 @@ QVector<PhotoRecord> PhotoArchive::records() const
     for (const QFileInfo& directoryInfo : directories) {
         const QDir recordDirectory(directoryInfo.absoluteFilePath());
         const QString imagePath = recordDirectory.filePath(QStringLiteral("image.jpg"));
-        const QString resultPath = recordDirectory.filePath(QStringLiteral("result.json"));
-        if (!QFileInfo(imagePath).isReadable() || !QFileInfo(resultPath).isReadable()) {
+        if (!QFileInfo(imagePath).isReadable()) {
             continue;
         }
         QImageReader reader(imagePath);
         PhotoRecord record;
         record.path = imagePath;
+        record.recordPath = directoryInfo.absoluteFilePath();
         record.fileName = directoryInfo.fileName();
         record.modified = directoryInfo.lastModified();
         record.bytes = directorySize(recordDirectory);
         record.imageSize = reader.size();
         result.push_back(record);
     }
+
+    const QFileInfoList legacyFiles = directory.entryInfoList(
+        {QStringLiteral("*.jpg"), QStringLiteral("*.jpeg"), QStringLiteral("*.png")},
+        QDir::Files | QDir::Readable,
+        QDir::Time);
+    for (const QFileInfo& file : legacyFiles) {
+        QImageReader reader(file.absoluteFilePath());
+        PhotoRecord record;
+        record.path = file.absoluteFilePath();
+        record.recordPath = file.absoluteFilePath();
+        record.fileName = file.fileName();
+        record.modified = file.lastModified();
+        record.bytes = file.size();
+        record.imageSize = reader.size();
+        result.push_back(record);
+    }
+
+#ifdef Q_OS_WIN
+    const QDir previousDirectory(QFileInfo(m_directoryPath).absoluteDir());
+    const QFileInfoList previousFiles = previousDirectory.entryInfoList(
+        {QStringLiteral("*.jpg"), QStringLiteral("*.jpeg"), QStringLiteral("*.png")},
+        QDir::Files | QDir::Readable,
+        QDir::Time);
+    for (const QFileInfo& file : previousFiles) {
+        QImageReader reader(file.absoluteFilePath());
+        PhotoRecord record;
+        record.path = file.absoluteFilePath();
+        record.recordPath = file.absoluteFilePath();
+        record.fileName = file.fileName();
+        record.modified = file.lastModified();
+        record.bytes = file.size();
+        record.imageSize = reader.size();
+        result.push_back(record);
+    }
+#endif
+
+    std::sort(result.begin(), result.end(), [](const PhotoRecord& left,
+                                                const PhotoRecord& right) {
+        return left.modified > right.modified;
+    });
     return result;
 }
 
@@ -97,7 +139,10 @@ bool PhotoArchive::remove(const QString& path, QString* errorMessage) const
         setError(errorMessage, QStringLiteral("记录目录不存在"));
         return false;
     }
-    if (!QDir(recordPath).removeRecursively()) {
+    const bool removed = QFileInfo(recordPath).isDir()
+        ? QDir(recordPath).removeRecursively()
+        : QFile::remove(recordPath);
+    if (!removed) {
         setError(errorMessage, QStringLiteral("无法删除记录：%1").arg(recordPath));
         return false;
     }
@@ -109,7 +154,11 @@ PhotoClearResult PhotoArchive::clear() const
     PhotoClearResult result;
     const QVector<PhotoRecord> currentRecords = records();
     for (const PhotoRecord& record : currentRecords) {
-        if (QDir(recordPathForImage(record.path)).removeRecursively()) {
+        const QString recordPath = recordPathForImage(record.path);
+        const bool removed = QFileInfo(recordPath).isDir()
+            ? QDir(recordPath).removeRecursively()
+            : QFile::remove(recordPath);
+        if (removed) {
             ++result.removed;
         } else {
             ++result.failed;
@@ -134,8 +183,15 @@ bool PhotoArchive::exportRecord(const QString& sourcePath,
         setError(errorMessage, QStringLiteral("导出目标已经存在"));
         return false;
     }
-    if (!copyDirectory(QDir(source), QDir(destination))) {
-        QDir(destination).removeRecursively();
+    const bool copied = QFileInfo(source).isDir()
+        ? copyDirectory(QDir(source), QDir(destination))
+        : QFile::copy(source, destination);
+    if (!copied) {
+        if (QFileInfo(destination).isDir()) {
+            QDir(destination).removeRecursively();
+        } else {
+            QFile::remove(destination);
+        }
         setError(errorMessage, QStringLiteral("无法导出记录到：%1").arg(destination));
         return false;
     }
@@ -145,12 +201,20 @@ bool PhotoArchive::exportRecord(const QString& sourcePath,
 QString PhotoArchive::recordPathForImage(const QString& imagePath) const
 {
     const QFileInfo imageInfo(imagePath);
+    const QString parentPath = imageInfo.absoluteDir().absolutePath();
     if (imageInfo.fileName() != QStringLiteral("image.jpg")) {
+        if (parentPath == m_directoryPath) {
+            return imageInfo.absoluteFilePath();
+        }
+#ifdef Q_OS_WIN
+        if (parentPath == QFileInfo(m_directoryPath).absoluteDir().absolutePath()) {
+            return imageInfo.absoluteFilePath();
+        }
+#endif
         return QString();
     }
-    const QString recordPath = imageInfo.absoluteDir().absolutePath();
-    if (QFileInfo(recordPath).absoluteDir().absolutePath() != m_directoryPath) {
-        return QString();
+    if (QFileInfo(parentPath).absoluteDir().absolutePath() == m_directoryPath) {
+        return parentPath;
     }
-    return recordPath;
+    return parentPath == m_directoryPath ? imageInfo.absoluteFilePath() : QString();
 }

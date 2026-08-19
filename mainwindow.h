@@ -57,6 +57,7 @@ private slots:
     void updateClock();
     void toggleDetection();
     void openRecordsPage();
+    void clearAllPhotos();
     void openMonitorPage();
     void requestSnapshot();
     void updateStorageSpace();
@@ -66,6 +67,8 @@ private slots:
     void zoomDetailOut();
     void resetDetailZoom();
     void fitDetailImage();
+    void viewCurrentJson();
+    void quantifyCurrentPhoto();
     void exportCurrentPhoto();
     void deleteCurrentPhoto();
     void openSettingsPage();
@@ -92,6 +95,7 @@ private:
     QuantificationService* m_quantificationService;
     bool m_detecting;
     bool m_snapshotPending;
+    QString m_pendingSnapshotId;
     QImage m_lastFrame;
     QString m_currentPhotoPath;
     QPixmap m_detailPixmap;
