@@ -709,11 +709,11 @@ void InferenceController::completeCleanup()
 
     m_stopTimer->stop();
     cleanupReceiver();
-    failPendingSnapshot(message);
     m_activeMode = CameraMode::None;
 
     const CleanupOutcome outcome = m_cleanupOutcome;
     const QString message = m_cleanupMessage;
+    failPendingSnapshot(message);
     m_cleanupInProgress = false;
     m_cleanupOutcome = CleanupOutcome::Idle;
     m_cleanupMessage.clear();

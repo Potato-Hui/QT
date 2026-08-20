@@ -65,10 +65,6 @@ signals:
         CameraMode mode,
         const QString &message);
 
-    void selectedModeChanged(
-        CameraMode mode,
-        const QString &message);
-
 private slots:
     void readProcessOutput();
     void readProcessError();
