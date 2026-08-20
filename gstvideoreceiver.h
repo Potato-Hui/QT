@@ -3,6 +3,7 @@
 
 #include <QImage>
 #include <QObject>
+#include <QString>
 
 #include <atomic>
 
@@ -14,6 +15,13 @@
 
 class QTimer;
 
+enum class VideoSource
+{
+    None,
+    TcpJpeg,
+    ThermalRtsp
+};
+
 class GstVideoReceiver : public QObject
 {
     Q_OBJECT
@@ -22,9 +30,12 @@ public:
     explicit GstVideoReceiver(QObject *parent = nullptr);
     ~GstVideoReceiver() override;
 
-    bool start();
+    bool start(VideoSource source,
+               const QString &rtspUrl = QString(),
+               int rtspLatency = 0);
     void stop();
     bool isRunning() const;
+    VideoSource source() const;
 
 signals:
     void frameReady(const QImage &frame);
@@ -54,6 +65,7 @@ private:
     gulong m_newSampleHandler = 0;
 
     std::atomic_bool m_firstFrameEmitted{false};
+    VideoSource m_source = VideoSource::None;
 };
 
 #endif

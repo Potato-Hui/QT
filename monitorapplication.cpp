@@ -31,6 +31,10 @@ int runMonitorApplication(int argc, char *argv[], InferenceProfile profile)
                      &controller, &InferenceController::startDetection);
     QObject::connect(&window, &MainWindow::detectionStopRequested,
                      &controller, &InferenceController::stopDetection);
+    QObject::connect(&window, &MainWindow::cameraModeSelectionRequested,
+                     &controller, &InferenceController::selectCameraMode);
+    QObject::connect(&controller, &InferenceController::selectedModeChanged,
+                     &window, &MainWindow::setSelectedCameraMode);
     qRegisterMetaType<SnapshotRequest>("SnapshotRequest");
     qRegisterMetaType<SnapshotPackage>("SnapshotPackage");
     QObject::connect(&window, &MainWindow::snapshotRequested,
@@ -53,6 +57,9 @@ int runMonitorApplication(int argc, char *argv[], InferenceProfile profile)
                      [](const QString& message) { qInfo().noquote() << message; });
     QObject::connect(&controller, &InferenceController::metricsUpdated,
                      &window, &MainWindow::setPerformanceMetrics);
+    window.setSelectedCameraMode(
+        controller.selectedMode(),
+        QStringLiteral("已选择可见光摄像头，点击开始检测"));
     window.showFullScreen();
     return app.exec();
 }

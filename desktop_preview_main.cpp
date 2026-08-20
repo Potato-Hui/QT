@@ -117,6 +117,17 @@ int main(int argc, char *argv[])
             window.setDetectionUiState(false, false, false,
                 QStringLiteral("等待开始"));
         });
+    QObject::connect(&window, &MainWindow::cameraModeSelectionRequested,
+        &window, [&window](CameraMode mode) {
+            window.setSelectedCameraMode(
+                mode,
+                mode == CameraMode::Thermal
+                    ? QStringLiteral("已选择热像仪模式，点击开始检测")
+                    : QStringLiteral("已选择可见光摄像头，点击开始检测"));
+        });
+    window.setSelectedCameraMode(
+        CameraMode::VisibleLight,
+        QStringLiteral("已选择可见光摄像头，点击开始检测"));
 
     QTimer metricsTimer;
     QObject::connect(&metricsTimer, &QTimer::timeout, &window, [&window] {

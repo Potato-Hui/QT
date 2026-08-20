@@ -20,6 +20,7 @@ set(MONITOR_COMMON_SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    cameramode.h
     photoarchive.cpp
     photoarchive.h
     snapshotprotocol.cpp
@@ -119,6 +120,7 @@ if(BUILD_DESKTOP_UI_PREVIEW)
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        cameramode.h
         photoarchive.cpp
         photoarchive.h
         snapshotprotocol.cpp

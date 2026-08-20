@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "cameramode.h"
 #include "photoarchive.h"
 #include "snapshotprotocol.h"
 
@@ -40,6 +41,9 @@ public slots:
                              const QString &message);
     void setPerformanceMetrics(double pipelineFps,
                                double latencyMs);
+    void setSelectedCameraMode(
+        CameraMode mode,
+        const QString &message = QString());
     void processSnapshotPackage(const SnapshotPackage& package);
     void handleSnapshotFailure(const QString& requestId, const QString& message);
 
@@ -49,6 +53,7 @@ signals:
     void snapshotRequested(const SnapshotRequest& request);
     void quantificationRequested(const SnapshotPackage& package);
     void settingsRequested();
+    void cameraModeSelectionRequested(CameraMode mode);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

@@ -25,6 +25,7 @@ SOURCES += \
     $$PWD/../lianghua/cpp_qualification/src/DamageEvaluator.cpp
 
 HEADERS += \
+    cameramode.h \
     mainwindow.h \
     monitorapplication.h \
     inferencecontroller.h \
@@ -49,3 +50,6 @@ FORMS += \
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    thermal_camera.example.ini

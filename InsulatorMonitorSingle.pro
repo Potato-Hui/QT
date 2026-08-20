@@ -11,7 +11,7 @@ SOURCES += main_single.cpp monitorapplication.cpp mainwindow.cpp \
     $$PWD/../lianghua/cpp_qualification/src/Gating.cpp \
     $$PWD/../lianghua/cpp_qualification/src/IdealArea.cpp \
     $$PWD/../lianghua/cpp_qualification/src/DamageEvaluator.cpp
-HEADERS += monitorapplication.h mainwindow.h inferencecontroller.h \
+HEADERS += cameramode.h monitorapplication.h mainwindow.h inferencecontroller.h \
     inferencelaunchspec.h inferenceprofile.h inferencelifecycle.h \
     gstvideoreceiver.h latest_value_slot.hpp photoarchive.h snapshotprotocol.h \
     quantificationservice.h \
@@ -23,3 +23,4 @@ DEFINES += INSULATOR_QUANTIFIER_AVAILABLE \
     INSULATOR_CALIBRATION_PATH=\"/data/config/pitch_area_model.json\"
 FORMS += mainwindow.ui
 RESOURCES += resources.qrc
+DISTFILES += thermal_camera.example.ini

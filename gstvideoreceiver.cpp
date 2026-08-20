@@ -1,7 +1,28 @@
 #include "gstvideoreceiver.h"
 
+#include <QRegularExpression>
 #include <QTimer>
 #include <utility>
+
+namespace {
+
+QString quoteGstreamerValue(QString value)
+{
+    value.replace(QStringLiteral("\\"), QStringLiteral("\\\\"));
+    value.replace(QStringLiteral("\""), QStringLiteral("\\\""));
+    return QStringLiteral("\"%1\"").arg(value);
+}
+
+QString redactRtspUrls(QString message)
+{
+    static const QRegularExpression expression(
+        QStringLiteral("rtsps?://[^\\s\\\"']+"),
+        QRegularExpression::CaseInsensitiveOption);
+    message.replace(expression, QStringLiteral("rtsp://<已隐藏>"));
+    return message;
+}
+
+} // namespace
 /*
  * GstVideoReceiver
  *
@@ -52,7 +73,9 @@ GstVideoReceiver::~GstVideoReceiver()
     stop();
 }
 
-bool GstVideoReceiver::start()
+bool GstVideoReceiver::start(VideoSource source,
+                             const QString &rtspUrl,
+                             int rtspLatency)
 {
     /*
      * 防止重复启动造成旧管线、Bus 和 signal handler 泄漏。
@@ -61,22 +84,50 @@ bool GstVideoReceiver::start()
 
     m_firstFrameEmitted.store(false);
 
-    const char *pipelineDescription =
-        "tcpclientsrc host=127.0.0.1 port=5000 ! "
-        "jpegparse ! "
-        "jpegdec ! "
-        "videoconvert ! "
-        "video/x-raw,format=BGR ! "
-        "appsink name=qt_video_sink "
-        "emit-signals=true "
-        "max-buffers=1 "
-        "drop=true "
-        "sync=false";
+    QString pipelineDescription;
+    if (source == VideoSource::TcpJpeg) {
+        pipelineDescription = QStringLiteral(
+            "tcpclientsrc host=127.0.0.1 port=5000 ! "
+            "jpegparse ! "
+            "jpegdec ! "
+            "videoconvert ! "
+            "video/x-raw,format=BGR ! "
+            "appsink name=qt_video_sink "
+            "emit-signals=true "
+            "max-buffers=1 "
+            "drop=true "
+            "sync=false");
+    } else if (source == VideoSource::ThermalRtsp) {
+        if (rtspUrl.trimmed().isEmpty()) {
+            emit streamError(QStringLiteral("热像仪 RTSP 地址为空"));
+            return false;
+        }
+
+        pipelineDescription = QStringLiteral(
+            "rtspsrc location=%1 protocols=tcp latency=%2 ! "
+            "rtph264depay ! "
+            "h264parse ! "
+            "mppvideodec ! "
+            "videoconvert ! "
+            "video/x-raw,format=BGR ! "
+            "appsink name=qt_video_sink "
+            "emit-signals=true "
+            "max-buffers=1 "
+            "drop=true "
+            "sync=false")
+            .arg(quoteGstreamerValue(rtspUrl))
+            .arg(qMax(0, rtspLatency));
+    } else {
+        emit streamError(QStringLiteral("未指定视频来源"));
+        return false;
+    }
+
+    const QByteArray pipelineUtf8 = pipelineDescription.toUtf8();
 
     GError *error = nullptr;
 
     m_pipeline =
-        gst_parse_launch(pipelineDescription, &error);
+        gst_parse_launch(pipelineUtf8.constData(), &error);
 
     /*
      * gst_parse_launch 有可能在返回非空 pipeline 的同时
@@ -84,7 +135,7 @@ bool GstVideoReceiver::start()
      */
     if (error != nullptr) {
         const QString errorMessage =
-            QString::fromUtf8(error->message);
+            redactRtspUrls(QString::fromUtf8(error->message));
 
         g_error_free(error);
         error = nullptr;
@@ -187,6 +238,7 @@ bool GstVideoReceiver::start()
      */
     m_busTimer->start();
     m_deliveryTimer->start();
+    m_source = source;
 
     return true;
 }
@@ -251,11 +303,17 @@ void GstVideoReceiver::stop()
 
     m_firstFrameEmitted.store(false);
     m_latestFrame.clear();
+    m_source = VideoSource::None;
 }
 
 bool GstVideoReceiver::isRunning() const
 {
     return m_pipeline != nullptr;
+}
+
+VideoSource GstVideoReceiver::source() const
+{
+    return m_source;
 }
 
 /*
@@ -479,7 +537,7 @@ void GstVideoReceiver::checkBus()
 
             if (error != nullptr) {
                 errorMessage =
-                    QString::fromUtf8(error->message);
+                    redactRtspUrls(QString::fromUtf8(error->message));
 
                 g_error_free(error);
                 error = nullptr;
