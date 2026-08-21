@@ -145,6 +145,7 @@ private:
     QTimer *m_videoWatchdog = nullptr;
 
     QElapsedTimer m_lastFrameTimer;
+    QImage m_lastFrame;
 
     State m_state = State::Idle;
     CameraMode m_selectedMode = CameraMode::VisibleLight;

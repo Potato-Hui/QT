@@ -4,6 +4,7 @@
 #include "inferencelaunchspec.h"
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QFileInfo>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -368,12 +369,37 @@ void InferenceController::requestSnapshot(const SnapshotRequest& request)
         emit snapshotFailed(request.requestId, QStringLiteral("快照请求无效"));
         return;
     }
-    if (m_state != State::Running || m_process->state() != QProcess::Running) {
-        emit snapshotFailed(request.requestId, QStringLiteral("RKNN 推理程序未运行"));
+    if (m_state != State::Running) {
+        emit snapshotFailed(request.requestId, QStringLiteral("当前视频未运行"));
         return;
     }
     if (!m_pendingSnapshotId.isEmpty()) {
         emit snapshotFailed(request.requestId, QStringLiteral("上一张快照仍在生成"));
+        return;
+    }
+
+    if (m_activeMode == CameraMode::Thermal) {
+        if (m_lastFrame.isNull()) {
+            emit snapshotFailed(request.requestId,
+                                QStringLiteral("热像仪当前没有可保存的视频帧"));
+            return;
+        }
+
+        QDir recordDir(request.outputDir);
+        if (!QDir().mkpath(recordDir.absolutePath())
+                || !m_lastFrame.save(recordDir.filePath(QStringLiteral("image.jpg")),
+                                     "JPG", 90)) {
+            emit snapshotFailed(request.requestId, QStringLiteral("热像照片保存失败"));
+            return;
+        }
+
+        emit snapshotReady({request.requestId, recordDir.absolutePath()});
+        return;
+    }
+
+    if (m_activeMode != CameraMode::VisibleLight
+            || m_process->state() != QProcess::Running) {
+        emit snapshotFailed(request.requestId, QStringLiteral("RKNN 推理程序未运行"));
         return;
     }
 
@@ -522,6 +548,7 @@ void InferenceController::handleFrame(const QImage &frame)
         return;
     }
     m_lastFrameTimer.restart();
+    m_lastFrame = frame;
     emit frameReady(frame);
 }
 
@@ -774,6 +801,7 @@ CameraMode InferenceController::activeMode() const
 
 void InferenceController::cleanupReceiver()
 {
+    m_lastFrame = QImage();
     if (m_videoReceiver != nullptr) {
         m_videoReceiver->stop();
     }

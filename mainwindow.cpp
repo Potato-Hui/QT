@@ -392,7 +392,11 @@ void MainWindow::processSnapshotPackage(const SnapshotPackage& package)
         ui->snapshotCountValueLabel->setText(
             QString::number(m_photoArchive.records().size()));
         updateStorageSpace();
-        ui->runStatusLabel->setText(QStringLiteral("照片、mask 和 metadata 已保存"));
+        const bool hasMetadata = QFileInfo(
+            QDir(package.recordDir).filePath(QStringLiteral("metadata.json"))).isReadable();
+        ui->runStatusLabel->setText(
+            hasMetadata ? QStringLiteral("照片、mask 和 metadata 已保存")
+                        : QStringLiteral("热像照片已保存"));
 
         auto* toast = new QMessageBox(
             QMessageBox::Information, QString(), QStringLiteral("保存成功"),
@@ -619,9 +623,12 @@ void MainWindow::updateDetailPixmap()
     ui->fitImageButton->setEnabled(true);
     ui->exportPhotoButton->setEnabled(!m_currentPhotoPath.isEmpty());
     ui->deletePhotoButton->setEnabled(!m_currentPhotoPath.isEmpty());
-    ui->viewJsonButton->setEnabled(!m_currentPhotoPath.isEmpty());
+    const QFileInfo imageInfo(m_currentPhotoPath);
+    const bool hasMetadata = QFileInfo(
+        imageInfo.absoluteDir().filePath(QStringLiteral("metadata.json"))).isReadable();
+    ui->viewJsonButton->setEnabled(hasMetadata);
     ui->quantifyPhotoButton->setEnabled(
-        QFileInfo(m_currentPhotoPath).fileName() == QStringLiteral("image.jpg"));
+        imageInfo.fileName() == QStringLiteral("image.jpg") && hasMetadata);
 }
 
 void MainWindow::zoomDetailIn()
@@ -806,12 +813,14 @@ void MainWindow::viewCurrentJson()
 void MainWindow::quantifyCurrentPhoto()
 {
     const QFileInfo imageInfo(m_currentPhotoPath);
-    if (imageInfo.fileName() != QStringLiteral("image.jpg")) {
+    const QDir recordDir(imageInfo.absoluteDir());
+    if (imageInfo.fileName() != QStringLiteral("image.jpg")
+            || !QFileInfo(recordDir.filePath(QStringLiteral("metadata.json"))).isReadable()
+            || !QFileInfo(recordDir.filePath(QStringLiteral("masks"))).isDir()) {
         QMessageBox::information(this, QStringLiteral("无法量化"),
-                                 QStringLiteral("旧照片没有对应的 mask 和 metadata"));
+                                 QStringLiteral("该照片没有对应的 mask 和 metadata"));
         return;
     }
-    const QDir recordDir(imageInfo.absoluteDir());
     ui->runStatusLabel->setText(QStringLiteral("正在量化当前照片"));
     emit quantificationRequested({recordDir.dirName(), recordDir.absolutePath()});
 }
