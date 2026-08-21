@@ -140,7 +140,7 @@
     <item>
      <widget class="QStackedWidget" name="pageStack">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="monitorPage">
        <layout class="QHBoxLayout" name="monitorLayout" stretch="68,0">
@@ -161,6 +161,12 @@
         </property>
         <item>
          <widget class="QFrame" name="previewCard">
+          <property name="maximumSize">
+           <size>
+            <width>1280</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="card" stdset="0">
            <bool>true</bool>
           </property>
@@ -318,6 +324,18 @@
           </property>
           <item>
            <widget class="QFrame" name="resultCard">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="card" stdset="0">
              <bool>true</bool>
             </property>
@@ -347,6 +365,11 @@
                </property>
                <item row="1" column="0">
                 <widget class="QLabel" name="latencyNameLabel">
+                 <property name="font">
+                  <font>
+                   <pointsize>16</pointsize>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>延迟</string>
                  </property>
@@ -357,6 +380,14 @@
                </item>
                <item row="1" column="1">
                 <widget class="QLabel" name="latencyValueLabel">
+                 <property name="font">
+                  <font>
+                   <family>Ubuntu Condensed</family>
+                   <pointsize>16</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>--</string>
                  </property>
@@ -370,6 +401,15 @@
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="fpsValueLabel">
+                 <property name="font">
+                  <font>
+                   <family>Ubuntu Condensed</family>
+                   <pointsize>16</pointsize>
+                   <weight>75</weight>
+                   <italic>false</italic>
+                   <bold>true</bold>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>--</string>
                  </property>
@@ -383,6 +423,11 @@
                </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="fpsNameLabel">
+                 <property name="font">
+                  <font>
+                   <pointsize>16</pointsize>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>FPS</string>
                  </property>
@@ -421,8 +466,8 @@
               <widget class="QPushButton" name="detectButton">
                <property name="minimumSize">
                 <size>
-                 <width>172</width>
-                 <height>31</height>
+                 <width>180</width>
+                 <height>50</height>
                 </size>
                </property>
                <property name="text">
@@ -437,8 +482,8 @@
               <widget class="QPushButton" name="snapshotButton">
                <property name="minimumSize">
                 <size>
-                 <width>172</width>
-                 <height>31</height>
+                 <width>180</width>
+                 <height>50</height>
                 </size>
                </property>
                <property name="text">
@@ -453,6 +498,12 @@
                </property>
                <item>
                 <widget class="QPushButton" name="recordsButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>180</width>
+                   <height>50</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>历史记录</string>
                  </property>
@@ -462,6 +513,12 @@
              </item>
              <item>
               <widget class="QPushButton" name="settingsButton">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>50</height>
+                </size>
+               </property>
                <property name="contextMenuPolicy">
                 <enum>Qt::DefaultContextMenu</enum>
                </property>
@@ -695,7 +752,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="detailContentLayout" stretch="0,28">
+         <layout class="QHBoxLayout" name="detailContentLayout" stretch="5,3">
           <property name="spacing">
            <number>16</number>
           </property>
@@ -739,8 +796,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>165</width>
-                  <height>346</height>
+                  <width>744</width>
+                  <height>446</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="detailImageScrollLayout">
@@ -758,6 +815,12 @@
                  </property>
                  <item>
                   <widget class="QLabel" name="detailImageLabel">
+                   <property name="maximumSize">
+                    <size>
+                     <width>1500</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>选择历史照片后显示大图</string>
                    </property>
@@ -841,9 +904,9 @@
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="detailSideLayout">
+           <layout class="QVBoxLayout" name="detailSideLayout" stretch="1,1,2,1,1,1,1">
             <property name="spacing">
-             <number>12</number>
+             <number>25</number>
             </property>
             <item>
              <widget class="QFrame" name="detailResultCard">
@@ -1001,6 +1064,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="quantifyPhotoButton">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="text">
                <string>量化</string>
               </property>
@@ -1011,6 +1080,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="viewJsonButton">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="text">
                <string>查看 JSON</string>
               </property>
@@ -1021,6 +1096,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="exportPhotoButton">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="text">
                <string>导出照片</string>
               </property>
@@ -1031,6 +1112,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="deletePhotoButton">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
               <property name="text">
                <string>删除照片</string>
               </property>

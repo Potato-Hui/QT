@@ -55,7 +55,8 @@ function(add_quantification_core opencv_target)
         "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/InsulatorQuantifier.cpp"
         "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/Gating.cpp"
         "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/IdealArea.cpp"
-        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/DamageEvaluator.cpp")
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/DamageEvaluator.cpp"
+        "${INSULATOR_QUANTIFIER_SOURCE_DIR}/src/BrokenAssociation.cpp")
     target_include_directories(insulator_quantification PUBLIC
         "${INSULATOR_QUANTIFIER_SOURCE_DIR}/include"
         "${INSULATOR_QUANTIFIER_SOURCE_DIR}/qt")
