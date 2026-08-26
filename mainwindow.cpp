@@ -171,6 +171,7 @@ MainWindow::MainWindow(QWidget *parent)
     updateStorageSpace();
     updateDetectionButton();
     updateSnapshotButton();
+    updateInstitutionLogo();
     ui->pageStack->setCurrentWidget(ui->monitorPage);
     auto *recordsHeader = ui->recordsTable->horizontalHeader();
     // Keep the history table columns large enough for an actual thumbnail and
@@ -211,10 +212,23 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
     QMainWindow::resizeEvent(event);
     updatePreviewPixmap();
+    updateInstitutionLogo();
     if (ui->pageStack->currentWidget() == ui->photoDetailPage
             && m_detailFitMode && !m_detailPixmap.isNull()) {
         updateDetailPixmap();
     }
+}
+
+void MainWindow::updateInstitutionLogo()
+{
+    const QPixmap logo(QStringLiteral(":/images/institution-logo.png"));
+    const QSize targetSize = ui->institutionLogoLabel->contentsRect().size();
+    if (logo.isNull() || targetSize.isEmpty()) {
+        return;
+    }
+
+    ui->institutionLogoLabel->setPixmap(
+        logo.scaled(targetSize, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void MainWindow::setDetectionResult(const QString &result,

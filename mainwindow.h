@@ -88,6 +88,7 @@ private:
     void updateDetailPixmap();
     void clearDetailState();
     void updateSnapshotButton();
+    void updateInstitutionLogo();
     void moveFailedRecord(const SnapshotPackage& package);
     double detailFitScale() const;
 
