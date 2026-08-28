@@ -8,7 +8,9 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLinearGradient>
+#include <QLabel>
 #include <QPainter>
+#include <QPushButton>
 #include <QTextStream>
 #include <QTimer>
 
@@ -138,6 +140,34 @@ int main(int argc, char *argv[])
     });
     metricsTimer.start(1000);
 
-    window.showFullScreen();
+    if (app.arguments().contains(QStringLiteral("--smoke-light"))) {
+        QTimer::singleShot(0, &window, [&window] {
+            auto* button = window.findChild<QPushButton*>(
+                QStringLiteral("lightToggleButton"));
+            auto* status = window.findChild<QLabel*>(
+                QStringLiteral("lightStatusLabel"));
+            if (!button || !status) {
+                QTextStream(stderr) << "LIGHT_SMOKE FAIL missing widgets\n";
+                QCoreApplication::exit(2);
+                return;
+            }
+
+            button->click();
+            const bool enabledOk = button->isChecked()
+                && button->text() == QStringLiteral("关灯")
+                && status->text() == QStringLiteral("灯光：已开启");
+            button->click();
+            const bool disabledOk = !button->isChecked()
+                && button->text() == QStringLiteral("开灯")
+                && status->text() == QStringLiteral("灯光：已关闭");
+
+            QTextStream(stdout)
+                << (enabledOk && disabledOk ? "LIGHT_SMOKE PASS\n"
+                                            : "LIGHT_SMOKE FAIL state mismatch\n");
+            QCoreApplication::exit(enabledOk && disabledOk ? 0 : 3);
+        });
+    } else {
+        window.showFullScreen();
+    }
     return app.exec();
 }

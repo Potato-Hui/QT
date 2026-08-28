@@ -138,6 +138,30 @@ latency=0
 
 `thermal_camera.ini` 已被 Git 忽略。程序需要以 root 身份运行，或拥有配置网卡所需的 `CAP_NET_ADMIN` 权限。热像仪解码依赖 `rtspsrc`、`rtph264depay`、`h264parse` 和 RK3588 的 `mppvideodec` 插件。
 
+## GPIO灯光控制
+
+设置页面的“开灯/关灯”按钮通过 RK3588 GPIO4_A4 控制外接灯。默认映射集中定义在
+gpiolightcontroller.h：
+
+~~~cpp
+#define LIGHT_GPIO_CHIP_PATH "/dev/gpiochip4"
+#define LIGHT_GPIO_LINE_OFFSET 4U
+#define LIGHT_GPIO_ACTIVE_LEVEL 1
+~~~
+
+程序使用 Linux GPIO character-device 接口直接申请输出 line，不调用 shell、sudo
+或后台进程。启动时申请 GPIO4_A4 并保持关闭电平，程序退出时再次写入关闭电平并释放
+line。若外部驱动电路为低电平有效，只需把 LIGHT_GPIO_ACTIVE_LEVEL 改成 0。
+
+部署前在开发板上确认 gpiochip 和 line 名称：
+
+~~~bash
+gpioinfo /dev/gpiochip4
+~~~
+
+运行用户需要能够读写 /dev/gpiochip4；可使用 root、合适的 udev 规则或设备权限，
+程序本身不会请求 sudo。Windows DesktopUiPreview 只模拟开关状态，不访问GPIO设备。
+
 ### 同帧拍照协议
 
 Qt 拍照时会向 RKNN 程序标准输入写入一行：

@@ -14,6 +14,7 @@
 #include <QPlainTextEdit>
 #include <QResizeEvent>
 #include <QScrollArea>
+#include <QSignalBlocker>
 #include <QStandardPaths>
 #include <QStorageInfo>
 #include <QStyle>
@@ -138,6 +139,8 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::deleteCurrentPhoto);
     connect(ui->settingBackButton, &QPushButton::clicked,
             this, &MainWindow::openMonitorPage);
+    connect(ui->lightToggleButton, &QPushButton::clicked,
+            this, &MainWindow::toggleLight);
     auto *cameraModeGroup = new QButtonGroup(this);
     cameraModeGroup->setExclusive(true);
     ui->VisibleLightCamera->setCheckable(true);
@@ -172,6 +175,13 @@ MainWindow::MainWindow(QWidget *parent)
     updateDetectionButton();
     updateSnapshotButton();
     updateInstitutionLogo();
+    QString lightError;
+    if (!m_lightController.initialize(&lightError)) {
+        ui->lightStatusLabel->setToolTip(lightError);
+        updateLightUi(QStringLiteral("灯光：不可用，点击重试"));
+    } else {
+        updateLightUi();
+    }
     ui->pageStack->setCurrentWidget(ui->monitorPage);
     auto *recordsHeader = ui->recordsTable->horizontalHeader();
     // Keep the history table columns large enough for an actual thumbnail and
@@ -194,6 +204,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    m_lightController.shutdown();
     m_quantificationThread->quit();
     m_quantificationThread->wait();
     delete ui;
@@ -217,6 +228,35 @@ void MainWindow::resizeEvent(QResizeEvent *event)
             && m_detailFitMode && !m_detailPixmap.isNull()) {
         updateDetailPixmap();
     }
+}
+
+void MainWindow::toggleLight()
+{
+    const bool requestedEnabled = ui->lightToggleButton->isChecked();
+    QString errorMessage;
+    if (!m_lightController.setLightEnabled(requestedEnabled, &errorMessage)) {
+        ui->lightStatusLabel->setToolTip(errorMessage);
+        updateLightUi(QStringLiteral("灯光：操作失败"));
+        QMessageBox::warning(this, QStringLiteral("灯光控制失败"), errorMessage);
+        return;
+    }
+
+    ui->lightStatusLabel->setToolTip(QString());
+    updateLightUi();
+}
+
+void MainWindow::updateLightUi(const QString& statusMessage)
+{
+    const bool enabled = m_lightController.isLightEnabled();
+    const QSignalBlocker blocker(ui->lightToggleButton);
+    ui->lightToggleButton->setChecked(enabled);
+    ui->lightToggleButton->setText(
+        enabled ? QStringLiteral("关灯") : QStringLiteral("开灯"));
+    ui->lightStatusLabel->setText(
+        statusMessage.isEmpty()
+            ? (enabled ? QStringLiteral("灯光：已开启")
+                       : QStringLiteral("灯光：已关闭"))
+            : statusMessage);
 }
 
 void MainWindow::updateInstitutionLogo()

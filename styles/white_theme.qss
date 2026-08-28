@@ -208,6 +208,17 @@ QPushButton#settingsButton {
     font-size: 19px;
 }
 
+QPushButton#lightToggleButton:checked {
+    background: #F2B23A;
+    border-color: #D99A24;
+    color: #10213D;
+}
+
+QPushButton#lightToggleButton:checked:hover {
+    background: #E5A52F;
+    border-color: #C88B1E;
+}
+
 QPushButton[compact="true"] {
     min-height: 48px;
     padding: 0 18px;

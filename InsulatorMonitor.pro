@@ -16,6 +16,7 @@ SOURCES += \
     inferencecontroller.cpp \
     inferencelaunchspec.cpp \
     gstvideoreceiver.cpp \
+    gpiolightcontroller.cpp \
     photoarchive.cpp \
     snapshotprotocol.cpp \
     quantificationservice.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     inferenceprofile.h \
     inferencelifecycle.h \
     gstvideoreceiver.h \
+    gpiolightcontroller.h \
     latest_value_slot.hpp \
     photoarchive.h \
     snapshotprotocol.h \

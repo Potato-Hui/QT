@@ -1236,6 +1236,47 @@
          <bool>false</bool>
         </property>
        </widget>
+       <widget class="QPushButton" name="lightToggleButton">
+        <property name="geometry">
+         <rect>
+          <x>650</x>
+          <y>300</y>
+          <width>172</width>
+          <height>58</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>开灯</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lightStatusLabel">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>370</y>
+          <width>292</width>
+          <height>62</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>灯光：已关闭</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="role" stdset="0">
+         <string>muted</string>
+        </property>
+       </widget>
        <widget class="QPushButton" name="settingBackButton">
         <property name="geometry">
          <rect>

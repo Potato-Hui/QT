@@ -21,6 +21,8 @@ set(MONITOR_COMMON_SOURCES
     mainwindow.h
     mainwindow.ui
     cameramode.h
+    gpiolightcontroller.cpp
+    gpiolightcontroller.h
     photoarchive.cpp
     photoarchive.h
     snapshotprotocol.cpp
@@ -122,6 +124,8 @@ if(BUILD_DESKTOP_UI_PREVIEW)
         mainwindow.h
         mainwindow.ui
         cameramode.h
+        gpiolightcontroller.cpp
+        gpiolightcontroller.h
         photoarchive.cpp
         photoarchive.h
         snapshotprotocol.cpp

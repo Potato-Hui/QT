@@ -6,14 +6,14 @@ TARGET = InsulatorMonitorSingle
 TEMPLATE = app
 SOURCES += main_single.cpp monitorapplication.cpp mainwindow.cpp \
     inferencecontroller.cpp inferencelaunchspec.cpp gstvideoreceiver.cpp \
-    photoarchive.cpp snapshotprotocol.cpp quantificationservice.cpp \
+    gpiolightcontroller.cpp photoarchive.cpp snapshotprotocol.cpp quantificationservice.cpp \
     $$PWD/../lianghua/cpp_qualification/src/InsulatorQuantifier.cpp \
     $$PWD/../lianghua/cpp_qualification/src/Gating.cpp \
     $$PWD/../lianghua/cpp_qualification/src/IdealArea.cpp \
     $$PWD/../lianghua/cpp_qualification/src/DamageEvaluator.cpp
 HEADERS += cameramode.h monitorapplication.h mainwindow.h inferencecontroller.h \
     inferencelaunchspec.h inferenceprofile.h inferencelifecycle.h \
-    gstvideoreceiver.h latest_value_slot.hpp photoarchive.h snapshotprotocol.h \
+    gstvideoreceiver.h gpiolightcontroller.h latest_value_slot.hpp photoarchive.h snapshotprotocol.h \
     quantificationservice.h \
     $$PWD/../lianghua/cpp_qualification/include/InsulatorQuantifier.hpp \
     $$PWD/../lianghua/cpp_qualification/qt/QtInsulatorQuantifier.hpp

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "cameramode.h"
+#include "gpiolightcontroller.h"
 #include "photoarchive.h"
 #include "snapshotprotocol.h"
 
@@ -77,6 +78,7 @@ private slots:
     void exportCurrentPhoto();
     void deleteCurrentPhoto();
     void openSettingsPage();
+    void toggleLight();
     void handleQuantificationCompleted(const SnapshotPackage& package,
                                        const QJsonObject& result);
     void handleQuantificationFailed(const SnapshotPackage& package,
@@ -89,6 +91,7 @@ private:
     void clearDetailState();
     void updateSnapshotButton();
     void updateInstitutionLogo();
+    void updateLightUi(const QString& statusMessage = QString());
     void moveFailedRecord(const SnapshotPackage& package);
     double detailFitScale() const;
 
@@ -99,6 +102,7 @@ private:
     PhotoArchive m_photoArchive;
     QThread* m_quantificationThread;
     QuantificationService* m_quantificationService;
+    GpioLightController m_lightController;
     bool m_detecting;
     bool m_snapshotPending;
     QString m_pendingSnapshotId;
