@@ -46,6 +46,26 @@ QString recordRootPath()
 #endif
 }
 
+void setDetailResult(QLabel* label, const QString& text,
+                     const QString& level = QString())
+{
+    QString color;
+    if (level == QStringLiteral("严重")) {
+        color = QStringLiteral("#f31212");
+    } else if (level == QStringLiteral("中度")) {
+        color = QStringLiteral("#e42182");
+    } else if (level == QStringLiteral("轻度")) {
+        color = QStringLiteral("#c07f1e");
+    } else if (level == QStringLiteral("正常")) {
+        color = QStringLiteral("#2cad33");
+    }
+
+    label->setText(text);
+    label->setStyleSheet(color.isEmpty()
+        ? QString()
+        : QStringLiteral("color: %1;").arg(color));
+}
+
 QString resultSummary(const QJsonObject& result)
 {
     const QString level = result.value(QStringLiteral("overall_level")).toString();
@@ -285,7 +305,6 @@ void MainWindow::setDetectionResult(const QString &result,
     Q_UNUSED(defectPixels);
 }
 
-
 void MainWindow::updateClock()
 {
     const QDateTime now = QDateTime::currentDateTime();
@@ -297,7 +316,7 @@ void MainWindow::toggleDetection()//点击开始检测按钮
 {
     if (m_detecting) {
         emit detectionStopRequested();//点击关闭界面后，画面应该消失，后面需要修改
-clearDisplayToBlack();//画面应该消失
+        clearDisplayToBlack();
     } else {
         emit detectionStartRequested();
     }
@@ -482,7 +501,8 @@ void MainWindow::handleQuantificationCompleted(const SnapshotPackage& package,
     Q_UNUSED(package)
     m_snapshotPending = false;
     updateSnapshotButton();
-    ui->detailResultValueLabel->setText(resultSummary(result));
+    setDetailResult(ui->detailResultValueLabel, resultSummary(result),
+                    result.value(QStringLiteral("overall_level")).toString());
     ui->runStatusLabel->setText(resultSummary(result));
     ui->snapshotCountValueLabel->setText(QString::number(m_photoArchive.records().size()));
     refreshHistoryPhotos();
@@ -611,11 +631,15 @@ void MainWindow::openPhotoDetail(int row, int column)
     QJsonParseError parseError;
     if (resultFile.open(QIODevice::ReadOnly)) {
         const QJsonDocument resultDocument = QJsonDocument::fromJson(resultFile.readAll(), &parseError);
-        ui->detailResultValueLabel->setText(
-            parseError.error == QJsonParseError::NoError && resultDocument.isObject()
-                ? resultSummary(resultDocument.object()) : QStringLiteral("结果文件无效"));
+        if (parseError.error == QJsonParseError::NoError && resultDocument.isObject()) {
+            const QJsonObject result = resultDocument.object();
+            setDetailResult(ui->detailResultValueLabel, resultSummary(result),
+                            result.value(QStringLiteral("overall_level")).toString());
+        } else {
+            setDetailResult(ui->detailResultValueLabel, QStringLiteral("结果文件无效"));
+        }
     } else {
-        ui->detailResultValueLabel->setText(QStringLiteral("尚未量化"));
+        setDetailResult(ui->detailResultValueLabel, QStringLiteral("尚未量化"));
     }
 
     ui->pageStack->setCurrentWidget(ui->photoDetailPage);
@@ -808,7 +832,7 @@ void MainWindow::clearDetailState()
     ui->detailFileSizeValueLabel->setText(QStringLiteral("--"));
     ui->detailImageSizeValueLabel->setText(QStringLiteral("--"));
     ui->detailPathValueLabel->setText(QStringLiteral("--"));
-    ui->detailResultValueLabel->setText(QStringLiteral("未记录"));
+    setDetailResult(ui->detailResultValueLabel, QStringLiteral("未记录"));
     ui->zoomValueLabel->setText(QStringLiteral("100%"));
     ui->detailImageLabel->setMinimumSize(0, 0);
     ui->detailImageLabel->setPixmap(QPixmap());
