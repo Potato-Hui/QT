@@ -316,7 +316,11 @@ void MainWindow::toggleDetection()//点击开始检测按钮
 {
     if (m_detecting) {
         emit detectionStopRequested();//点击关闭界面后，画面应该消失，后面需要修改
-        clearDisplayToBlack();
+                m_lastFrame = QImage();
+                ui->previewLabel->clear();
+                ui->previewHintLabel->hide();
+                ui->previewSubHintLabel->hide();
+            
     } else {
         emit detectionStartRequested();
     }
