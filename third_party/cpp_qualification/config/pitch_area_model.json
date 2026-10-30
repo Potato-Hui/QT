@@ -1,0 +1,119 @@
+{
+  "version": "PITCH_IDEAL_AREA_V1",
+  "eligibility": "reference_eligible=True AND multi_axis_measurement_valid=True",
+  "target": "symmetric 11-point trapezoidal estimated_full_area / major_span^2",
+  "inference_formula": "ideal_area = coefficient * predicted_major_span^2",
+  "model": {
+    "feature_name": "pose_ratio_q75",
+    "method": "LINEAR",
+    "valid": 1,
+    "training_image_count": 21,
+    "status": "VALID",
+    "slope": 1.5601636488425434,
+    "intercept": -0.10735866032344729,
+    "feature_min": 0.13812464907245967,
+    "feature_max": 0.2212446043727898,
+    "grouped_cv_rmse": 0.024363437915408754,
+    "grouped_cv_mae": 0.01779148097519722,
+    "grouped_cv_validation_pitch_count": 7,
+    "grouped_cv_validation_image_count": 21,
+    "candidate_evaluations": [
+      {
+        "feature_name": "pose_ratio_median",
+        "method": "LINEAR",
+        "validation_pitches": [
+          -30.0,
+          -20.0,
+          -10.0,
+          0.0,
+          10.0,
+          20.0,
+          30.0
+        ],
+        "validation_pitch_count": 7,
+        "validation_image_count": 21,
+        "rmse": 0.025110419811070078,
+        "mae": 0.019067540523537926
+      },
+      {
+        "feature_name": "pose_ratio_median",
+        "method": "INTERPOLATION",
+        "validation_pitches": [
+          -20.0,
+          -10.0,
+          0.0,
+          10.0,
+          20.0
+        ],
+        "validation_pitch_count": 5,
+        "validation_image_count": 15,
+        "rmse": 0.02812077801813372,
+        "mae": 0.020783367595441977
+      },
+      {
+        "feature_name": "pose_ratio_q75",
+        "method": "LINEAR",
+        "validation_pitches": [
+          -30.0,
+          -20.0,
+          -10.0,
+          0.0,
+          10.0,
+          20.0,
+          30.0
+        ],
+        "validation_pitch_count": 7,
+        "validation_image_count": 21,
+        "rmse": 0.024363437915408754,
+        "mae": 0.01779148097519722
+      },
+      {
+        "feature_name": "pose_ratio_q75",
+        "method": "INTERPOLATION",
+        "validation_pitches": [
+          -20.0,
+          -10.0,
+          0.0,
+          10.0,
+          20.0
+        ],
+        "validation_pitch_count": 5,
+        "validation_image_count": 15,
+        "rmse": 0.027112151309059605,
+        "mae": 0.018553065994607806
+      },
+      {
+        "feature_name": "pose_ratio_max",
+        "method": "LINEAR",
+        "validation_pitches": [
+          -30.0,
+          -20.0,
+          -10.0,
+          0.0,
+          10.0,
+          20.0,
+          30.0
+        ],
+        "validation_pitch_count": 7,
+        "validation_image_count": 21,
+        "rmse": 0.03223194311386131,
+        "mae": 0.025149404466662716
+      },
+      {
+        "feature_name": "pose_ratio_max",
+        "method": "INTERPOLATION",
+        "validation_pitches": [
+          -20.0,
+          -10.0,
+          0.0,
+          10.0,
+          20.0
+        ],
+        "validation_pitch_count": 5,
+        "validation_image_count": 15,
+        "rmse": 0.025278536524612823,
+        "mae": 0.021795074562159403
+      }
+    ]
+  }
+}

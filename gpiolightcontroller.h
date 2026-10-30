@@ -4,11 +4,11 @@
 #include <QString>
 
 #ifndef LIGHT_GPIO_CHIP_PATH
-#define LIGHT_GPIO_CHIP_PATH "/dev/gpiochip4"
+#define LIGHT_GPIO_CHIP_PATH "/dev/gpiochip0"
 #endif
 
 #ifndef LIGHT_GPIO_LINE_OFFSET
-#define LIGHT_GPIO_LINE_OFFSET 4U
+#define LIGHT_GPIO_LINE_OFFSET 22U
 #endif
 
 #ifndef LIGHT_GPIO_ACTIVE_LEVEL

@@ -60,7 +60,7 @@ bool GpioLightController::initialize(QString* errorMessage)
         const int requestError = errno;
         ::close(chipFd);
         setError(errorMessage,
-                 gpioError(QStringLiteral("无法申请GPIO4_A4（%1，line %2）")
+                 gpioError(QStringLiteral("无法申请GPIO0_C6（%1，line %2）")
                                .arg(QStringLiteral(LIGHT_GPIO_CHIP_PATH))
                                .arg(LIGHT_GPIO_LINE_OFFSET),
                            requestError));
